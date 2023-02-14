@@ -2,8 +2,11 @@
 CLONAZIONE REPO
 ******************************************
 
-1- clonare repo
-2- composer i
-3- copiare il file .env e rinominarlo
-4- php artisan key:generate
-5- npm i --force
+<ul>
+    <li>clonare repo</li>
+    <li>composer i</li>
+    <li>copiare il file .env e rinominarlo</li>
+    <li>php artisan key:generate</li>
+    <li>npm i --force</li>
+    <li>clonare repo</li>
+</ul>
