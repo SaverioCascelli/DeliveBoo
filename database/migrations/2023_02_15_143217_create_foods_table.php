@@ -13,7 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('food_order', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 200);
+            $table->string('slug', 210)->nullable();
+            $table->tinyInteger('is_available')->default(1);
+            $table->decimal('price', 4, 2);
+            $table->string('description');
+            $table->string('img_url')->nullable();
             $table->timestamps();
         });
     }
@@ -25,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('food_order');
+        Schema::dropIfExists('foods');
     }
 };
