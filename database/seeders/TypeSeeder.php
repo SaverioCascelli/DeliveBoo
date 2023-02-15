@@ -18,6 +18,8 @@ class TypeSeeder extends Seeder
     {
         $types = ['americana','araba','argentina','Brasiliana','Cinese','Fast-food','Francese','giapponese','Italiana','Mediterranea','pizza','steakhouse'];
 
+
+        
         foreach($types as $type){
             $new_type = new Type();
             $new_type->name = $type;
