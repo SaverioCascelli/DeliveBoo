@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,12 +36,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'verified'])
     ->name('admin.')
     ->prefix('admin')
-    ->group(function(){
+    ->group(function () {
         // rotta per la parte admin del sito
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::resource('foods', FoodController::class);
     });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 /************************************************************/
@@ -48,9 +50,9 @@ require __DIR__.'/auth.php';
 /************************************************************/
 
 // questa è la rotta per la home della parte guest del sito
-Route::get('/', [PageController::class , 'index'])->name('home');
+Route::get('/', [PageController::class, 'index'])->name('home');
 
 // rotta per tutte le rotte Vue da mettere doppo tutte le altre rotte!
-Route::get('{any?}',function(){
+Route::get('{any?}', function () {
     return view('guest.home');
-})->where('any','.*')->name('home');
+})->where('any', '.*')->name('home');
