@@ -78,7 +78,7 @@
 
             <!-- Immagine -->
             <div class="mb-3">
-                <label for="img_url" class="form-label">Immagine</label>
+                <label for="img_url" class="form-label @error('img_url') is-invalid @enderror">Immagine</label>
                 <input
                 onchange="showImage(event)"
                 type="file" name="img_url" class="form-control" id="img_url">
