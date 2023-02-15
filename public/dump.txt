@@ -1,1 +1,0 @@
-[{"id":1,"user_id":1,"name":"Pizzeria da Pino","slug":null,"VAT":"IT67414821149","address":"Piazza Gianmarco 771","img_url":"https:\/\/www.centrocormano.it\/wp-content\/uploads\/2021\/08\/tipi-di-pizze-2.jpg","created_at":"2023-02-15T14:39:53.000000Z","updated_at":"2023-02-15T14:39:53.000000Z"}]
