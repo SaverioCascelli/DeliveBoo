@@ -19,7 +19,6 @@
 
 ******************************************
 <ul>
-    
     <li>Creare Branch</li>
     <li>php artisan serve</li>
     <li>npm run dev</li>
