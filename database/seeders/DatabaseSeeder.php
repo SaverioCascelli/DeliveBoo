@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
 
             user_table_seeder::class,
             restaurant_table_seeder::class,
+            Typeseeder::class,
+
 
         ]);
     }

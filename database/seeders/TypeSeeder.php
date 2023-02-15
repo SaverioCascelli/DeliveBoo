@@ -16,16 +16,15 @@ class TypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['americana','araba','argentina','Brasiliana','Cinese','Fast-food','Francese','giapponese','Italiana','Mediterranea','pizza','steakhouse'];
+        $types = ['americana', 'araba', 'argentina', 'brasiliana', 'cinese', 'fast-food', 'francese', 'giapponese', 'italiana', 'mediterranea', 'pizza', 'steakhouse'];
 
 
-        
-        foreach($types as $type){
+
+        foreach ($types as $type) {
             $new_type = new Type();
             $new_type->name = $type;
             $new_type->slug = Str::slug($type);
             $new_type->save();
-
         }
     }
 }
