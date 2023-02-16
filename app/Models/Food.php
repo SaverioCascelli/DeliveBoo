@@ -14,4 +14,14 @@ class Food extends Model
     public function orders(){
         return $this->belongsToMany(Order::class);
     }
+
+    protected $fillable = [
+        'name',
+        'is_available',
+        'price',
+        'description',
+        'img_url',
+        //'img_url_original_name',
+        'slug'
+    ];
 }
