@@ -7,11 +7,11 @@
 @section('content')
 
 <main>
-    <div class="container-xl my-4 p-3">
+    <div class="container-lg my-4 p-3">
         <div class="">
 
             <div class="card">
-                <div class="row row-cols-1 row-cols-xs-1 row-cols-xl-2 d-flex justify-content-between">
+                <div class="row row-cols-1 row-cols-xs-1 flex-wrap-reverse row-cols-xl-2 d-flex justify-content-between">
 
                     <!--    NOME PIATTO/PREZZO -->
                     <div class="col p-3 px-5">
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="col">
-                        <img src="https://www.mcdonalds.it/sites/default/files/styles/product_isolated_preview/public/products/big-mac-isolated.png" class="img w-100 p-auto m-auto" alt="hamburger">
+                        <img src="https://www.mcdonalds.it/sites/default/files/styles/product_isolated_preview/public/products/big-mac-isolated.png" class="img w-75 m-auto d-block" alt="hamburger">
                     </div>
                 </div>
             </div>
