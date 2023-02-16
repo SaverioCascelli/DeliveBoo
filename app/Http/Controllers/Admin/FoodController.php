@@ -41,11 +41,10 @@ class FoodController extends Controller
     public function store(FoodRequest $request)
     {
         $form_data = $request->all();
-        //$form_data['slug'] = Food::generateSlug($form_data['name']);
+        $form_data['slug'] = Food::generateSlug($form_data['name']);
         $new_food = Food::create($form_data);
         return redirect()->route('admin.foods.show', $new_food)
-        //->with('message','Piatto creato correttamente')
-        ;
+            ->with('message', 'Piatto creato correttamente');
     }
 
     /**
@@ -80,15 +79,15 @@ class FoodController extends Controller
     public function update(FoodRequest $request, Food $food)
     {
         $form_data = $request->all();
-            if($form_data['name'] != $food->name){
-                $form_data['slug'] = Food::generateSlug($form_data['name']);
-            }else{
-                $form_data['slug'] = $food->slug;
-            }
-            $food->update($form_data);
-            return redirect()->route('admin.foods.show', $food)
+        if ($form_data['name'] != $food->name) {
+            $form_data['slug'] = Food::generateSlug($form_data['name']);
+        } else {
+            $form_data['slug'] = $food->slug;
+        }
+        $food->update($form_data);
+        return redirect()->route('admin.foods.show', $food)
             //->with('message', "Il piatto $food->name è stato modificato correttamente")
-            ;
+        ;
     }
 
     /**
@@ -101,7 +100,7 @@ class FoodController extends Controller
     {
         $food->delete();
         return redirect()->route('admin.foods.index')
-        //->with('deleted', "Il piatto $food->name è stato eliminato correttamente")
+            //->with('deleted', "Il piatto $food->name è stato eliminato correttamente")
         ;
     }
 }
