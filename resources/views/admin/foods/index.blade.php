@@ -24,18 +24,21 @@
 
                             <!-- 1 card -->
                             <div class="col col-md-6 col-lg-4 col-xl-3">
-                                <div class="card">
 
-                                    <img src="https://www.mcdonalds.it/sites/default/files/styles/product_isolated_preview/public/products/big-mac-isolated.png" class="card-img-top w-75 m-auto" alt="hamburger">
+
+                                @foreach ($foods as $food)
+                                <div class="card">
+                                    <!--    IMMAGINE -->
+                                    <img src="{{$food->img_url}}" class="card-img-top w-75 m-auto" alt="{{$food->name}}">
 
                                     <!--    NOME PIATTO/PREZZO -->
                                     <div class="card-body">
-                                        <div class="clearfix mb-3">
-                                            <span class="float-end">
-                                                4.00&euro;
+                                        <div class="d-flex mb-3">
+                                            <span class="justify-content-end">
+                                                {{$food->price}}&euro;
                                             </span>
                                             <h5 class="card-title">
-                                                Hamburger
+                                                    {{$food->name}}
                                             </h5>
                                         </div>
                                         <div class="text-left my-1 d-flex justify-content-between">
@@ -54,7 +57,7 @@
                                         <!--    INGREDIENTI -->
                                         <div>
                                             <p class="text-capitalize w-50">
-                                                pane, carne bovina, formaggio, salsa big mac, insalata, cipolla, cetriolo.
+                                                {{$food->description}}
                                             </p>
                                         </div>
                                         <!--    /INGREDIENTI -->
@@ -78,6 +81,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
 
                         </div>
 
