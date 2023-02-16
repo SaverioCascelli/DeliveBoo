@@ -17,6 +17,7 @@
 
     <!-- Usando Vite -->
     @vite(['resources/js/appBlade.js'])
+
 </head>
 
 <body>
