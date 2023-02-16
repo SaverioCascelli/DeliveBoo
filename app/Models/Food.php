@@ -52,5 +52,4 @@ class Food extends Model
         //'img_url_original_name',
         'slug'
     ];
-
 }
