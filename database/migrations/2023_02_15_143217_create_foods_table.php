@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 200);
             $table->string('slug', 210);
             $table->tinyInteger('is_available')->default(1);
-            $table->decimal('price', 4, 2);
+            $table->decimal('price', 5, 2);
             $table->string('description')->nullable();
             $table->string('img_url', 500)->nullable();
             $table->string('img_url_original_name')->nullable();
