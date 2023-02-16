@@ -387,7 +387,11 @@ return [
             "description" => '] 900G DI COSTATA DI SUINO NAZIONALE, LEGGERMENTE SPEZIATA, COTTA “AL ROSA”. PATATE FRITTE MCCAIN E
                 SENAPE'
         ],
-        "Brasiliana" => [
+    ],
+
+
+    "brasiliana" => [
+        [
             "name" => 'Acarajé',
             "url" => 'https://www.bakespace.com/images/large/1a53452e52f2918f3aae2e6828e6c6b3.jpeg',
             "description" => 'Frittelle di fagioli neri e cipolle ripiene di gamberi o altri ingredienti.'
@@ -422,11 +426,11 @@ return [
             "url" => 'https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/styles/recipes_1200_800_fallback/public/fdl_content_import_it/pao-de-queijo-ricetta.jpg?itok=OJqOe5O7',
             "description" => 'Piccoli pani di formaggio a base di polvere di yucca e formaggio.'
         ],
+    ],
 
 
-
-
-        "Cinese" => [
+    "cinese" => [
+        [
             "name" => 'Chow Mein',
             "url" => 'https://hintofhelen.com/wp-content/uploads/2021/01/Actifry-Chicken-Chow-Mein-Recipe-Hint-of-Helen-2-e1610378434717-720x540.jpg',
             "description" => 'Spaghetti saltati in padella con carne o verdure.'
@@ -476,12 +480,14 @@ return [
             "url" => 'https://upload.wikimedia.org/wikipedia/commons/8/80/Xiaolongbao-breakfast.jpg',
             "description" => 'Piccoli ravioli ripieni di carne di maiale e brodo.'
         ],
+    ],
 
 
 
 
 
-        "Fast-food" => [
+    "fast-food" => [
+        [
             "name" => 'Cheeseburger',
             "url" => 'https://bakeitwithlove.com/wp-content/uploads/2022/06/baked-cheeseburgers-sq.jpg',
             "description" => 'Hamburger con formaggio fuso sopra la carne.'
@@ -531,6 +537,7 @@ return [
             "url" => 'https://wips.plug.it/cips/buonissimo.org/cms/2018/02/chicken-wrap-2.jpg',
             "description" => 'Sandwich arrotolato a base di carne, verdure e altri ingredienti, servito in un involucro di tortilla o foglia di lattuga.'
         ],
+    ],
 
 
 
@@ -539,9 +546,8 @@ return [
 
 
 
-
-
-        "Francese" => [
+    "francese" => [
+        [
             "name" => 'Boeuf Bourguignon',
             "url" => 'https://bakeitwithlove.com/wp-content/uploads/2018/01/Beef-Bourguignon-sq1.jpg',
             "description" => 'Stufato di carne di manzo cucinata a fuoco lento con vino rosso, cipolle, pancetta e funghi.'
@@ -591,12 +597,13 @@ return [
             "url" => 'https://www.donnamoderna.com/content/uploads/2014/12/Tarte-tatin-alla-francese-725x545.jpg',
             "description" => 'Torta di mele rovesciata cotta in una crosta di pasta sfoglia.'
         ],
+    ],
 
 
 
 
-
-        "Mediterranea" => [
+    "mediterranea" => [
+        [
             "name" => 'Bruschetta',
             "url" => 'https://www.schaer.com/sites/default/files/styles/square_lg/public/2016-08/1039_BruschettaRustica.jpg',
             "description" => 'Pomodori maturi, basilico fresco, aglio, olio d\'oliva e pane tostato.'
@@ -646,6 +653,7 @@ return [
             "url" => 'https://whatsgabycooking.com/wp-content/uploads/2022/07/WGC-Summer-Stone-Fruit-Fattoush-2-copy.jpg',
             "description" => 'Insalata di verdure grigliate (peperoni, cetrioli, pomodori), pane tostato, erbe fresche (prezzemolo, menta), aglio, limone e olio d\'oliva.'
         ],
+    ],
 
 
 
@@ -653,7 +661,8 @@ return [
 
 
 
-        "Italiana" => [
+    "italiana" => [
+        [
             "name" => 'Cannoli Siciliani',
             "url" => 'https://www.giallozafferano.it/images/206-20605/Cannoli-siciliani_650x433_wm.jpg',
             "description" => 'Pasta frolla, ricotta, zucchero, scorza di arancia o cioccolato.'
@@ -704,4 +713,5 @@ return [
             "description" => 'Tortellini ripieni di carne o formaggio, brodo di pollo o manzo'
         ],
     ]
+
 ];

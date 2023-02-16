@@ -15,7 +15,7 @@ class restaurant_type_seeder extends Seeder
      * @return void
      */
 
-    //prende i ristoranti e li cicla, per ogni ristorante prende in ordine random tutti i tipi e li associa con numero n di type.
+    //prende i ristoranti e li cicla, per ogni ristorante prende in ordine random tutti i tipi e ne associa con numero n di type.
     public function run()
     {
 

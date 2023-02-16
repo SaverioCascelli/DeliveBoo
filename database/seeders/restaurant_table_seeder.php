@@ -23,6 +23,7 @@ class restaurant_table_seeder extends Seeder
             $newRestaurant = new Restaurant();
             $newRestaurant->user_id = $key + 1;
             $newRestaurant->name = $restaurant['name'];
+            $newRestaurant->slug = Restaurant::generateSlug($newRestaurant->name);
             $newRestaurant->VAT = $faker->vat();
             $newRestaurant->address = $faker->streetAddress();
             $newRestaurant->img_url = $restaurant['url'];

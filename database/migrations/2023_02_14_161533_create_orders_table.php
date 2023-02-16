@@ -15,13 +15,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('receipt', 10);
             $table->decimal('total_price', 5, 2);
             $table->string('customer_name', 75);
             $table->string('customer_surname', 75);
             $table->string('customer_address');
             $table->string('customer_mail', 150); //check
-            $table->string('customer_phone_number', 30); //check
+            $table->string('customer_phone_number', 50); //check
             $table->string('customer_note');
             $table->timestamps();
         });

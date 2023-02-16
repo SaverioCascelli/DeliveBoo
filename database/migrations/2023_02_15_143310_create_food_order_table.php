@@ -16,17 +16,17 @@ return new class extends Migration
         Schema::create('food_order', function (Blueprint $table) {
             $table->unsignedBigInteger('food_id');
             $table->foreign('food_id')
-              ->references('id')
-              ->on('foods')
-              ->cascadeOnDelete();
+                ->references('id')
+                ->on('foods')
+                ->cascadeOnDelete();
 
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')
-              ->references('id')
-              ->on('orders')
-              ->cascadeOnDelete();
+                ->references('id')
+                ->on('orders')
+                ->cascadeOnDelete();
 
-            $table->tinyInteger('quantity')->nullable(); //check
+            $table->integer('quantity')->default(1); //check
             $table->timestamps();
         });
     }
