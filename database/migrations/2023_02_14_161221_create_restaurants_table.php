@@ -22,7 +22,7 @@ return new class extends Migration
                 ->on('users')
                 ->cascadeOnDelete();
             $table->string('name', 200);
-            $table->string('slug', 250)->nullable();
+            $table->string('slug', 250);
             $table->string('VAT');
             $table->string('address', 150);
             $table->string('img_url', 250)->nullable();

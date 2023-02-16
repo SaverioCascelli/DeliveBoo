@@ -15,15 +15,19 @@ class restaurant_type_seeder extends Seeder
      * @return void
      */
 
-    //prende i ristoranti e li cicla, per ogni ristorante prende in ordine random tutti i tipi e li associa con numero n di type.
+    //prende i ristoranti e li cicla, per ogni ristorante prende in ordine random tutti i tipi e ne associa con numero n di type.
     public function run()
     {
 
         $restaurants = Restaurant::all();
         foreach ($restaurants as $restaurant) {
+            // prende i tipi in ordine random
             $types = Type::inRandomOrder()->get();
-            $randTypesNumber = rand(1, 3);
-            for ($i = 0; $i < $randTypesNumber; $i++) {
+            // un numero random tra 1 e 3
+            $randNumberOfTypes = rand(1, 3);
+            // ciclo un numero n di volte e attacco n tipi al ristorante
+            for ($i = 0; $i < $randNumberOfTypes; $i++) {
+                //  prende un ristorante e gli attacca l'id del tipo in random order
                 $restaurant->types()->attach($types[$i]->id);
             }
         }
