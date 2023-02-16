@@ -12,15 +12,13 @@
 
             <div class="card">
                 <div class="row row-cols-1 row-cols-xs-1 flex-wrap-reverse row-cols-xl-2 d-flex justify-content-between">
-
-                    <!--    NOME PIATTO/PREZZO -->
                     <div class="col p-3 px-5">
                         <div class="clearfix mb-3">
                             <h4 class="float-end">
-                                4.00&euro;
+                                {{$food->price}}
                             </h4>
                             <h1 class="card-title">
-                                Hamburger
+                                {{$food->name}}
                             </h1>
                         </div>
                         <div class="text-left my-3 d-flex justify-content-between">
@@ -29,7 +27,7 @@
                         <!--    INGREDIENTI -->
                         <div>
                             <p class="text-capitalize w-75 fs-5">
-                                pane, carne bovina, formaggio, salsa big mac, insalata, cipolla, cetriolo.
+                                {{$food->description}}
                             </p>
                         </div>
                         <!--    /INGREDIENTI -->
@@ -43,7 +41,7 @@
                                     </a>
                                 </button>
                                 <button type="button" class="col mx-2 btn btn-warning mt-1">
-                                    <a class="text-white text-decoration-none" href="#">
+                                    <a class="text-white text-decoration-none" href="{{route('admin.foods.edit', $food)}}">
                                         MODIFICA
                                     </a>
                                 </button>
@@ -51,11 +49,11 @@
                                     <a href="" class="text-white text-decoration-none">ELIMINA</a>
                                 </button>
                                 <!--    PULSANTE ON/OFF -->
-                                <div class=" col mx-2 form-check form-switch">
+                                <!--<div class=" col mx-2 form-check form-switch">
                                     <label class="form-check-label" for="flexSwitchCheckChecked"></label>
                                     <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
                                     <span>ON/OFF</span>
-                                </div>
+                                </div>-->
                                 <!--    /PULSANTE ON/OFF -->
 
                             </div>
@@ -64,9 +62,11 @@
 
                     </div>
 
-                    <div class="col">
-                        <img src="https://www.mcdonalds.it/sites/default/files/styles/product_isolated_preview/public/products/big-mac-isolated.png" class="img w-75 m-auto d-block" alt="hamburger">
+                    <div class="col py-3">
+                        <img src="{{$food->img_url}}" class="img w-75 m-auto d-block rounded" alt="{{$food->name}}">
                     </div>
+                    <!--    NOME PIATTO/PREZZO -->
+
                 </div>
             </div>
 
