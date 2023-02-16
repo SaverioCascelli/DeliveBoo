@@ -17,6 +17,7 @@ class Food extends Model
         return $this->belongsToMany(Order::class);
     }
 
+
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
@@ -41,4 +42,15 @@ class Food extends Model
         }
         return $slug;
     }
+
+    protected $fillable = [
+        'name',
+        'is_available',
+        'price',
+        'description',
+        'img_url',
+        //'img_url_original_name',
+        'slug'
+    ];
+
 }
