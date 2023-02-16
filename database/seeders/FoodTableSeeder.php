@@ -44,7 +44,7 @@ class FoodTableSeeder extends Seeder
                     $new_food = new Food();
                     $new_food->is_available = rand(0, 1);
                     //TODO aggiungere random float e non int
-                    $new_food->price = rand(2, 40);
+                    $new_food->price = rand(200, 4000) / 100;
                     $new_food->restaurant_id = $restaurant->id;
                     //prende le informazioni della ricetta nel file config e le salva nell'istanza food
                     $foodInfo = $foodList[$i];
