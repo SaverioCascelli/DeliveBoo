@@ -22,8 +22,10 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        $types = Type::all();
-        return view('auth.register', compact($types));
+        $types = Type::all()->toArray();
+        // dd($types);
+
+        return view('auth.register', compact('types'));
     }
 
     /**
