@@ -47,6 +47,10 @@ class FoodController extends Controller
 
         $new_food = Food::create($form_data);
         $new_food->restaurant_id = Auth::id();
+        // se il food non ha l'immagine ne viene caricata una di placeholder
+        if ($new_food->img_url == null) {
+            $new_food->img_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png';
+        }
         //dd($new_food);
         $new_food->update();
         return redirect()->route('admin.foods.show', $new_food)
@@ -62,10 +66,10 @@ class FoodController extends Controller
     public function show(Food $food)
     {
         //2 se l'utente non è loggato viene rimbalzato alla index
-        if($food->restaurant_id === Auth::id()){
+        if ($food->restaurant_id === Auth::id()) {
             return view('admin.foods.show', compact('food'));
-          }
-          return redirect()->route('admin.foods.index');
+        }
+        return redirect()->route('admin.foods.index');
 
         //return view('admin.foods.show', compact('food'));
     }
@@ -79,11 +83,11 @@ class FoodController extends Controller
     public function edit(Food $food)
     {
         //3 se l'utente non è loggato viene rimbalzato alla index
-        if($food->restaurant_id != Auth::id()){
+        if ($food->restaurant_id != Auth::id()) {
             return redirect()->route('admin.foods.index');
-            }
-            //qui va l'import dei restaurant types
-            return view('admin.foods.edit', compact('food'));
+        }
+        //qui va l'import dei restaurant types
+        return view('admin.foods.edit', compact('food'));
 
         //return view('admin.foods.edit', compact('food'));
     }

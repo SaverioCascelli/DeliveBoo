@@ -28,29 +28,30 @@ class FoodRequest extends FormRequest
             'is_available' => 'required',
             'price' => 'required|max:999.99|min:0.01',
             'description' => 'required|max:255|min:10',
-            'img_url' => 'required|image|max:3200',
+            'img_url' => 'image|max:3200',
         ];
     }
 
-    public function messages(){
+    public function messages()
+    {
         return [
-             'name.required' => 'Il nome è un campo obbligatorio',
-             'name.max' => 'Il nome deve avere massimo :max caratteri',
-             'name.min' => 'Il nome deve avere minimo :min caratteri',
+            'name.required' => 'Il nome è un campo obbligatorio',
+            'name.max' => 'Il nome deve avere massimo :max caratteri',
+            'name.min' => 'Il nome deve avere minimo :min caratteri',
 
-             'is_available.required' => 'La disponibilità è un campo obbligatorio',
+            'is_available.required' => 'La disponibilità è un campo obbligatorio',
 
-             'price.required' => 'Il prezzo è un campo obbligatorio',
-             'price.max' => 'Il prezzo deve essere inferiore a &euro;999,99',
-             'price.min' => 'Il prezzo deve essere maggiore di &euro;0',
+            'price.required' => 'Il prezzo è un campo obbligatorio',
+            'price.max' => 'Il prezzo deve essere inferiore a &euro;999,99',
+            'price.min' => 'Il prezzo deve essere maggiore di &euro;0',
 
-             'description.required' => 'La descrizione è un campo obbligatorio',
-             'description.max' => 'La descrizione deve avere massimo :max caratteri',
-             'description.min' => 'La descrizione deve avere minimo :min caratteri',
+            'description.required' => 'La descrizione è un campo obbligatorio',
+            'description.max' => 'La descrizione deve avere massimo :max caratteri',
+            'description.min' => 'La descrizione deve avere minimo :min caratteri',
 
-             'img_url.required' => 'L\'immagine è un campo obbligatorio',
-             'img_url.image' => 'Il file immagine non è corretto',
-             'img_url.max' => 'Il file immagine deve essere al massimo di :max MB'
-         ];
-     }
+
+            'img_url.image' => 'Il file immagine non è corretto',
+            'img_url.max' => 'Il file immagine deve essere al massimo di :max MB'
+        ];
+    }
 }
