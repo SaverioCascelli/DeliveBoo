@@ -11,15 +11,34 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Registrazione</div>
+
+                    <div class="card-header">
+                        <h6 class="mb-0">Registrazione</h6>
+                        <small>I campi contrassegnati con * sono obbligatori</small>
+                    </div>
 
                     <div class="card-body">
+
+                        <!--  ************* Gestione lista degli errori server ****************** -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert" id="errorServer">
+                                <ul class="mb-0">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{$error}}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <!-- ***************************** -->
+                        <!-- ********** Form ************* -->
+                        <!-- ***************************** -->
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
 
                             <!-- Nome utente -->
                             <div class="mb-3">
-                                <label for="name" class="form-label">Nome</label>
+                                <label for="name" class="form-label">Nome *</label>
                                 <input id="name" type="text"
                                     class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ old('name') }}" placeholder="Inserisci il tuo nome">
@@ -33,7 +52,7 @@
 
                             <!-- Email utente -->
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">Email *</label>
                                 <input id="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" placeholder="Inserisci la tua email">
@@ -47,7 +66,7 @@
 
                             <!-- Nome ristorante-->
                             <div class="mb-3">
-                                <label for="restaurantName" class="form-label">Nome ristorante</label>
+                                <label for="restaurantName" class="form-label">Nome ristorante *</label>
                                 <input id="restaurantName" type="text"
                                     class="form-control @error('restaurantName') is-invalid @enderror"
                                     name="restaurantName" value="{{ old('restaurantName') }}" placeholder="Inserisci il nome del ristorante">
@@ -61,7 +80,7 @@
 
                             <!-- Partita iva -->
                             <div class="mb-3">
-                                <label for="piva" class="form-label">Partita IVA</label>
+                                <label for="piva" class="form-label">Partita IVA *</label>
                                 <input id="piva" type="text"
                                     class="form-control @error('piva') is-invalid @enderror" name="piva"
                                     value="{{ old('piva') }}" placeholder="Inserisci la Partita Iva">
@@ -76,7 +95,7 @@
 
                             <!-- Indirizzo -->
                             <div class="mb-3">
-                                <label for="address" class="form-label">Indirizzo ristorante</label>
+                                <label for="address" class="form-label">Indirizzo ristorante *</label>
                                 <input id="address" type="text"
                                     class="form-control @error('address') is-invalid @enderror" name="address"
                                     value="{{ old('address') }}" placeholder="Inserisci l'indirizzo del ristorante">
@@ -88,36 +107,28 @@
                                 @enderror
                             </div>
 
-                            <!--  TIPOLOGIA CUCINA ATTIVITA'  -->
-                            <div class="mb-4 row">
-                                <label for="type" class="col-md-4 col-form-label text-md-right">Tipologia Cucina</label>
+                            <!-- Tipologia cucina -->
+                            <div class="mb-3 ">
+                                <label class="form-label mb-0">Tipologia di cucina *</label>
+                                <small class="d-block mb-2">Inserisci una o più tipologie di cucina</small>
 
-
-                                <!--#################### DATI DA CICLARE ########################-->
-                                <div class="col-md-4 row">
-                                    <div class="form-check col">
-                                        <input class="form-check-input" type="checkbox" name="typologies[]" id="argentina"
-                                            value="argentina">
-                                        <label class="form-check-label" for="argentina">
-                                            Argentina
-                                        </label>
+                                <div class="row row-cols-2">
+                                    @foreach ($types as $type)
+                                    <div class="col">
+                                        <input type="checkbox"
+                                            id="type{{$loop->iteration}}"
+                                            name="types[]"
+                                            value="{{$type->id}}">
+                                            <label class="me-2" for="type{{$loop->iteration}}">{{$type->name}}</label>
                                     </div>
-                                    <div class="form-check col">
-                                        <input class="form-check-input" type="checkbox" name="typologies[]" id="italiana"
-                                            value="italiana">
-                                        <label class="form-check-label" for="italiana">
-                                            Italiana
-                                        </label>
-                                    </div>
-
+                                    @endforeach
                                 </div>
+
                             </div>
-
-
 
                             <!-- Password -->
                             <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                                <label for="password" class="form-label">Password *</label>
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     placeholder="Inserisci la password">
@@ -130,8 +141,8 @@
                             </div>
 
                             <!-- Conferma Password -->
-                            <div class="mb-3">
-                                <label for="passwordConfirm" class="form-label">Conferma password</label>
+                            <div class="mb-4">
+                                <label for="passwordConfirm" class="form-label">Conferma password *</label>
                                 <input id="passwordConfirm" type="password"
                                     class="form-control @error('passwordConfirm') is-invalid @enderror"
                                     name="passwordConfirm" placeholder="Inserisci la password">
@@ -143,25 +154,15 @@
                                 @enderror
                             </div>
 
-                            <div class="row">
-                                <div class="mb-4 col-md-2">
-                                    <div class="">
-                                        <button type="submit" class="btn btn-primary">
-                                            Registrati
-                                        </button>
-                                    </div>
-                                </div>
 
-                                <div class="mb-4 col-md-2">
-                                    <div>
-                                        <button type="reset" class="btn btn-danger">
-                                            Cancella
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <button type="submit" class="btn btn-primary me-3">Registrati</button>
+
+                            <button type="reset" class="btn btn-danger">Cancella</button>
+
                         </form>
+
                     </div>
+
                 </div>
             </div>
         </div>

@@ -25,7 +25,7 @@
 
         <!-- ***************************** -->
         <!-- ********** Form ************* -->
-         <!-- ***************************** -->
+        <!-- ***************************** -->
         <form action="{{route('admin.foods.update', $food)}}" method="POST" enctype="multipart/form-data" id="foodFormEdit">
 
             @csrf

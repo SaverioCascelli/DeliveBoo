@@ -25,7 +25,7 @@
 
         <!-- ***************************** -->
         <!-- ********** Form ************* -->
-         <!-- ***************************** -->
+        <!-- ***************************** -->
         <form action="{{route('admin.foods.store')}}" method="POST" enctype="multipart/form-data" id="foodFormCreate">
 
             @csrf
