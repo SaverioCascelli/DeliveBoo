@@ -16,10 +16,10 @@
     <h1>HEADER</h1>
     <ul>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Login</a>
+            <router-link :to="{ name: 'login' }">home</router-link>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+            <router-link :to="{ name: 'register' }">register</router-link>
         </li>
     </ul>
 

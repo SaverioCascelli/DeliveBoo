@@ -30,6 +30,14 @@ const router = createRouter({
             component: CartPayment
         },
         {
+            path: '/login',
+            name: 'login',
+        },
+        {
+            path: '/register',
+            name: 'register',
+        },
+        {
             path:'/:pathMatch(.*)*',
             component : Error404
         }
