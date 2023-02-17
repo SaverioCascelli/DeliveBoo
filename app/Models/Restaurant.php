@@ -10,6 +10,7 @@ class Restaurant extends Model
 {
     use HasFactory;
 
+
     //interrogazione relazione con user one to one
     public function user()
     {
