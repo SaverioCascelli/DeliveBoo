@@ -26,7 +26,7 @@
         <!-- ***************************** -->
         <!-- ********** Form ************* -->
          <!-- ***************************** -->
-        <form action="{{route('admin.foods.update', $food)}}" method="POST" enctype="multipart/form-data" id="foodForm">
+        <form action="{{route('admin.foods.update', $food)}}" method="POST" enctype="multipart/form-data" id="foodFormEdit">
 
             @csrf
             @method('PUT')
@@ -98,8 +98,7 @@
             <!-- Immagine -->
             <div class="mb-3">
                 <label for="img_url" class="form-label">Immagine</label>
-                <input onchange="showImage(event)"
-                    type="file" name="img_url" class="form-control @error('img_url') is-invalid @enderror" id="img_url">
+                <input type="file" name="img_url" class="form-control @error('img_url') is-invalid @enderror" id="img_url">
                 {{-- errore client --}}
                 <p id="foodImage" class="invalid-feedback d-none mb-1"></p>
                 {{-- errore server --}}
@@ -107,9 +106,15 @@
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
 
-                <div class="mt-2">
-                    <img id="output-image" width="150" src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}">
-                </div>
+                @if (str_contains($food->img_url, 'http'))
+                    <div class="mt-2">
+                        <img id="output-image" width="150" src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
+                    </div>
+                @else
+                    <div class="mt-2">
+                        <img id="output-image" width="150" src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}">
+                    </div>
+                @endif
 
             </div>
 

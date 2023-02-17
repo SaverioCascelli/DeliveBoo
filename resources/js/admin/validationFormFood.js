@@ -1,34 +1,51 @@
-const foodForm = document.getElementById('foodForm');
+const foodFormCreate = document.getElementById('foodFormCreate');
+const foodFormEdit = document.getElementById('foodFormEdit');
+
+let foodForm;
+
+if(foodFormCreate) {
+
+    foodForm = foodFormCreate;
+
+} else if(foodFormEdit) {
+
+    foodForm = foodFormEdit;
+
+}
+
+
+
 
 document.addEventListener('DOMContentLoaded', function(){
 
     const errorServer = document.getElementById('errorServer');
 
-    if(errorServer) {
+    if(errorServer || foodFormEdit) {
 
-        nameCheck();
+        nameCheck(foodForm);
 
-        descriptionCheck();
+        descriptionCheck(foodForm);
 
-        priceCheck();
+        priceCheck(foodForm);
 
-        imageCheck();
+        // imageCheck(foodForm);
 
     }
 
 })
 
+
 if(foodForm) {
 
     foodForm.addEventListener('submit', function(event){
 
-        nameCheck(event);
+        nameCheck(foodForm, event);
 
-        descriptionCheck(event);
+        descriptionCheck(foodForm, event);
 
-        priceCheck(event);
+        priceCheck(foodForm, event);
 
-        imageCheck(event);
+        // imageCheck(foodForm, event);
 
     })
 
@@ -55,6 +72,7 @@ function displayError(errorId, inputId, errorMessage) {
 
 }
 
+
 // funzione che rimuove l'errore lato client
 function removeError(errorId, inputId) {
 
@@ -73,21 +91,21 @@ function removeError(errorId, inputId) {
 
 
 // controllo del nome
-function nameCheck(event = null){
+function nameCheck(element, event = null){
 
-    if( foodForm.name.value == '') {
+    if( element.name.value == '') {
 
         displayError('foodName', 'name', 'Il nome è un campo obbligatorio');
 
         if(event) event.preventDefault();
 
-    } else if( foodForm.name.value.length > 100 ) {
+    } else if( element.name.value.length > 100 ) {
 
         displayError('foodName', 'name', 'Il nome deve avere massimo 100 caratteri');
 
         if(event) event.preventDefault();
 
-    } else if( foodForm.name.value.length < 2 ) {
+    } else if( element.name.value.length < 2 ) {
 
         displayError('foodName', 'name', 'Il nome deve avere minimo 2 caratteri');
 
@@ -103,21 +121,21 @@ function nameCheck(event = null){
 
 
 // controllo della descrizione
-function descriptionCheck(event = null){
+function descriptionCheck(element, event = null){
 
-    if( foodForm.description.value == '') {
+    if( element.description.value == '') {
 
         displayError('foodDescription', 'description', 'La descrizione è un campo obbligatorio');
 
         if(event) event.preventDefault();
 
-    } else if( foodForm.description.value.length > 255 ) {
+    } else if( element.description.value.length > 255 ) {
 
         displayError('foodDescription', 'description', 'La descrizione deve avere massimo 255 caratteri');
 
         if(event) event.preventDefault();
 
-    } else if( foodForm.description.value.length < 10 ) {
+    } else if( element.description.value.length < 10 ) {
 
         displayError('foodDescription', 'description', 'La descrizione deve avere minimo 10 caratteri');
 
@@ -133,24 +151,24 @@ function descriptionCheck(event = null){
 
 
 // controllo del prezzo
-function priceCheck(event = null){
+function priceCheck(element, event = null){
 
-    const decimalPrice = foodForm.price.value.toString().split('.');
+    const decimalPrice = element.price.value.toString().split('.');
 
-    if( foodForm.price.value == '') {
+    if( element.price.value == '') {
 
         displayError('foodPrice', 'price', 'Il prezzo è un campo obbligatorio');
 
         if(event) event.preventDefault();
 
     }
-    else if( foodForm.price.value == 0 ) {
+    else if( element.price.value == 0 ) {
 
         displayError('foodPrice', 'price', 'Il prezzo deve essere maggiore di &euro;0');
 
         if(event) event.preventDefault();
 
-    } else if( foodForm.price.value > 999.99) {
+    } else if( element.price.value > 999.99) {
 
         displayError('foodPrice', 'price', 'Il prezzo deve essere inferiore a &euro;999,99');
 
@@ -172,20 +190,18 @@ function priceCheck(event = null){
 
 
 // controllo immagine
-function imageCheck(event = null){
+// function imageCheck(element, event = null){
 
-    if( foodForm.img_url.value == '') {
+//     if( element.img_url.value == '') {
 
-        displayError('foodImage', 'img_url', 'L\'immagine è un campo obblighatorio');
+//         displayError('foodImage', 'img_url', 'L\'immagine è un campo obblighatorio');
 
-        if(event) event.preventDefault();
+//         if(event) event.preventDefault();
 
-    } else {
+//     } else {
 
-        removeError('foodImage', 'img_url');
+//         removeError('foodImage', 'img_url');
 
-    }
+//     }
 
-}
-
-
+// }
