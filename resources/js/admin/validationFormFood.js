@@ -18,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 })
 
-errorCheck()
-
-function errorCheck(){
+if(foodForm) {
 
     foodForm.addEventListener('submit', function(event){
 

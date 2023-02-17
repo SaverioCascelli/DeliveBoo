@@ -52,7 +52,6 @@
                 @error('description')
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
-
             </div>
 
             <!-- Prezzo -->
@@ -89,9 +88,7 @@
             <!-- Immagine -->
             <div class="mb-3">
                 <label for="img_url" class="form-label">Immagine</label>
-                <input
-                onchange="showImage(event)"
-                type="file" name="img_url" class="form-control @error('img_url') is-invalid @enderror" id="img_url">
+                <input type="file" name="img_url" class="form-control @error('img_url') is-invalid @enderror" id="img_url">
                 {{-- errore client --}}
                 <p id="foodImage" class="invalid-feedback d-none mb-1"></p>
                 {{-- errore server --}}
@@ -102,7 +99,6 @@
                 <div class="mt-2">
                     <img id="output-image" width="150" src="" alt="">
                 </div>
-
             </div>
 
             <button type="submit" class="btn btn-outline-success">CREA</button>
@@ -110,14 +106,5 @@
         </form>
 
     </div>
-
-    <script>
-
-        function showImage(event){
-            const tagImage = document.getElementById('output-image');
-            tagImage.src = URL.createObjectURL(event.target.files[0]);
-        }
-
-    </script>
 
 @endsection

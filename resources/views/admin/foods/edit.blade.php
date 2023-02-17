@@ -10,12 +10,12 @@
 
     <div class="container-fluid h-100 overflow-auto">
 
-        <h1 class="mb-3">AGGIUNGI UN NUOVO PIATTO</h1>
+        <h1 class="mb-3">MODIFICA INFORMAZIONI PIATTO</h1>
 
-        <!--  ************* Gestione lista degli errori ****************** -->
+        <!--  ************* Gestione lista degli errori server ****************** -->
         @if ($errors->any())
-            <div class="alert alert-danger" role="alert">
-                <ul>
+            <div class="alert alert-danger" role="alert" id="errorServer">
+                <ul class="mb-0">
                     @foreach ($errors->all() as $error)
                         <li>{{$error}}</li>
                     @endforeach
@@ -26,16 +26,19 @@
         <!-- ***************************** -->
         <!-- ********** Form ************* -->
          <!-- ***************************** -->
-        <form action="{{route('admin.foods.update')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('admin.foods.update', $food)}}" method="POST" enctype="multipart/form-data" id="foodForm">
 
             @csrf
             @method('PUT')
 
-            <!-- Nome del piatto -->
+            <!-- Nome piatto -->
             <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
                 <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name"
                     value="{{old('name', $food->name)}}" placeholder="Inserisci il nome del piatto">
+                {{-- errore client --}}
+                <p id="foodName" class="invalid-feedback d-none"></p>
+                {{-- errore server --}}
                 @error('name')
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
@@ -44,7 +47,10 @@
             <!-- Descrizione -->
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
-                <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" value="{{old('description', $food->description)}}" placeholder="Inserisci la descrizione del piatto">
+                <textarea type="text" name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Inserisci la descrizione del piatto">{{old('description', $food->description)}}</textarea>
+                {{-- errore client --}}
+                <p id="foodDescription" class="invalid-feedback d-none"></p>
+                {{-- errore server --}}
                 @error('description')
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
@@ -53,7 +59,10 @@
             <!-- Prezzo -->
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="number" min="0" step="any" name="price" class="form-control id="price" value="{{old('price', $food->price)}}" placeholder="Inserisci il prezzo del piatto">
+                <input type="number" min="0" step="any" name="price" class="form-control @error('price') is-invalid @enderror" id="price" value="{{old('price', $food->price)}}" placeholder="Inserisci il prezzo del piatto">
+                {{-- errore client --}}
+                <p id="foodPrice" class="invalid-feedback d-none"></p>
+                {{-- errore server --}}
                 @error('price')
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
@@ -89,9 +98,11 @@
             <!-- Immagine -->
             <div class="mb-3">
                 <label for="img_url" class="form-label">Immagine</label>
-                <input
-                onchange="showImage(event)"
-                type="file" name="img_url" class="form-control" id="img_url">
+                <input onchange="showImage(event)"
+                    type="file" name="img_url" class="form-control @error('img_url') is-invalid @enderror" id="img_url">
+                {{-- errore client --}}
+                <p id="foodImage" class="invalid-feedback d-none mb-1"></p>
+                {{-- errore server --}}
                 @error('img_url')
                     <p class="invalid-feedback">{{$message}}</p>
                 @enderror
@@ -107,14 +118,5 @@
         </form>
 
     </div>
-
-    <script>
-
-        function showImage(event){
-            const tagImage = document.getElementById('output-image');
-            tagImage.src = URL.createObjectURL(event.target.files[0]);
-        }
-
-    </script>
 
 @endsection
