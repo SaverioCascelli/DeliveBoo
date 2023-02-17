@@ -1,5 +1,13 @@
 @use './partialsBlade/vars';
 
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+.ft-img{
+    img{
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+    }
+}
 
 
