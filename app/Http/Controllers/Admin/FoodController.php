@@ -8,6 +8,7 @@ use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
@@ -43,16 +44,26 @@ class FoodController extends Controller
         $form_data = $request->all();
         $form_data['slug'] = Food::generateSlug($form_data['name']);
         //1
-        $from_data['restaurant_id'] = Auth::id();
+        //$from_data['restaurant_id'] = Auth::id();
+
+        //se è presente il file image lo salvo nel filesystem e nel db, e salvo il nome originale
+        if(array_key_exists('img_url',$form_data)){
+            $form_data['img_url_original_name'] = $request->file('img_url')->getClientOriginalName();
+            $form_data['img_url'] = Storage::put('uploads',$form_data['img_url']);
+        }
+        //dd($form_data);
 
         $new_food = Food::create($form_data);
         $new_food->restaurant_id = Auth::id();
+
         // se il food non ha l'immagine ne viene caricata una di placeholder
         if ($new_food->img_url == null) {
             $new_food->img_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png';
         }
-        //dd($new_food);
+
+
         $new_food->update();
+        //dd($new_food);
         return redirect()->route('admin.foods.show', $new_food)
             ->with('message', 'Piatto creato correttamente');
     }
@@ -107,6 +118,17 @@ class FoodController extends Controller
         } else {
             $form_data['slug'] = $food->slug;
         }
+
+        //se esiste l'image è possibile cancellarla e rimpiazzarla tramite il form
+        if(array_key_exists('img_url',$form_data)){
+            if($food->img_url){
+                Storage::disk('public')->delete($food->img_url);
+            }
+
+            $form_data['img_url_original_name'] = $request->file('img_url')->getClientOriginalName();
+            $form_data['img_url'] = Storage::put('uploads',$form_data['img_url']);
+        }
+
         $food->update($form_data);
         return redirect()->route('admin.foods.show', $food)
             //->with('message', "Il piatto $food->name è stato modificato correttamente")
@@ -121,6 +143,11 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
+        //se esiste l'image si può cancellare
+        if($food->img_url){
+            Storage::disk('public')->delete($food->img_url);
+        }
+
         $food->delete();
         return redirect()->route('admin.foods.index')
             //->with('deleted', "Il piatto $food->name è stato eliminato correttamente")
