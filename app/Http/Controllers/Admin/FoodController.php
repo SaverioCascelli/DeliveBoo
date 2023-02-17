@@ -42,7 +42,13 @@ class FoodController extends Controller
     {
         $form_data = $request->all();
         $form_data['slug'] = Food::generateSlug($form_data['name']);
+        //1
+        $from_data['restaurant_id'] = Auth::id();
+
         $new_food = Food::create($form_data);
+        $new_food->restaurant_id = Auth::id();
+        //dd($new_food);
+        $new_food->update();
         return redirect()->route('admin.foods.show', $new_food)
             ->with('message', 'Piatto creato correttamente');
     }
@@ -55,7 +61,13 @@ class FoodController extends Controller
      */
     public function show(Food $food)
     {
-        return view('admin.foods.show', compact('food'));
+        //2 se l'utente non è loggato viene rimbalzato alla index
+        if($food->restaurant_id === Auth::id()){
+            return view('admin.foods.show', compact('food'));
+          }
+          return redirect()->route('admin.foods.index');
+
+        //return view('admin.foods.show', compact('food'));
     }
 
     /**
@@ -66,7 +78,14 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        return view('admin.foods.edit', compact('food'));
+        //3 se l'utente non è loggato viene rimbalzato alla index
+        if($food->restaurant_id != Auth::id()){
+            return redirect()->route('admin.foods.index');
+            }
+            //qui va l'import dei restaurant types
+            return view('admin.foods.edit', compact('food'));
+
+        //return view('admin.foods.edit', compact('food'));
     }
 
     /**
