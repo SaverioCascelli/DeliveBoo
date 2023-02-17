@@ -32,7 +32,6 @@
                             <div class="col col-sm-6 col-md-4 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <!--    IMMAGINE -->
-
                                     @if (str_contains($food->img_url, 'http'))
                                     <div class="m-auto py-2 ft-img">
                                         <img class="card-img-top m-auto rounded" src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
