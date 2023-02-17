@@ -35,7 +35,7 @@
             <div class="row h-100">
                 <!--    ASIDE MENU -->
                 @auth
-                    <div class="col-2 col-sm-2 col-md-1 main-wrapper bg-warning">
+                    <div class="col-2 col-sm-2 col-sm-1 main-wrapper bg-warning">
                         @include('admin.partials.aside')
                     </div>
                 @endauth

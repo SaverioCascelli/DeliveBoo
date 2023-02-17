@@ -34,18 +34,18 @@
 
                         <!--    BOTTONI FONTAWESOME -->
                         <div class="">
-                            <div class="row">
-                                <button type="button" class="col-2 mx-2 btn btn-success mt-1">
+                            <div class="row-cols-1 row-cols-lg-4 mt-2">
+                                <button type="button" class="col-12 col-sm-4 btn btn-success mt-2">
                                     <a class="text-white text-decoration-none" href="{{route('admin.foods.index')}}">
                                         TORNA AL MEN&Uacute;
                                     </a>
                                 </button>
-                                <button type="button" class="col mx-2 btn btn-warning mt-1">
+                                <button type="button" class="col-12 col-sm-4 btn btn-warning mt-2">
                                     <a class="text-white text-decoration-none" href="{{route('admin.foods.edit', $food)}}">
                                         MODIFICA
                                     </a>
                                 </button>
-                                <button type="button" class="col mx-2 btn btn-danger mt-1">
+                                <button type="button" class="col-12 col-sm-4 btn btn-danger mt-2">
                                     <a href="" class="text-white text-decoration-none">ELIMINA</a>
                                 </button>
                                 <!--    PULSANTE ON/OFF -->
