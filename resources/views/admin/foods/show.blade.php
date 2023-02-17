@@ -62,9 +62,15 @@
 
                     </div>
 
+                        @if (str_contains($food->img_url, 'http'))
                     <div class="col py-3">
-                        <img src="{{$food->img_url}}" class="img w-75 m-auto d-block rounded" alt="{{$food->name}}">
+                        <img class="img w-75 m-auto d-block rounded"  src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
                     </div>
+                        @else
+                    <div class="col py-3">
+                        <img class="img w-75 m-auto d-block rounded" src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}">
+                    </div>
+                        @endif
                     <!--    NOME PIATTO/PREZZO -->
 
                 </div>
