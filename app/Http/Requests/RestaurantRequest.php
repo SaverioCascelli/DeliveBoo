@@ -13,7 +13,7 @@ class RestaurantRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class RestaurantRequest extends FormRequest
     public function rules()
     {
         return [
-            
+
             'name' => 'required|max:200|min:2',
             'VAT' => 'required|max:11|min:11',
             'address' => 'required|max:150|min:8',
@@ -34,7 +34,7 @@ class RestaurantRequest extends FormRequest
     public function message()
     {
         return [
-            
+
             'name.required' => 'Inserisci un nome valido',
             'name.max' => 'Inserisci un nome valido di massimo 200 caratteri',
             'name.min' => 'Inserisci un nome valido di minimo 2 caratteri',

@@ -32,7 +32,7 @@ return [
         'string' => 'The :attribute must be between :min and :max characters.',
     ],
     'boolean' => 'The :attribute field must be true or false.',
-    'confirmed' => 'The :attribute confirmation does not match.',
+    'confirmed' => 'La :attribute non corrisponde.',
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
@@ -47,7 +47,7 @@ return [
     'distinct' => 'The :attribute field has a duplicate value.',
     'doesnt_end_with' => 'The :attribute may not end with one of the following: :values.',
     'doesnt_start_with' => 'The :attribute may not start with one of the following: :values.',
-    'email' => 'The :attribute must be a valid email address.',
+    'email' => 'L\' :attribute deve essere valida',
     'ends_with' => 'The :attribute must end with one of the following: :values.',
     'enum' => 'The selected :attribute is invalid.',
     'exists' => 'The selected :attribute is invalid.',
@@ -150,6 +150,10 @@ return [
     'url' => 'The :attribute must be a valid URL.',
     'ulid' => 'The :attribute must be a valid ULID.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'restaurantName' => 'deve esserci',
+    'address' => 'deve esserci',
+    'piva' => 'deve esserci',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -166,6 +170,30 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'name' => [
+            'min' => 'Il nome deve aver minimo :min caratteri',
+            'max' => 'Il nome deve avere massimo :max caratteri',
+            'required' => 'Il nome è un campo obbligatorio'
+        ],
+        'email' => [
+            'unique' => 'Email già registrata',
+            'min' => 'L\'email deve avere minimo :min caratteri',
+            'max' => 'L\'email deve avere massimo :max caratteri'
+        ],
+        'restaurantName' => [
+            'required' => 'Il nome del ristorante è un campo obbligatorio',
+        ],
+        'piva' => [
+            'required' => 'La piva è un campo obbligatorio',
+            'starts_with' => 'La partita iva deve iniziare con IT',
+            'min' => 'La partita iva deve avere 11 caratteri',
+            'max' => 'La partita iva deve avere 11 caratteri'
+        ],
+        'address' => [
+            'required' => 'L\'indirizzo è un campo obbligatorio',
+            'min' => 'L\'indirizzo deve avere minimo :min caratteri',
+            "max' => 'L\'indirizzo deve avere massimo :max caratteri"
+        ]
     ],
 
     /*
