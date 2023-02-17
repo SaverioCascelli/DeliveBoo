@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'restaurantName' => ['required', 'string', 'min:2', 'max:255'],
             'address' => ['required', 'string', 'min:10', 'max:100'],
             'piva' => ['required', 'string', 'min:11', 'max:11'],
+            'types' => ['required'],
             'email' => ['required', 'string', 'email', 'min:8', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);

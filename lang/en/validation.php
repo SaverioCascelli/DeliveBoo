@@ -153,6 +153,7 @@ return [
     'restaurantName' => 'deve esserci',
     'address' => 'deve esserci',
     'piva' => 'deve esserci',
+    'types' => 'deve esserci',
 
 
     /*
@@ -193,6 +194,9 @@ return [
             'required' => 'L\'indirizzo è un campo obbligatorio',
             'min' => 'L\'indirizzo deve avere minimo :min caratteri',
             "max' => 'L\'indirizzo deve avere massimo :max caratteri"
+        ],
+        'types' => [
+            'required' => 'Devi selezionare almeno una tipologia di ristorante'
         ]
     ],
 
