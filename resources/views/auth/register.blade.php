@@ -145,7 +145,7 @@
                                 <label for="password-confirm" class="form-label">Conferma password *</label>
                                 <input id="password-confirm" type="password"
                                     class="form-control @error('password-confirm') is-invalid @enderror"
-                                    name="password-confirm" placeholder="Inserisci la password">
+                                    name="password_confirmation" placeholder="Inserisci la password">
                                 {{-- errore client --}}
                                 <p id="registerPasswordConfirm" class="invalid-feedback d-none"></p>
                                 {{-- errore server --}}
