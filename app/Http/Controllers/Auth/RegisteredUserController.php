@@ -52,6 +52,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        //crea il ristorante con i dati del form
         $formData = $request->all();
         $new_restaurent = new Restaurant();
         $new_restaurent->name = $formData['restaurantName'];
@@ -60,6 +61,7 @@ class RegisteredUserController extends Controller
         $new_restaurent->VAT = $formData['piva'];
         $new_restaurent->address = $formData['address'];
         $new_restaurent->save();
+        //associa i ristoranti con le tipologie selezionate nel form
         foreach ($formData['types'] as $type) {
             $type = Type::all()->where('id', (int)$type)->first();
             $new_restaurent->types()->attach($type->id);
