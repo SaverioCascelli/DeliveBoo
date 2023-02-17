@@ -15,7 +15,7 @@
                     <div class="col p-3 px-5">
                         <div class="clearfix mb-3">
                             <h4 class="float-end">
-                                {{$food->price}}
+                                {{$food->price}}&euro;
                             </h4>
                             <h1 class="card-title">
                                 {{$food->name}}

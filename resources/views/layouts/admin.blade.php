@@ -89,12 +89,27 @@
                                         @csrf
                                     </form>
                                 </div>
+                                <div>
+
+                                </div>
+
                             </li>
+
                         @endguest
+
                     </ul>
+
+
                 </div>
             </div>
+
         </nav>
+
+        <!--    ASIDE MENU -->
+        @auth
+            @include('admin.partials.aside')
+        @endauth
+
 
         <main class="">
             @yield('content')

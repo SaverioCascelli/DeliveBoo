@@ -13,8 +13,13 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
 
-                <div class="card-header">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h1 class="m-0 mt-3">Menù</h1>
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-success ">
+                            <a class="text-white text-decoration-none" href="{{route('admin.foods.create')}}"><i class="fa-solid fa-plus"></i></a>
+                        </button>
+                    </div>
                 </div>
 
                 <div>
@@ -27,7 +32,7 @@
                             <div class="col col-sm-6 col-md-4 col-lg-4 col-xl-3">
                                 <div class="card h-100">
                                     <!--    IMMAGINE -->
-                                    <div class="w-75 h-50 m-auto py-2">
+                                    <div class="m-auto py-2 ft-img">
                                         <img src="{{$food->img_url}}" class="card-img-top m-auto rounded" alt="{{$food->name}}">
                                     </div>
                                     <!--    NOME PIATTO/PREZZO -->
