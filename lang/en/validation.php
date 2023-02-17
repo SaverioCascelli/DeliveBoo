@@ -178,6 +178,7 @@ return [
         ],
         'email' => [
             'unique' => 'Email già registrata',
+            'required' => 'L\'email è un campo obbligatorio',
             'min' => 'L\'email deve avere minimo :min caratteri',
             'max' => 'L\'email deve avere massimo :max caratteri'
         ],
@@ -185,7 +186,7 @@ return [
             'required' => 'Il nome del ristorante è un campo obbligatorio',
         ],
         'piva' => [
-            'required' => 'La piva è un campo obbligatorio',
+            'required' => 'La partita iva è un campo obbligatorio',
             'starts_with' => 'La partita iva deve iniziare con IT',
             'min' => 'La partita iva deve avere 11 caratteri',
             'max' => 'La partita iva deve avere 11 caratteri'
