@@ -49,7 +49,7 @@ class Food extends Model
         'price',
         'description',
         'img_url',
-        //'img_url_original_name',
+        'img_url_original_name',
         'slug',
         'restaurant_id'
     ];
