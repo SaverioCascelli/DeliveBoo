@@ -5,6 +5,7 @@ import.meta.glob([
     '../img/**'
 ]);
 
+
 import './admin/validationFormFood';
 
 import './admin/showImageForm';
