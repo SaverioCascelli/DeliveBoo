@@ -13,9 +13,9 @@
     <div class="row justify-content-center">
         <div class="col-md-11">
 
-                <div class="card-header d-flex justify-content-between align-items-center">
+                <div class="card-header d-flex align-items-center">
                     <h1 class="m-0 mt-3">Menù</h1>
-                    <div class="mt-4">
+                    <div class="mt-4 mx-5">
                         <button type="button" class="btn btn-success ">
                             <a class="text-white text-decoration-none" href="{{route('admin.foods.create')}}"><i class="fa-solid fa-plus"></i></a>
                         </button>
