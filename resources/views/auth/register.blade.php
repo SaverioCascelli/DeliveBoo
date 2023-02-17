@@ -142,14 +142,14 @@
 
                             <!-- Conferma Password -->
                             <div class="mb-4">
-                                <label for="passwordConfirm" class="form-label">Conferma password *</label>
-                                <input id="passwordConfirm" type="password"
-                                    class="form-control @error('passwordConfirm') is-invalid @enderror"
-                                    name="passwordConfirm" placeholder="Inserisci la password">
+                                <label for="password-confirm" class="form-label">Conferma password *</label>
+                                <input id="password-confirm" type="password"
+                                    class="form-control @error('password-confirm') is-invalid @enderror"
+                                    name="password-confirm" placeholder="Inserisci la password">
                                 {{-- errore client --}}
                                 <p id="registerPasswordConfirm" class="invalid-feedback d-none"></p>
                                 {{-- errore server --}}
-                                @error('passwordConfirm')
+                                @error('password-confirm')
                                     <p class="invalid-feedback">{{$message}}</p>
                                 @enderror
                             </div>
