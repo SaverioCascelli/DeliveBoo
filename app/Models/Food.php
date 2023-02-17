@@ -50,6 +50,7 @@ class Food extends Model
         'description',
         'img_url',
         //'img_url_original_name',
-        'slug'
+        'slug',
+        'restaurant_id'
     ];
 }
