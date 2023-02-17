@@ -63,6 +63,7 @@
                     </div>
 
                     <!-- controllo immagini -->
+
                         @if (str_contains($food->img_url, 'http'))
                     <div class="col py-3">
                         <img class="img w-75 m-auto d-block rounded"  src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
