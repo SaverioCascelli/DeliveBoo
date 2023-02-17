@@ -6,3 +6,5 @@ import.meta.glob([
 ]);
 
 import './admin/validationFormFood';
+
+import './admin/showImageForm';
