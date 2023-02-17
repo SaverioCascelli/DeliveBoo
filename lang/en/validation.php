@@ -36,7 +36,7 @@ return [
     'current_password' => 'The password is incorrect.',
     'date' => 'The :attribute is not a valid date.',
     'date_equals' => 'The :attribute must be a date equal to :date.',
-    'date_format' => 'The :attribute does not match the format :format.',
+    'date_format' => 'Le :attribute does not match the format :format.',
     'decimal' => 'The :attribute must have :decimal decimal places.',
     'declined' => 'The :attribute must be declined.',
     'declined_if' => 'The :attribute must be declined when :other is :value.',
@@ -97,10 +97,10 @@ return [
     'mimes' => 'The :attribute must be a file of type: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
-        'array' => 'The :attribute must have at least :min items.',
+        'array' => 'La :attribute deve essere lunga almeno :min.',
         'file' => 'The :attribute must be at least :min kilobytes.',
         'numeric' => 'The :attribute must be at least :min.',
-        'string' => 'The :attribute must be at least :min characters.',
+
     ],
     'min_digits' => 'The :attribute must have at least :min digits.',
     'missing' => 'The :attribute field must be missing.',
@@ -125,7 +125,7 @@ return [
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'La :attribute è un campo obbligatorio.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_if_accepted' => 'The :attribute field is required when :other is accepted.',
@@ -184,10 +184,12 @@ return [
         ],
         'restaurantName' => [
             'required' => 'Il nome del ristorante è un campo obbligatorio',
+            'min' => 'Il nome del ristorante deve avere minimo :min caratteri',
+            'max' => 'Il nome del ristorante deve avere massimo :max caratteri'
         ],
         'piva' => [
             'required' => 'La partita iva è un campo obbligatorio',
-            'starts_with' => 'La partita iva deve iniziare con IT',
+
             'min' => 'La partita iva deve avere 11 caratteri',
             'max' => 'La partita iva deve avere 11 caratteri'
         ],
@@ -197,7 +199,7 @@ return [
             "max' => 'L\'indirizzo deve avere massimo :max caratteri"
         ],
         'types' => [
-            'required' => 'Devi selezionare almeno una tipologia di ristorante'
+            'required' => 'Devi selezionare almeno una tipologia di cucina'
         ]
     ],
 
