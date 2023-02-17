@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\RestaurantRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
 use App\Models\Type;
@@ -28,17 +29,19 @@ class RegisteredUserController extends Controller
         return view('auth.register', compact('types'));
     }
 
-    /**
+    /**e
      * Handle an incoming registration request.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
-        //dd($request->all());
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class],
+            'name' => ['required', 'string', 'max:255', 'min:2'],
+            'restaurantName' => ['required', 'string', 'min:2', 'max:255'],
+            'address' => ['required', 'string', 'min:10', 'max:100'],
+            'piva' => ['required', 'string', 'min:11', 'max:11'],
+            'email' => ['required', 'string', 'email', 'min:8', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -56,6 +59,13 @@ class RegisteredUserController extends Controller
         $new_restaurent->VAT = $formData['piva'];
         $new_restaurent->address = $formData['address'];
         $new_restaurent->save();
+        dd($formData);
+        foreach ($formData['typologies'] as $type) {
+            $type = Type::with('name', strtolower($type));
+            dd($type);
+            $new_restaurent->types()->attach($type->id);
+        }
+
 
 
         event(new Registered($user));
