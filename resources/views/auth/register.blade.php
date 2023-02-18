@@ -21,7 +21,7 @@
 
                         <!--  ************* Gestione lista degli errori server ****************** -->
                         @if ($errors->any())
-                            <div class="alert alert-danger" role="alert" id="errorServer">
+                            <div class="alert alert-danger" role="alert" id="errorServerRegister">
                                 <ul class="mb-0">
                                     @foreach ($errors->all() as $error)
                                         <li>{{$error}}</li>
@@ -33,7 +33,7 @@
                         <!-- ***************************** -->
                         <!-- ********** Form ************* -->
                         <!-- ***************************** -->
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('register') }}" id="userRegister">
                             @csrf
 
                             <!-- Nome utente -->
@@ -92,7 +92,6 @@
                                 @enderror
                             </div>
 
-
                             <!-- Indirizzo -->
                             <div class="mb-3">
                                 <label for="address" class="form-label">Indirizzo ristorante *</label>
@@ -123,14 +122,13 @@
                                     </div>
                                     @endforeach
                                 </div>
-
                             </div>
 
                             <!-- Password -->
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password *</label>
                                 <input id="password" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password" value="{{ old('password') }}"
                                     placeholder="Inserisci la password">
                                 {{-- errore client --}}
                                 <p id="registerPassword" class="invalid-feedback d-none"></p>
@@ -145,7 +143,7 @@
                                 <label for="password-confirm" class="form-label">Conferma password *</label>
                                 <input id="password-confirm" type="password"
                                     class="form-control @error('password-confirm') is-invalid @enderror"
-                                    name="password_confirmation" placeholder="Inserisci la password">
+                                    name="password_confirmation" placeholder="Inserisci la password" value="{{ old('password_confirmation') }}">
                                 {{-- errore client --}}
                                 <p id="registerPasswordConfirm" class="invalid-feedback d-none"></p>
                                 {{-- errore server --}}

@@ -14,13 +14,11 @@ if(foodFormCreate) {
 }
 
 
-
-
 document.addEventListener('DOMContentLoaded', function(){
 
-    const errorServer = document.getElementById('errorServer');
+    const errorServerFood = document.getElementById('errorServerFood');
 
-    if(errorServer || foodFormEdit) {
+    if(errorServerFood || foodFormEdit) {
 
         nameCheck(foodForm);
 
