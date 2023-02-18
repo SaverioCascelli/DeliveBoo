@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-<div class="container mt-4">
+<div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
 
                 <div class="card-header">
@@ -60,7 +60,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary text-white px-4">Login</button>
 
                         {{-- @if (Route::has('password.request'))
                         <a class="btn btn-link" href="{{ route('password.request') }}">Password dimenticata?</a>

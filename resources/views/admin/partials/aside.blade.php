@@ -1,4 +1,4 @@
-<aside class="d-flex justify-content-center align-items-center">
+<aside class="d-flex justify-content-center align-items-center ">
     <nav class="navbar navbar-expand-lg">
         <div class="">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
