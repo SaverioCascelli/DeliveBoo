@@ -60,6 +60,7 @@ class RegisteredUserController extends Controller
         $new_restaurent->user_id = $user->id;
         $new_restaurent->VAT = $formData['piva'];
         $new_restaurent->address = $formData['address'];
+        $new_restaurent->img_url = 'https://t3.ftcdn.net/jpg/02/06/04/70/360_F_206047084_OxZGQ404N8rocQmItLIQRMRWlQwV3mSH.jpg';
         $new_restaurent->save();
         //associa i ristoranti con le tipologie selezionate nel form
         foreach ($formData['types'] as $type) {
