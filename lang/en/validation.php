@@ -188,7 +188,7 @@ return [
             'max' => 'Il nome del ristorante deve avere massimo :max caratteri'
         ],
         'piva' => [
-            'required' => 'La partita iva è un campo obbligatorio',
+            'required' => 'La Partita IVA è un campo obbligatorio',
 
             'min' => 'La partita iva deve avere 11 caratteri',
             'max' => 'La partita iva deve avere 11 caratteri'
@@ -199,7 +199,7 @@ return [
             "max' => 'L\'indirizzo deve avere massimo :max caratteri"
         ],
         'types' => [
-            'required' => 'Devi selezionare almeno una tipologia di cucina'
+            'required' => 'Seleziona almeno una tipologia di cucina'
         ]
     ],
 
