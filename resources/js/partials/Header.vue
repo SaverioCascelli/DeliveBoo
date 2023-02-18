@@ -15,11 +15,11 @@
 
     <h1>HEADER</h1>
     <ul>
-        <li class="nav-item">
-            <router-link :to="{ name: 'login' }">home</router-link>
+        <li>
+            <a href="/login">Login</a>
         </li>
-        <li class="nav-item">
-            <router-link :to="{ name: 'register' }">register</router-link>
+        <li>
+            <a href="/register">Register</a>
         </li>
     </ul>
 
