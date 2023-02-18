@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FoodController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,8 @@ Route::middleware(['auth', 'verified'])
         // rotta per la parte admin del sito
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::resource('foods', FoodController::class);
+        Route::get('/orders', [OrderController::class, 'index'])->name('orders');
+        Route::get('/statistics', [OrderController::class, 'statistics'])->name('statistics');
     });
 
 require __DIR__ . '/auth.php';

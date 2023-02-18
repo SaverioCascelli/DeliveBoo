@@ -26,29 +26,61 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="container-xxl p-0">
 
-        <!--    NAVBAR -->
-        @include('admin.partials.header')
+        <header>
+            @include('admin.partials.header')
+        </header>
 
-        <div class="container-fluid main-wrapper">
+        <div class="container-fluid main-wrapper p-0">
+
             <div class="row h-100">
+
                 <!--    ASIDE MENU -->
                 @auth
-                    <div class="col-2 col-sm-2 col-sm-1 main-wrapper bg-warning">
+                    <aside class="d-none d-lg-block col-lg-2 h-100 p-0">
                         @include('admin.partials.aside')
-                    </div>
+                    </aside>
                 @endauth
 
                 <!--    MAIN CONTENT -->
-                <main class="@auth col-10 @endauth main-wrapper">
-                    @yield('content')
-                </main>
+                <div class="@auth col-12 col-lg-10 dashboard-main  @else login-main col-12 @endauth p-0">
+
+                    <main class="main container-fluid overflow-scroll p-0 py-5 position-relative">
+
+                        {{-- shape divider --}}
+                        <div class="custom-shape-divider-top-1676714921">
+                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+                            </svg>
+                        </div>
+
+                        <div class="custom-shape-divider-bottom-1676715405">
+                            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+                            </svg>
+                        </div>
+
+                        <div class="h-100 px-3">
+
+                            @yield('content')
+
+                        </div>
+
+                    </main>
+
+                </div>
+
             </div>
+
         </div>
 
-        <!--    FOOTEER -->
-        @include('admin.partials.footer')
+        @auth
+            <footer>
+                @include('admin.partials.footer')
+            </footer>
+        @endauth
+
     </div>
 </body>
 

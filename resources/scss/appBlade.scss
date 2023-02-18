@@ -1,30 +1,144 @@
-@use './partialsBlade/vars';
+@use './partialsBlade/vars' as *;
 
 @import '~bootstrap/scss/bootstrap';
 
-/*  ##############################
-    ######### GENERAL #############
-    #############################*/
+@import './partialsBlade/header';
 
-.main-wrapper{
-    height: calc(100vh - 142px);
-    overflow: scroll;
+body {
+    overflow-x: hidden;
+
 }
+
+header {
+    min-height: $header-height;
+}
+
+footer {
+    height: $footer-height;
+}
+
+.main-wrapper {
+    height: $main-height;
+}
+
+.login-main {
+    min-height: calc(100vh - $header-height);
+}
+
+.dashboard-main {
+    height: $main-height;
+    overflow: auto;
+}
+
+.main {
+    min-height: 100%;
+}
+
+
+.card-header {
+    background-color: $bg-light;
+}
+
+img {
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+    &.nav-link:hover{
+        color: $primary;
+    }
+}
+
+
+/* shape divider */
+
+.custom-shape-divider-top-1676714921 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.custom-shape-divider-top-1676714921 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: $shape-height;
+}
+
+.custom-shape-divider-top-1676714921 .shape-fill {
+    fill: $primary-color;
+}
+
+
+
+.custom-shape-divider-bottom-1676715405 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1676715405 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: $shape-height;
+}
+
+.custom-shape-divider-bottom-1676715405 .shape-fill {
+    fill: #D0EB99;
+}
+
+/*  /shape divider */
+
+/* Bootstrap is-valid check */
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: $primary-light;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem $primary-light;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid {
+    border-color: $primary;
+    padding-right: calc(1.5em + 0.75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 0.25rem $primary-light;
+}
+
+
+
+
 
 /*  ##############################
     ######### HEADER #############
     #############################*/
 
-header{
-    height: 82px;
-}
+
 
 /*  ##############################
     ######### ASIDE #############
     #############################*/
 
 aside{
-    margin-left: 10px;
+    background-color: $bg-light;
+
     ul{
         li{
             list-style: none;
@@ -51,11 +165,6 @@ aside{
 }
 
 
-/*  ##############################
-    ######### FOOTER #############
-    #############################*/
 
-footer{
-    height: 60px;
-}
+
 

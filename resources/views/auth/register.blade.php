@@ -7,9 +7,9 @@
 @endsection
 
 @section('content')
-    <div class="container mt-4">
+    <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-6">
                 <div class="card">
 
                     <div class="card-header">
@@ -152,10 +152,7 @@
                                 @enderror
                             </div>
 
-
-                            <button type="submit" class="btn btn-primary me-3">Registrati</button>
-
-                            <button type="reset" class="btn btn-danger">Cancella</button>
+                            <button type="submit" class="btn btn-primary text-white px-4">Registrati</button>
 
                         </form>
 

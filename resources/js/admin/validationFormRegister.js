@@ -29,15 +29,15 @@ if(userFormRegister) {
 
         nameCheckRegister(userFormRegister, event);
 
-        emailCheckRegister(userFormRegister);
+        emailCheckRegister(userFormRegister, event);
 
-        nameRestaurantCheckRegister(userFormRegister);
+        nameRestaurantCheckRegister(userFormRegister, event);
 
-        pivaCheck(userFormRegister);
+        pivaCheck(userFormRegister, event);
 
-        addressCheckRegister(userFormRegister);
+        addressCheckRegister(userFormRegister, event);
 
-        passwordCheckRegister(userFormRegister);
+        passwordCheckRegister(userFormRegister, event);
 
     })
 
@@ -145,19 +145,19 @@ function emailCheckRegister(element, event = null){
 // controllo del nome del ristorante
 function nameRestaurantCheckRegister(element, event = null){
 
-    if( element.name.value == '') {
+    if( element.restaurantName.value == '') {
 
         displayErrorRegister('registerRestaurantName', 'restaurantName', 'Il nome del ristorante è un campo obbligatorio');
 
         if(event) event.preventDefault();
 
-    } else if( element.name.value.length > 100 ) {
+    } else if( element.restaurantName.value.length > 100 ) {
 
         displayErrorRegister('registerRestaurantName', 'restaurantName', 'Il nome del ristorante deve avere massimo 100 caratteri');
 
         if(event) event.preventDefault();
 
-    } else if( element.name.value.length < 2 ) {
+    } else if( element.restaurantName.value.length < 2 ) {
 
         displayErrorRegister('registerRestaurantName', 'restaurantName', 'Il nome del ristorante deve avere minimo 2 caratteri');
 
