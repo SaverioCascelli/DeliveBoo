@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FoodController extends Controller
 {
@@ -35,8 +36,10 @@ class FoodController extends Controller
 
     public function search($string)
     {
+        $string = trim($string);
+        $string = Str::slug($string, '-');
 
-        $foods = Food::where('restaurant_id', Auth::id())->where('name', 'like', "%$string%")->get();
+        $foods = Food::where('restaurant_id', Auth::id())->where('slug', 'like', "%$string%")->get();
 
         return view('admin.foods.index', compact('foods'));
     }
