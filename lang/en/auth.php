@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'failed' => 'Le credenziali non sono incorrette',
+    'failed' => 'Le credenziali non sono corrette',
     'password' => 'La password non è corretta',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
