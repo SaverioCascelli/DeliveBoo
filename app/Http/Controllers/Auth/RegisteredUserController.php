@@ -38,7 +38,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:100', 'min:2'],
-            'email' => ['required', 'string', 'email', 'min:8', 'max:100', 'unique:' . User::class],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:' . User::class],
             'restaurantName' => ['required', 'string', 'min:2', 'max:100'],
             'piva' => ['required', 'string', 'min:11', 'max:11'],
             'address' => ['required', 'string', 'min:10', 'max:100'],
