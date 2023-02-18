@@ -33,7 +33,7 @@ class OrderTableSeeder extends Seeder
                 $new_order = new Order();
                 $new_order->customer_name = $faker->firstName();
                 $new_order->customer_surname = $faker->lastName();
-                $new_order->customer_address = $faker->address();
+                $new_order->customer_address = $faker->streetAddress();
                 $new_order->customer_mail = $faker->email();
                 $new_order->customer_phone_number = $faker->phoneNumber();
                 $new_order->customer_note = $faker->text();

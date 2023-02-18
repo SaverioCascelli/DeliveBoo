@@ -9,6 +9,7 @@ use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class FoodController extends Controller
 {
@@ -20,6 +21,26 @@ class FoodController extends Controller
     public function index()
     {
         $foods = Food::all()->where('restaurant_id', Auth::id());
+        return view('admin.foods.index', compact('foods'));
+    }
+
+    public function orderBy($col, $dir)
+    {
+
+        $dir = $dir === 'desc' ? 'asc' : 'desc';
+
+        $foods = Food::where('restaurant_id', Auth::id())->orderBy($col, $dir)->get();
+
+        return view('admin.foods.index', compact('foods', 'dir'));
+    }
+
+    public function search($string)
+    {
+        $string = trim($string);
+        $string = Str::slug($string, '-');
+
+        $foods = Food::where('restaurant_id', Auth::id())->where('slug', 'like', "%$string%")->get();
+
         return view('admin.foods.index', compact('foods'));
     }
 
@@ -47,9 +68,9 @@ class FoodController extends Controller
         //$from_data['restaurant_id'] = Auth::id();
 
         //se è presente il file image lo salvo nel filesystem e nel db, e salvo il nome originale
-        if(array_key_exists('img_url',$form_data)){
+        if (array_key_exists('img_url', $form_data)) {
             $form_data['img_url_original_name'] = $request->file('img_url')->getClientOriginalName();
-            $form_data['img_url'] = Storage::put('uploads',$form_data['img_url']);
+            $form_data['img_url'] = Storage::put('uploads', $form_data['img_url']);
         }
         //dd($form_data);
 
@@ -120,13 +141,13 @@ class FoodController extends Controller
         }
 
         //se esiste l'image è possibile cancellarla e rimpiazzarla tramite il form
-        if(array_key_exists('img_url',$form_data)){
-            if($food->img_url){
+        if (array_key_exists('img_url', $form_data)) {
+            if ($food->img_url) {
                 Storage::disk('public')->delete($food->img_url);
             }
 
             $form_data['img_url_original_name'] = $request->file('img_url')->getClientOriginalName();
-            $form_data['img_url'] = Storage::put('uploads',$form_data['img_url']);
+            $form_data['img_url'] = Storage::put('uploads', $form_data['img_url']);
         }
 
         $food->update($form_data);
@@ -144,7 +165,7 @@ class FoodController extends Controller
     public function destroy(Food $food)
     {
         //se esiste l'image si può cancellare
-        if($food->img_url){
+        if ($food->img_url) {
             Storage::disk('public')->delete($food->img_url);
         }
 

@@ -39,6 +39,8 @@ Route::middleware(['auth', 'verified'])
     ->group(function () {
         // rotta per la parte admin del sito
         Route::get('/', [DashboardController::class, 'index'])->name('home');
+        Route::get('foods/orderby/{col}/{dir}', [FoodController::class, 'orderBy'])->name('foods.orderby');
+        Route::get('foods/search/{string}', [FoodController::class, 'search'])->name('search');
         Route::resource('foods', FoodController::class);
     });
 
