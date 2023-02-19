@@ -467,7 +467,7 @@ return [
         ],
         [
             "name" => 'Suan La Tang',
-            "url" => '',
+            "url" => 'https://www.chinasichuanfood.com/wp-content/uploads/2014/02/hot-and-sour-soup-14-1.jpg',
             "description" => 'Zuppa aspra e piccante. Questa zuppa è fatta con carne di maiale o manzo, verdure, funghi, uova e tofu, e viene insaporita con aceto di riso, peperoncino e altre spezie.'
         ],
         [

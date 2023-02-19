@@ -20,7 +20,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = Food::all()->where('restaurant_id', Auth::id());
+        $foods = Food::where('restaurant_id', Auth::id())->paginate(10);
+        dd($foods);
         return view('admin.foods.index', compact('foods'));
     }
 
@@ -29,7 +30,9 @@ class FoodController extends Controller
 
         $dir = $dir === 'desc' ? 'asc' : 'desc';
 
-        $foods = Food::where('restaurant_id', Auth::id())->orderBy($col, $dir)->get();
+        $foods = Food::where('restaurant_id', Auth::id())
+            ->orderBy($col, $dir)
+            ->paginate(10);
 
         return view('admin.foods.index', compact('foods', 'dir'));
     }
@@ -39,7 +42,9 @@ class FoodController extends Controller
         $string = trim($string);
         $string = Str::slug($string, '-');
 
-        $foods = Food::where('restaurant_id', Auth::id())->where('slug', 'like', "%$string%")->get();
+        $foods = Food::where('restaurant_id', Auth::id())
+            ->where('slug', 'like', "%$string%")
+            ->paginate(10);
 
         return view('admin.foods.index', compact('foods'));
     }
@@ -152,8 +157,7 @@ class FoodController extends Controller
 
         $food->update($form_data);
         return redirect()->route('admin.foods.show', $food)
-            //->with('message', "Il piatto $food->name è stato modificato correttamente")
-        ;
+            ->with('message', "Il piatto $food->name è stato modificato correttamente");
     }
 
     /**
@@ -171,7 +175,6 @@ class FoodController extends Controller
 
         $food->delete();
         return redirect()->route('admin.foods.index')
-            //->with('deleted', "Il piatto $food->name è stato eliminato correttamente")
-        ;
+            ->with('deleted', "Il piatto $food->name è stato eliminato correttamente");
     }
 }

@@ -10,20 +10,22 @@ use Illuminate\Http\Request;
 
 class RestaurantController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $types = Type::all();
         $foods = Food::all();
-        $restaurants = Restaurant::with(['types','foods','user'])->get();
+        $restaurants = Restaurant::with(['types', 'foods', 'user'])->get();
         //dd($restaurants);
-            return response()->json(compact('restaurants','types','foods'));
+        return response()->json(compact('restaurants', 'types', 'foods'));
     }
 
 
-    public function getByType(){
+    public function getByType()
+    {
         $typeIds = [];
         $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
-        $query->whereIn ('id', $typeIds);
-        }, '>', count($typeIds)-1)->get();
+            $query->whereIn('id', $typeIds);
+        }, '>', count($typeIds) - 1)->get();
         return response()->json(compact('restaurants'));
     }
 }
