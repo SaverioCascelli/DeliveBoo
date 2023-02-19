@@ -23,7 +23,7 @@ class OrderController extends Controller
     {
         //2 se l'utente non è loggato viene rimbalzato alla index
         if ($order->restaurant_id === Auth::id()) {
-            return view('admin.foods.show', compact('food'));
+            return view('admin.foods.show', compact('order'));
         }
 
         return redirect()->route('admin.orders.index');
