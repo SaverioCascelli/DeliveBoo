@@ -42,6 +42,7 @@ Route::middleware(['auth', 'verified'])
         Route::get('/', [DashboardController::class, 'index'])->name('home');
         Route::get('foods/orderby/{col}/{dir}', [FoodController::class, 'orderBy'])->name('foods.orderby');
         Route::get('foods/search/{string}', [FoodController::class, 'search'])->name('search');
+        Route::get('foods/toggle-available/{id}', [FoodController::class, 'toggleAvailable'])->name('toggleavailable');
         Route::resource('foods', FoodController::class);
         Route::get('/orders', [OrderController::class, 'index'])->name('orders');
         Route::get('/statistics', [OrderController::class, 'statistics'])->name('statistics');
