@@ -1,4 +1,4 @@
-<form action="{{route('admin.foods.toggle-available/id', $entity)}}" method="POST" id="formUpdate" data="{{$entity->id}}">
+<form action="{{route('admin.foods.index', $entity)}}" method="POST" id="formUpdate" data="{{$entity->id}}">
     @csrf
     @method('PUT')
     <div class="form-check form-switch">
