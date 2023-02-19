@@ -3,9 +3,12 @@
 <script>
 
     export default {
-
-        name:'Search'
-
+        name:'Search',
+        data(){
+            return{
+                baseUrl: 'http://127.0.0.1:8000/api'
+            }
+        }
     }
 
 </script>
