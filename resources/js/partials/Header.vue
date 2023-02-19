@@ -20,12 +20,12 @@
             </a>
             <ul class="d-flex">
                 <li class="mx-4 list-style-none ">
-                    <button class="btn btn-info me-2">
+                    <!-- <button class="btn btn-info me-2">
                         <a href="/login">Login</a>
                     </button>
                     <button class="btn btn-info">
                         <a href="/register">Registrati</a>
-                    </button>
+                    </button> -->
                 </li>
             </ul>
         </div>

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light h-100 bg-white">
+<nav class="navbar navbar-expand-lg navbar-light h-100 bg-white">
     <div class="container-fluid h-100">
 
         <a class="navbar-brand d-flex align-items-center" href="{{ url('home') }}">
@@ -38,8 +38,21 @@
 
                 @else
 
+                    <li>
+                        <form  action="{{route('admin.foods.index')}}" method="GET" class="d-flex align-items-center">
+                            @csrf
+                            <input class="form-control me-1 d-inline-block w-75" name="search" type="text" placeholder="Cerca un piatto">
+                            <button class="btn btn-primary btn-sm text-white" type="submit">Cerca</button>
+                        </form>
+
+                    </li>
+
                     <li class="nav-item">
-                        <a class="nav-link d-lg-none @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Aggiungi piatto</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Crea piatto</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.home') active @endif" href="{{route('admin.home')}}">Dashboard</a>
                     </li>
 
                     <li class="nav-item">
@@ -51,7 +64,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Statistiche</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Report</a>
                     </li>
 
 

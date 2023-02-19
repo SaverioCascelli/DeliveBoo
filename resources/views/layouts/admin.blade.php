@@ -10,6 +10,8 @@
 
     <title>DeliveBoo @yield('title')</title>
 
+    <link rel="icon" href="https://cwa.roocdn.com/_next/static/favicon-32x32.9ac59871.png">
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
