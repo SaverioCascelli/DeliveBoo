@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light h-100 bg-white">
+<nav class="navbar navbar-expand-md navbar-light h-100 bg-white">
     <div class="container-fluid h-100">
 
         <a class="navbar-brand d-flex align-items-center" href="{{ url('home') }}">
@@ -39,19 +39,19 @@
                 @else
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.foods.create')}}">Aggiungi piatto</a>
+                        <a class="nav-link d-lg-none @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Aggiungi piatto</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.foods.index')}}">Men&ugrave;</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.index') active @endif" href="{{route('admin.foods.index')}}">Men&ugrave;</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.orders')}}">Ordini</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.orders') active @endif" href="{{route('admin.orders')}}">Ordini</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.statistics')}}">Statistiche</a>
+                        <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Statistiche</a>
                     </li>
 
 

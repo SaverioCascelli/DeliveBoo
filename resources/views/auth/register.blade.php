@@ -117,7 +117,10 @@
                                         <input type="checkbox"
                                             id="type{{$loop->iteration}}"
                                             name="types[]"
-                                            value="{{$type->id}}">
+                                            value="{{$type->id}}"
+                                            @if (in_array($type->id, old('types',[])))
+                                                checked
+                                            @endif>
                                             <label class="me-2" for="type{{$loop->iteration}}">{{$type->name}}</label>
                                     </div>
                                     @endforeach
