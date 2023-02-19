@@ -14,12 +14,17 @@
 <template>
 
     <header class="container">
-        <div class="d-flex justify-content-between py-2 align-items-center">
+        <div class="d-flex justify-content-between py-2 align-utems-center">
+            <a href="/" class="text-decoration-none">
             <h1 class="text-info align-items-center">DeliveBoo</h1>
+            </a>
             <ul class="d-flex">
-                <li class="mx-4 list-style-none">
+                <li class="mx-4 list-style-none ">
+                    <button class="btn btn-info me-2">
+                        <a href="/login">Login</a>
+                    </button>
                     <button class="btn btn-info">
-                        <a href="/admin">Area Riservata</a>
+                        <a href="/register">Registrati</a>
                     </button>
                 </li>
             </ul>
