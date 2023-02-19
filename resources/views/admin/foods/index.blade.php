@@ -22,8 +22,8 @@
         <div class="pt-2 ps-2 pe-2 pb-1 pt-lg-4 pe-lg-4 ps-lg-4 ">
 
             @if (session('deleted'))
-                <div class="alert alert-success" role="alert">
-                    {{session('deleted')}}
+                <div class="alert alert-primary" role="alert">
+                    <strong>{{session('deleted')}}</strong>
                 </div>
             @endif
 
@@ -39,11 +39,13 @@
                             <!-- controllo immagini -->
                             @if (str_contains($food->img_url, 'http'))
                             <div class="food-image me-3">
-                                <img class="card-img-top" src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
+                                <img class="card-img-top @if ($food->is_available == 0) food-not-available @endif"
+                                src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}" id="imageFood">
                             </div>
                             @else
                             <div class="food-image me-3">
-                                <img class="card-img-top" src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}">
+                                <img class="card-img-top @if ($food->is_available == 0) food-not-available @endif"
+                                src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}" id="imageFood">
                             </div>
                             @endif
 
@@ -77,10 +79,12 @@
                             </h5>
 
                             <div class="py-1 px-2 bg-success rounded-2">
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                                    <label class="form-check-label" for="flexSwitchCheckChecked">ON</label>
-                                </div>
+
+                                @include('admin.partials.form-update' ,[
+                                'route' => 'foods',
+                                'entity' => $food
+                                ])
+
                             </div>
 
                             <div class="d-flex align-items-center h-100">
@@ -95,7 +99,8 @@
                                 'route' => 'foods',
                                 'message' => "Confermi l'eliminazione del piatto: $food->name",
                                 'entity' => $food
-                            ])
+                                ])
+
                             </div>
 
                         </div>
