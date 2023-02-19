@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Requests\RestaurantRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Restaurant;
@@ -51,7 +52,6 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         //crea il ristorante con i dati del form
         $formData = $request->all();
         $new_restaurent = new Restaurant();
@@ -74,6 +74,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('admin');
     }
 }
