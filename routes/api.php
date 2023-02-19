@@ -24,5 +24,6 @@ Route::namespace('Api')
 ->prefix('restaurants')
 ->group(function(){
     Route::get('/',[RestaurantController::class, 'index']);
-    Route::get('/restaurant-type/{typeIds}',[RestaurantController::class, 'getByType']);
+    Route::get('/search',[RestaurantController::class, 'searchByTypeAndName']);
+    //Route::get('/restaurant-type/{typeIds}',[RestaurantController::class, 'getByType']);
 });
