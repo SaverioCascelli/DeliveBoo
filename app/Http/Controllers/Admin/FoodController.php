@@ -160,6 +160,12 @@ class FoodController extends Controller
             ->with('message', "Il piatto $food->name è stato modificato correttamente");
     }
 
+    public function toggleAvailable(FoodRequest $request, Food $food)
+    {
+        $food->is_available = $food->is_available === 0 ? 1 : 0;
+        $food->update();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
