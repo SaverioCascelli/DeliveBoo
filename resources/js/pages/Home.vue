@@ -7,6 +7,10 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
 <script>
 
+import axios from 'axios';
+import {store} from '../data/store';
+import {BASE_URL} from '../data/data'
+import {active_base_url} from '../data/data'
 import Search from '../components/Search.vue';
 
     export default {
@@ -14,8 +18,28 @@ import Search from '../components/Search.vue';
         name:'Home',
         components:{
             Search
+        },
+        data(){
+            return{
+                BASE_URL,
+                active_base_url,
+                store
+            }
+        },
+        methods:{
+            getApi(url){
+                axios.get(url)
+                    .then(result => {
+                        store.restaurants = result.data.restaurant;
+                        store.types = result.data.types;
+                        //console.log(this.store.restaurants);
+                        //console.log(this.store.types);
+                    })
+                },
+        },
+        mounted(){
+            this.getApi(active_base_url);
         }
-
     }
 
 </script>
