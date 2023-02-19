@@ -32,16 +32,14 @@ class FoodController extends Controller
         return view('admin.foods.index', compact('foods'));
     }
 
-    public function orderBy($col, $dir)
-    {
 
-        $dir = $dir === 'desc' ? 'asc' : 'desc';
+    public function orderby($column, $direction){
 
-        $foods = Food::where('restaurant_id', Auth::id())
-            ->orderBy($col, $dir)
-            ->paginate(10);
+        $foods = Food::where('restaurant_id', Auth::id())->orderBy($column,$direction)->paginate(10);
 
-        return view('admin.foods.index', compact('foods', 'dir'));
+        $btn_active = $column;
+
+        return view('admin.foods.index', compact('foods', 'direction', 'btn_active'));
     }
 
 

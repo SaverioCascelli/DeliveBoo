@@ -8,23 +8,33 @@
 
 @section('content')
 
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <h1>DASHBOARD ADMIN</h1>
-                    <h1>DASHBOARD ADMIN</h1>
-                    <h1>DASHBOARD ADMIN</h1>
-                    <h1>DASHBOARD ADMIN</h1>
+<div class="container-fluid h-100 overflow-auto">
 
-                </div>
+    <div class="card col-12">
 
-            </div>
+        <div class="card-header px-2 px-lg-4 d-flex align-items-center justify-content-between">
+            <h3 class="mb-0">DASHBOARD</h3>
 
         </div>
 
+        <div class="pt-2 ps-2 pe-2 pb-1 pt-lg-4 pe-lg-4 ps-lg-4 ">
 
+            <div class="row row-cols-1 row-cols-md-2">
+
+                {{-- @dd($foods) --}}
+
+
+
+
+
+            </div>
+
+
+
+        </div>
 
     </div>
+
+</div>
 
 @endsection

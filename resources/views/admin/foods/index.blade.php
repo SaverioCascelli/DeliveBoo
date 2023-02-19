@@ -14,9 +14,42 @@
 
         <div class="card-header px-2 px-lg-4 d-flex align-items-center justify-content-between">
             <h3 class="mb-0">MENÙ</h3>
-            <a class="btn btn-outline-primary btn-sm" href="{{route('admin.foods.create')}}">
-                <i class="fa-solid fa-plus"></i>
-            </a>
+            <div class="d-flex align-items-center justify-content-between">
+
+                <a class="btn btn-sm me-2
+                    @if(Route::currentRouteName() === 'admin.foods.orderby' && $direction == 'asc' && $btn_active == 'name')  btn-primary
+                    @else btn-outline-primary @endif"
+                    href="{{route('admin.foods.orderby',['name','asc'])}}">
+                    <i class="fa-solid fa-arrow-down-a-z"></i>
+                </a>
+                <a class="btn btn-sm me-2
+                    @if(Route::currentRouteName() === 'admin.foods.orderby' && $direction == 'desc' && $btn_active == 'name')  btn-primary
+                    @else btn-outline-primary @endif"
+                    href="{{route('admin.foods.orderby',['name','desc'])}}">
+                    <i class="fa-solid fa-arrow-down-z-a"></i>
+                </a>
+
+                <a class="btn btn-sm me-2
+                    @if(Route::currentRouteName() === 'admin.foods.orderby' && $direction == 'desc' && $btn_active == 'price')  btn-primary
+                    @else btn-outline-primary @endif"
+                    href="{{route('admin.foods.orderby',['price','desc'])}}">
+                    <i class="fa-solid fa-euro-sign"></i>
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+                <a class="btn btn-sm me-2
+                    @if(Route::currentRouteName() === 'admin.foods.orderby' && $direction == 'asc' && $btn_active == 'price')  btn-primary
+                    @else btn-outline-primary @endif"
+                    href="{{route('admin.foods.orderby',['price', 'asc'])}}">
+                    <i class="fa-solid fa-euro-sign"></i>
+                    <i class="fa-solid fa-arrow-up"></i>
+                </a>
+
+
+                <a class="btn btn-outline-primary btn-sm" href="{{route('admin.foods.create')}}">
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+
+            </div>
         </div>
 
         <div class="pt-2 ps-2 pe-2 pb-1 pt-lg-4 pe-lg-4 ps-lg-4 ">

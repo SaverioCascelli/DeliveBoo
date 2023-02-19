@@ -2,7 +2,7 @@
     <ul class="navbar-nav">
 
         <li class="nav-item">
-            <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Aggiungi piatto</a>
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Crea piatto</a>
         </li>
 
         <li class="nav-item">
