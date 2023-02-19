@@ -21,7 +21,7 @@ class FoodController extends Controller
     public function index()
     {
         $foods = Food::where('restaurant_id', Auth::id())->paginate(10);
-        dd($foods);
+        //dd($foods);
         return view('admin.foods.index', compact('foods'));
     }
 
