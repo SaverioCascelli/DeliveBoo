@@ -10,11 +10,11 @@
 
 <div class="container-fluid h-100 overflow-auto">
 
-    <div class="card col-12 ">
+    <div class="card col-12">
 
-        <div class="card-header d-flex align-items-center justify-content-between">
-            <h3 class="mb-0 ms-2">MENÙ</h3>
-            <a class="btn btn-outline-primary me-2" href="{{route('admin.foods.create')}}">
+        <div class="card-header px-2 px-lg-4 d-flex align-items-center justify-content-between">
+            <h3 class="mb-0">MENÙ</h3>
+            <a class="btn btn-outline-primary btn-sm" href="{{route('admin.foods.create')}}">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>
@@ -29,7 +29,8 @@
 
             <div class="row row-cols-1 row-cols-md-2">
 
-                <!-- 1 card -->
+                {{-- @dd($foods) --}}
+
                 @foreach ($foods as $food)
                 <div class="col mb-2 mb-md-3">
                     <div class="card p-2 h-100 bg-success">
@@ -39,13 +40,13 @@
                             <!-- controllo immagini -->
                             @if (str_contains($food->img_url, 'http'))
                             <div class="food-image me-3">
-                                <img class="card-img-top @if ($food->is_available == 0) food-not-available @endif"
-                                src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}" id="imageFood">
+                                <img class="image-available card-img-top @if ($food->is_available == 0) food-not-available @endif"
+                                src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}" data="{{$food->id}}">
                             </div>
                             @else
                             <div class="food-image me-3">
-                                <img class="card-img-top @if ($food->is_available == 0) food-not-available @endif"
-                                src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}" id="imageFood">
+                                <img class="image-available card-img-top @if ($food->is_available == 0) food-not-available @endif"
+                                src="{{asset('storage/' . $food->img_url)}}" alt="{{$food->img_url_original_name}}" data="{{$food->id}}">
                             </div>
                             @endif
 
@@ -89,7 +90,7 @@
 
                             <div class="d-flex align-items-center h-100">
                                 <a class="btn btn-outline-success btn-sm me-1" href="{{route('admin.foods.show', $food)}}">
-                                    <i class="fa-solid fa-eye"></i>
+                                    <i class="fa-solid fa-info"></i>
                                 </a>
                                 <a class="btn btn-outline-success btn-sm me-1" href="{{route('admin.foods.edit', $food)}}">
                                     <i class="fa-solid fa-pencil"></i>
@@ -109,6 +110,11 @@
                 </div>
                 @endforeach
 
+            </div>
+
+            <!-- pagination -->
+            <div class="d-flex justify-content-center mt-1">
+                {{$foods->links()}}
             </div>
 
         </div>

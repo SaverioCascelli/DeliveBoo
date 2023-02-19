@@ -1,39 +1,25 @@
-<aside class="d-flex justify-content-center align-items-center ">
-    <nav class="navbar navbar-expand-lg">
-        <div class="">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#asideSupportedContent" aria-controls="asideSupportedContent"
-                aria-expanded="true" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<nav class="navbar mt-4 d-flex justify-content-center">
+    <ul class="navbar-nav">
 
-            <div class="collapse navbar-collapse" id="asideSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto d-flex flex-column">
-                    <!-- Authentication Links -->
-                        <li class="nav-item dropdown">
-                            <a id="" class="nav-link" href="{{route('admin.home')}}"
-                                aria-haspopup="true" aria-expanded="true">
-                                Admin
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="" class="nav-link" href="{{route('admin.foods.index')}}" role="button"
-                                aria-haspopup="true" aria-expanded="false">
-                                Menu
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="" class="nav-link" href="{{route('admin.foods.create')}}" role="button"
-                                aria-haspopup="true" aria-expanded="false">
-                                Aggiungi Piatto
-                            </a>
-                        </li>
-                </ul>
-            </div>
-        </div>
+        <li class="nav-item">
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.create') active @endif" href="{{route('admin.foods.create')}}">Aggiungi piatto</a>
+        </li>
 
+        <li class="nav-item">
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.home') active @endif" href="{{route('admin.home')}}">Dashboard</a>
+        </li>
 
-    </nav>
-</aside>
+        <li class="nav-item">
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.foods.index') active @endif" href="{{route('admin.foods.index')}}">Men&ugrave;</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.orders') active @endif" href="{{route('admin.orders')}}">Ordini</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Statistiche</a>
+        </li>
+
+    </ul>
+</nav>

@@ -13,11 +13,16 @@
         <div class="card col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
 
             <div class="card-header">
-                <h3 class="mb-0">MODIFICA PIATTO</h3>
-                <small>I campi contrassegnati con * sono obbligatori</small>
+                <div class="d-flex justify-content-between align-items-center p-md-1">
+                    <h3 class="mb-0">MODIFICA PIATTO</h3>
+                    <a class="btn btn-outline-primary btn-sm me-1" href="{{route('admin.foods.index')}}">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+                <small class="ms-md-1">I campi contrassegnati con * sono obbligatori</small>
             </div>
 
-            <div class="p-2 p-lg-4">
+            <div class="p-2 p-md-4">
 
                 <!--  ************* Gestione lista degli errori server ****************** -->
                 @if ($errors->any())

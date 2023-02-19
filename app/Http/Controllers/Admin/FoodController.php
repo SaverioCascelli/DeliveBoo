@@ -20,7 +20,14 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods = Food::where('restaurant_id', Auth::id())->paginate(10);
+
+        if(isset($_GET['search'])){
+            $search = $_GET['search'];
+            $foods = Food::where('name','like',"%$search%")->where('restaurant_id', Auth::id())->paginate(10);
+        }else{
+            $foods = Food::where('restaurant_id', Auth::id())->paginate(10);
+        }
+
         //dd($foods);
         return view('admin.foods.index', compact('foods'));
     }
@@ -37,17 +44,6 @@ class FoodController extends Controller
         return view('admin.foods.index', compact('foods', 'dir'));
     }
 
-    public function search($string)
-    {
-        $string = trim($string);
-        $string = Str::slug($string, '-');
-
-        $foods = Food::where('restaurant_id', Auth::id())
-            ->where('slug', 'like', "%$string%")
-            ->paginate(10);
-
-        return view('admin.foods.index', compact('foods'));
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -91,7 +87,7 @@ class FoodController extends Controller
         $new_food->update();
         //dd($new_food);
         return redirect()->route('admin.foods.show', $new_food)
-            ->with('message', 'Piatto creato correttamente');
+            ->with('message', 'Il piatto è stato creato correttamente');
     }
 
     /**
@@ -157,7 +153,7 @@ class FoodController extends Controller
 
         $food->update($form_data);
         return redirect()->route('admin.foods.show', $food)
-            ->with('message', "Il piatto $food->name è stato modificato correttamente");
+            ->with('message', "Il piatto è stato modificato correttamente");
     }
 
     public function toggleAvailable($id)
@@ -184,6 +180,6 @@ class FoodController extends Controller
 
         $food->delete();
         return redirect()->route('admin.foods.index')
-            ->with('deleted', "Il piatto $food->name è stato eliminato correttamente");
+            ->with('deleted', "Il piatto è stato eliminato correttamente");
     }
 }

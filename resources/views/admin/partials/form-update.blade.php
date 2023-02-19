@@ -1,6 +1,5 @@
-<form action="{{route('admin.foods.index', $entity)}}" method="POST" id="formUpdate" data="{{$entity->id}}" class="form">
+<form action="{{route('admin.toggleavailable', $entity->id)}}" method="GET" class="form" data="{{$entity->id}}">
     @csrf
-    @method('PUT')
     <div class="form-check form-switch">
         <input class="input-update form-check-input" type="checkbox" role="switch" data="{{$entity->id}}"
         @if ($entity->is_available == 1)
@@ -11,6 +10,6 @@
     </div>
 </form>
 
-<script>
+
 
 
