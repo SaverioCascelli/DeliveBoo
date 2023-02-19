@@ -1,4 +1,4 @@
-<form action="{{route('admin.foods.index', $entity)}}" method="POST" id="formUpdate" data="{{$entity->id}}">
+<form action="{{route('admin.foods.index', $entity)}}" method="POST" id="formUpdate" data="{{$entity->id}}" class="form">
     @csrf
     @method('PUT')
     <div class="form-check form-switch">
@@ -13,23 +13,4 @@
 
 <script>
 
-    // const formUpdateArray = document.querySelectorAll('form[data]');
-    // const isAvailableArray = document.querySelectorAll('input[data]');
-    const imageFood = document.getElementById('imageFood');
-
-    console.log()
-
-    // isAvailable.addEventListener('click', function(){
-    //     formUpdate.submit();
-
-    //     if(imageFood.classList.contains('food-not-available')){
-    //         imageFood.classList.remove('food-not-available');
-    //         console.log('contiene');
-    //     } else {
-    //         imageFood.classList.add('food-not-available');
-    //         console.log('non-contiene');
-    //     }
-    // })
-
-</script>
 

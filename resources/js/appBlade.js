@@ -10,3 +10,4 @@ import './admin/validationFormFood';
 
 
 import './admin/showImageForm';
+import './admin/imageAvailabe';
