@@ -160,10 +160,13 @@ class FoodController extends Controller
             ->with('message', "Il piatto $food->name è stato modificato correttamente");
     }
 
-    public function toggleAvailable(FoodRequest $request, Food $food)
+    public function toggleAvailable($id)
     {
-        $food->is_available = $food->is_available === 0 ? 1 : 0;
+        $food = Food::where('id', $id)->first();
+        $food->is_available = $food->is_available === 1 ? 0 : 1;
+
         $food->update();
+        return redirect()->route('admin.foods.index');
     }
 
     /**
