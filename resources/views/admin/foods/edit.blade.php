@@ -15,9 +15,16 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center p-md-1">
                     <h3 class="mb-0">MODIFICA PIATTO</h3>
-                    <a class="btn btn-outline-primary btn-sm me-1" href="{{route('admin.foods.index')}}">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </a>
+                    <div>
+                        <a class="btn btn-outline-primary btn-sm me-1" href="{{route('admin.foods.index')}}">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        @include('admin.partials.form-delete' ,[
+                            'route' => 'foods',
+                            'message' => "Confermi l'eliminazione del piatto: $food->name",
+                            'entity' => $food
+                            ])
+                    </div>
                 </div>
                 <small class="ms-md-1">I campi contrassegnati con * sono obbligatori</small>
             </div>
@@ -131,12 +138,6 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary text-white px-4 me-2">MODIFICA</button>
-
-                    @include('admin.partials.form-delete' ,[
-                        'route' => 'foods',
-                        'message' => "Confermi l'eliminazione del piatto: $food->name",
-                        'entity' => $food
-                        ])
 
                 </form>
 
