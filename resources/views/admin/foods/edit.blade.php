@@ -130,7 +130,13 @@
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary text-white px-4">MODIFICA</button>
+                    <button type="submit" class="btn btn-primary text-white px-4 me-2">MODIFICA</button>
+
+                    @include('admin.partials.form-delete' ,[
+                        'route' => 'foods',
+                        'message' => "Confermi l'eliminazione del piatto: $food->name",
+                        'entity' => $food
+                        ])
 
                 </form>
 
