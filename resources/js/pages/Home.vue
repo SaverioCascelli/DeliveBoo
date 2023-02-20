@@ -11,7 +11,7 @@ import axios from 'axios';
 import {store} from '../data/store';
 import {BASE_URL} from '../data/data'
 import {active_base_url} from '../data/data'
-import Search from '../components/Search.vue';
+import Search from '../components/SearchInput.vue';
 
     export default {
 

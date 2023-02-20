@@ -5,8 +5,6 @@
     import {getImagePath} from '../data/function';
     import {store} from '../data/store';
 
-    import SearchInput from '../components/SearchInput.vue';
-
     export default {
 
         name:'Header',
@@ -60,20 +58,20 @@
                 </div>
 
                 <a href="">
-                    <h4 class="text-white">deliveboo</h4>
+                    <h4 class="text-white mb-0">deliveboo</h4>
                 </a>
 
             </div>
 
-            <ul class="d-flex justify-content-between">
-                <li class="nav-item me-2">
-                    <a class="nav-link link-light" :class="{'d-none': store.isAuth }" href="login">Login</a>
+            <ul class="d-flex justify-content-between align-items-center mb-0">
+                <li class="nav-item">
+                    <a class="nav-link link-light p-0 me-4" :class="{'d-none': store.isAuth }" href="login">Login</a>
                 </li>
-                <li class="nav-item me-2">
-                    <a class="nav-link link-light" :class="{'d-none': store.isAuth }" href="register">Registrati</a>
+                <li class="nav-item">
+                    <a class="nav-link link-light p-0" :class="{'d-none': store.isAuth }" href="register">Registrati</a>
                 </li>
-                <li class="nav-item me-2">
-                    <a class="nav-link link-light" :class="{'d-none': !store.isAuth }" href="admin">Il mio ristorante</a>
+                <li class="nav-item">
+                    <a class="nav-link link-light mt-1 p-0" :class="{'d-none': !store.isAuth }" href="admin">Il mio ristorante</a>
                 </li>
             </ul>
 
@@ -85,10 +83,17 @@
 
                 <h1>I piatti che ami, a domicilio.</h1>
 
-                <SearchInput/>
+                <div class="mx-3 bg-white p-4 rounded-2 mt-5 mb-4">
+
+                    <input class="form-control mb-3" v-model.trim="store.searchInput" @keyup.enter="$emit('seachInput')" type="text" placeholder="Cerca un ristorante">
+
+                    <div class="d-flex justify-content-end">
+                        <button class="search btn btn-primary text-white" @click="$emit('seachInput')">CERCA</button>
+                    </div>
+
+                </div>
 
             </div>
-
 
             <div class="rider">
                 <img src="https://cwa.roocdn.com/_next/static/media/campaign.df58721f.svg" alt="Deliveboo rider">

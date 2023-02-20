@@ -2,7 +2,7 @@
 
 <script>
 
-import {store} from '../data/store'
+import {store} from '../data/store';
 
     export default {
 
@@ -26,10 +26,13 @@ import {store} from '../data/store'
 
 <template>
 
-    <div>
+    <div class="mx-3 bg-white p-4 rounded-2 mt-5 mb-4">
 
-        <input class="form-control me-1 d-inline-block w-75" v-model.trim="store.seachInput" type="text" placeholder="Cerca un ristorante">
-        <button class="btn btn-primary text-white" type="submit">Cerca</button>
+        <input class="form-control mb-3" v-model.trim="store.searchInput" @keyup.enter="$emit('seachInput')" type="text" placeholder="Cerca un ristorante">
+
+        <div class="d-flex justify-content-end">
+            <button class="search btn btn-primary text-white" @click="$emit('seachInput')">CERCA</button>
+        </div>
 
     </div>
 
@@ -38,6 +41,8 @@ import {store} from '../data/store'
 
 
 <style lang="scss" scoped>
+
+
 
 
 </style>
