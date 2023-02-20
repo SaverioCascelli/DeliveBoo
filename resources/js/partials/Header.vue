@@ -9,12 +9,6 @@
 
         name:'Header',
 
-        components: {
-
-            SearchInput
-
-        },
-
         data(){
             return{
 
@@ -180,11 +174,6 @@
             position: relative
         }
 
-
-
-
-
     }
-
 
 </style>
