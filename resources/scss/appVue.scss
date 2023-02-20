@@ -2,6 +2,11 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
 img {
     width: 100%;
 }

@@ -13,10 +13,15 @@
 
 <template>
 
+    <div class="footer container-fluid p-2 p-lg-4">
 
-        <div class="container text-white bg-dark">
-            <h1>FOOTER</h1>
+        <div class="footer-bottom">
+            <div>
+
+            </div>
+
         </div>
+    </div>
 
 
 </template>
@@ -24,9 +29,11 @@
 
 <style lang="scss" scoped>
 
-footer{
-    height: 80px;
-}
+    @use '../../scss/partialsVue/vars' as *;
+
+    .footer{
+        background-color: $black;
+    }
 
 
 </style>

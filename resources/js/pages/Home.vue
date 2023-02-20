@@ -11,14 +11,12 @@ import axios from 'axios';
 import {store} from '../data/store';
 import {BASE_URL} from '../data/data'
 import {active_base_url} from '../data/data'
-import Search from '../components/SearchInput.vue';
+
 
     export default {
 
         name:'Home',
-        components:{
-            Search
-        },
+
         data(){
             return{
                 BASE_URL,
@@ -63,7 +61,7 @@ import Search from '../components/SearchInput.vue';
     <main class="bg-success">
         <div class="container py-4">
             <h1>HOME</h1>
-            <search/>
+
         </div>
     </main>
 
