@@ -7,7 +7,7 @@ const baseUrl = 'http...'
 export {baseURL, ...};
 
 */
-const BASE_URL = 'http://127.0.0.1:8000/api/'
-const active_base_url = BASE_URL + 'restaurants'
+const BASE_URL = 'http://127.0.0.1:8000'
 
-export { BASE_URL, active_base_url }
+
+export { BASE_URL, }
