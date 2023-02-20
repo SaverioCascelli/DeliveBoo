@@ -21,17 +21,25 @@
 
 <template>
 
-    <div class="main-wrapper">
+    <div class="container-xxl p-0">
 
-        <Header/>
+        <header>
 
-        <main>
+            <Header/>
+
+        </header>
+
+        <main class="container-fluid p-0 bg-danger">
 
             <router-view></router-view>
 
         </main>
 
-        <Footer/>
+        <footer>
+
+            <Footer/>
+
+        </footer>
 
     </div>
 

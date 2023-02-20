@@ -69,11 +69,6 @@ i {
     width: $logo-width;
 }
 
-.navbar-toggler {
-    z-index: 999;
-}
-
-
 /* shape divider */
 
 .custom-shape-divider-top-1676714921 {
@@ -116,7 +111,7 @@ i {
 }
 
 .custom-shape-divider-bottom-1676715405 .shape-fill {
-    fill: #D0EB99;
+    fill: $secondary-color;
 }
 
 /*  /shape divider */

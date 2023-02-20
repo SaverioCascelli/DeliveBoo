@@ -1,6 +1,16 @@
 @use './partialsVue/vars' as *;
 
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
 
+img {
+    width: 100%;
+}
 
+a{
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
 
