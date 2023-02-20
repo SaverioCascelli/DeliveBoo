@@ -14,11 +14,11 @@ class DashboardController extends Controller
     public function index()
     {
         //mando in dashboard gli ultimi tre ordini ricevuti
-        $latestOrders = Order::orderBy('created_at', 'desc')->where('restaurant_id', Auth::id())->take(3)->get();
+        $latestOrders = Order::orderBy('created_at', 'desc')->where('restaurant_id', Auth::id())->take(4)->get();
         //il totale dei piatti(foods)
         $totalFoods = Food::where('restaurant_id', Auth::id())->count();
         //solo i piatti disponibili(foods)
-        $availableFoods = Food::where('restaurant_id', Auth::id())->where('is_available', 0)->count();
+        $availableFoods = Food::where('restaurant_id', Auth::id())->where('is_available', 1)->count();
         //il ristorante
         $restaurant = Restaurant::where('id', Auth::id())->first();
 
