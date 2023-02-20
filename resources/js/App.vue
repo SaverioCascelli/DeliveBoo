@@ -59,7 +59,7 @@
                      //console.log(params);
                 }
                 //chiamata axios con i parametri nell'oggetto params
-                axios.get( BASE_URL + 'api/restaurants/search', {
+                axios.get( BASE_URL + '/api/restaurants/search', {
                     params:params
                 })
                 //salva in store i ristoranti frutto della chiamata axios
