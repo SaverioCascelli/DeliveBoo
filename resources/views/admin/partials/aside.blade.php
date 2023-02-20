@@ -18,7 +18,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Statistiche</a>
+            <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Report</a>
         </li>
 
     </ul>

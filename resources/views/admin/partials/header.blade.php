@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light h-100 bg-white">
     <div class="container-fluid h-100">
 
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('home') }}">
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
 
             <div class="logo">
                 <img src="https://creativereview.imgix.net/content/uploads/2016/09/Deliveroo-Logo-Crop.png" alt="Deliveboo logo">
