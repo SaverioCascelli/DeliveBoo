@@ -13,11 +13,11 @@
 
 <template>
 
-    <footer class="bg-dark">
-        <div class="container text-white">
+
+        <div class="container text-white bg-dark">
             <h1>FOOTER</h1>
         </div>
-    </footer>
+
 
 </template>
 

@@ -32,7 +32,7 @@
             @include('admin.partials.header')
         </header>
 
-        <div class="container-fluid main-wrapper p-0">
+        <div class="container-fluid p-0">
 
             <div class="row h-100">
 
