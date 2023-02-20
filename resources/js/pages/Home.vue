@@ -36,9 +36,22 @@ import Search from '../components/Search.vue';
                         //console.log(this.store.types);
                     })
                 },
+            //controlla se l'utente è registrato o no e lo salva in store.isAuth. Passando da Foodcontroller
+            getAuth(){
+                axios.get('http://127.0.0.1:8000/admin/get-auth')
+                    .then(result =>{
+                        store.isAuth = true;
+                        console.log(store.isAuth);
+                    })
+                    .catch(error =>{
+                        store.isAuth = false;
+                        console.log(store.isAuth);
+                    })
+            }
         },
         mounted(){
             this.getApi(active_base_url);
+            this.getAuth();
         }
     }
 
