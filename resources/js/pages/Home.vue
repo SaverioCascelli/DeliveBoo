@@ -7,10 +7,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
 <script>
 
-import axios from 'axios';
 import {store} from '../data/store';
-import {BASE_URL} from '../data/data'
-import {active_base_url} from '../data/data'
 
 
     export default {
@@ -19,38 +16,10 @@ import {active_base_url} from '../data/data'
 
         data(){
             return{
-                BASE_URL,
-                active_base_url,
                 store
             }
         },
-        methods:{
-            getApi(url){
-                axios.get(url)
-                    .then(result => {
-                        store.restaurants = result.data.restaurant;
-                        store.types = result.data.types;
-                        //console.log(this.store.restaurants);
-                        //console.log(this.store.types);
-                    })
-                },
-            //controlla se l'utente è registrato o no e lo salva in store.isAuth. Passando da Foodcontroller
-            getAuth(){
-                axios.get('http://127.0.0.1:8000/admin/get-auth')
-                    .then(result =>{
-                        store.isAuth = true;
-                        console.log(store.isAuth);
-                    })
-                    .catch(error =>{
-                        store.isAuth = false;
-                        console.log(store.isAuth);
-                    })
-            }
-        },
-        mounted(){
-            this.getApi(active_base_url);
-            this.getAuth();
-        }
+
     }
 
 </script>
