@@ -14,7 +14,7 @@ class RestaurantController extends Controller
     {
         $types = Type::all();
         $foods = Food::all();
-        $restaurants = Restaurant::with(['types', 'foods', 'user'])->get();
+        $restaurants = Restaurant::with(['types', 'foods'])->get();
         //dd($restaurants);
         return response()->json(compact('restaurants', 'types', 'foods'));
     }
@@ -45,16 +45,17 @@ class RestaurantController extends Controller
     //esegue la ricerca dei ristoranti utilizzando sia il parametro tosearch (parola digitata) che l'array typeIds (una o più tipologie selezionate). La risposta JSON restituita contiene i ristoranti corrispondenti alla ricerca
     public function searchByTypeAndName()
     {
-        $typeIds = [];
-        if (isset($_GET['typeIds'])) {
-            $typeIds = explode(',', $_GET['typeIds']);
+        $typeSlug = [];
+        if (isset($_GET['types'])) {
+            $typeSlug = explode(',', $_GET['types']);
         }
-        $tosearch = $_GET['tosearch'];
-        $restaurants = Restaurant::where('name','like',"%$tosearch%")
-            ->whereHas('types', function ($query) use ($typeIds) {
-                $query->whereIn('id', $typeIds);
-            }, '>', count($typeIds) - 1)
-            ->with(['types', 'foods', 'user'])
+        $searchInput = $_GET['name'];
+        file_put_contents('dump.json', json_encode($searchInput));
+        $restaurants = Restaurant::where('slug', 'like', "%$searchInput%")
+            ->whereHas('types', function ($query) use ($typeSlug) {
+                $query->whereIn('slug', $typeSlug);
+            }, '>', count($typeSlug) - 1)
+            ->with(['types', 'foods'])
             ->get();
         return response()->json(compact('restaurants'));
     }
