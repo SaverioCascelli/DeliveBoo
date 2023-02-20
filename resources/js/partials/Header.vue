@@ -3,15 +3,25 @@
 <script>
 
     import {getImagePath} from '../data/function';
+    import {store} from '../data/store';
+
+    import SearchInput from '../components/SearchInput.vue';
 
     export default {
 
         name:'Header',
 
+        components: {
+
+            SearchInput
+
+        },
+
         data(){
             return{
 
-                getImagePath
+                getImagePath,
+                store
 
             }
         }
@@ -55,17 +65,15 @@
 
             </div>
 
-
-
             <ul class="d-flex justify-content-between">
                 <li class="nav-item me-2">
-                    <a class="nav-link link-light" href="">Login</a>
+                    <a class="nav-link link-light" :class="{'d-none': store.isAuth }" href="login">Login</a>
                 </li>
                 <li class="nav-item me-2">
-                    <a class="nav-link link-light" href="">Registrati</a>
+                    <a class="nav-link link-light" :class="{'d-none': store.isAuth }" href="register">Registrati</a>
                 </li>
                 <li class="nav-item me-2">
-                    <a class="nav-link link-light" href="">Il mio ristorante</a>
+                    <a class="nav-link link-light" :class="{'d-none': !store.isAuth }" href="admin">Il mio ristorante</a>
                 </li>
             </ul>
 
@@ -74,9 +82,11 @@
         <div class="d-flex justify-content-evenly align-items-center flex-wrap">
 
             <div class="search-container">
+
                 <h1>I piatti che ami, a domicilio.</h1>
 
-                <!-- componente serach -->
+                <SearchInput/>
+
             </div>
 
 
@@ -86,21 +96,7 @@
 
         </div>
 
-
-
-
-
-
-
-
-
-
-
     </div>
-
-
-
-
 
 </template>
 
