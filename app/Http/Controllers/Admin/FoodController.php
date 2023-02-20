@@ -21,10 +21,10 @@ class FoodController extends Controller
     public function index()
     {
 
-        if(isset($_GET['search'])){
+        if (isset($_GET['search'])) {
             $search = $_GET['search'];
-            $foods = Food::where('name','like',"%$search%")->where('restaurant_id', Auth::id())->paginate(10);
-        }else{
+            $foods = Food::where('name', 'like', "%$search%")->where('restaurant_id', Auth::id())->paginate(10);
+        } else {
             $foods = Food::where('restaurant_id', Auth::id())->paginate(10);
         }
 
@@ -33,15 +33,21 @@ class FoodController extends Controller
     }
 
 
-    public function orderby($column, $direction){
+    public function orderby($column, $direction)
+    {
 
-        $foods = Food::where('restaurant_id', Auth::id())->orderBy($column,$direction)->paginate(10);
+        $foods = Food::where('restaurant_id', Auth::id())->orderBy($column, $direction)->paginate(10);
 
         $btn_active = $column;
 
         return view('admin.foods.index', compact('foods', 'direction', 'btn_active'));
     }
 
+    public function getAuth()
+    {
+        $authId = Auth::id();
+        return response()->json(compact('authId'));
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -6,5 +6,6 @@ export const store = reactive({
 
     restaurants:[],
     types:[],
+    isAuth: false,
 
 });
