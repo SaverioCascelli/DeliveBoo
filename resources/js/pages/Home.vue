@@ -31,6 +31,10 @@ import {store} from '../data/store';
         <div class="container py-4">
             <h1>HOME</h1>
 
+            <ul>
+                <li v-for="restaurant in store.restaurants" :key="restaurant.id">{{ restaurant.name }}</li>
+            </ul>
+
         </div>
     </main>
 
@@ -38,11 +42,5 @@ import {store} from '../data/store';
 
 
 <style lang="scss" scoped>
-
-main{
-    height: calc(100vh - 40px);
-
-}
-
 
 </style>

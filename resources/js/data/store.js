@@ -8,6 +8,7 @@ export const store = reactive({
     types:[],
     isAuth: false,
 
-    searchInput: ""
+    searchInput: "",
+    searchArray: []
 
 });
