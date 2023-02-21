@@ -94,7 +94,7 @@
 
         </header>
 
-        <main class="container-fluid p-0 bg-danger">
+        <main class="container-fluid p-0">
 
             <router-view></router-view>
 
