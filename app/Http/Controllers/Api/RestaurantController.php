@@ -19,6 +19,11 @@ class RestaurantController extends Controller
         return response()->json(compact('restaurants', 'types', 'foods'));
     }
 
+    public function getTypes(){
+        $types = Type::get();
+        return response()->json(compact('types'));
+    }
+
     //ricerco il ristorante per la show partendo dallo slug e lo mando con i foods
     public function getRestaurant()
     {
