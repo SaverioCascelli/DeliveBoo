@@ -19,44 +19,36 @@ class RestaurantController extends Controller
         return response()->json(compact('restaurants', 'types', 'foods'));
     }
 
-    //Query solo per tipologia
-    /*
-    public function getByType()
+    //ricerco il ristorante per la show partendo dallo slug e lo mando con i foods
+    public function getRestaurant()
     {
-        $typeIds = [];
-        $restaurants = Restaurant::whereHas('types', function ($query) use ($typeIds) {
-            $query->whereIn('id', $typeIds);
-        }, '>', count($typeIds) - 1)->get();
-        return response()->json(compact('restaurants'));
+        if (isset($_GET['name'])) {
+            $searchItem = $_GET['name'];
+            $restaurant = Restaurant::with(['foods'])->where('slug', $searchItem)->first();
+        }
+        return response()->json(compact('restaurant'));
     }
-    */
-
-    //Query solo per nome
-    /*
-    public function search()
-    {
-        $tosearch = $_GET['tosearch'];
-        $restaurants = Restaurant::where('name','like',"%$tosearch%")->with(['types', 'foods', 'user'])->get();
-
-        return response()->json(compact('restaurants'));
-    }
-    */
 
     //esegue la ricerca dei ristoranti utilizzando sia il parametro tosearch (parola digitata) che l'array typeIds (una o più tipologie selezionate). La risposta JSON restituita contiene i ristoranti corrispondenti alla ricerca
     public function searchByTypeAndName()
     {
+        //array di slug che viene popolato dal get types
         $typeSlug = [];
         if (isset($_GET['types'])) {
+            // se mi arriva types in get allora lo esplodo dalla virgola
             $typeSlug = explode(',', $_GET['types']);
         }
+        // stringa name che mi arriva da ricercare
         $searchInput = $_GET['name'];
-        file_put_contents('dump.json', json_encode($searchInput));
+        //ricerca in base al nome
         $restaurants = Restaurant::where('slug', 'like', "%$searchInput%")
+            //ricerca sulla tabella ponte wherehase prender solo ristoranti con più di n relazioni con i tipi e applica una ricerca approfondit con wherein dove confronta lo slug del tipo con quello presente nell'array typeslug
             ->whereHas('types', function ($query) use ($typeSlug) {
                 $query->whereIn('slug', $typeSlug);
             }, '>', count($typeSlug) - 1)
             ->with(['types', 'foods'])
             ->get();
+        //ritorno il json dei ristoranti trovati
         return response()->json(compact('restaurants'));
     }
 }

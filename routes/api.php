@@ -21,9 +21,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::namespace('Api')
-->prefix('restaurants')
-->group(function(){
-    Route::get('/',[RestaurantController::class, 'index']);
-    Route::get('/search',[RestaurantController::class, 'searchByTypeAndName']);
-    //Route::get('/restaurant-type/{typeIds}',[RestaurantController::class, 'getByType']);
-});
+    ->prefix('restaurants')
+    ->group(function () {
+        Route::get('/', [RestaurantController::class, 'index']);
+        Route::get('/search', [RestaurantController::class, 'searchByTypeAndName']);
+        Route::get('/show', [RestaurantController::class, 'getRestaurant']);
+        //Route::get('/restaurant-type/{typeIds}',[RestaurantController::class, 'getByType']);
+    });
