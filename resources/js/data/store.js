@@ -8,7 +8,12 @@ export const store = reactive({
     types:[],
     isAuth: false,
 
+    currentRestaurant:{},
+
     searchInput: "",
-    searchArray: []
+    searchArray: [],
+
+    orderRestaurantSlug: '' ,
+    orderItems: [],
 
 });
