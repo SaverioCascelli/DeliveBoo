@@ -16,17 +16,17 @@
             Footer
 
         },
+
         data(){
             return{
+
                 BASE_URL,
                 store
+
             }
         },
+
         methods:{
-            mergedApi(){
-                this.getAuth();
-                this.getRestaurants();
-            },
 
             //se l'utente è loggato ottiene l'id e setta lo store.isAuth a ture del ristorante altrimenti intercetta errore 401(utente senza autorizzazione) e setta store.isAuth a false
             getAuth(){
@@ -46,9 +46,7 @@
             // restaurant.name in store.Input           stringa con lo slug del ristorante
             // resturant.types in store.searchArray     array con dentro lo slug della tipologia di ristorante
             getRestaurants(){
-                //resetto lo store per una nuova chiamata
-                store.searchInput = '';
-                store.searchArray = [];
+
                 //params è l'oggetto con i  parametri della chiamata axios: dentro vanno name(slug del ristorante da cercare ) e types(array dello slug dei types del ristorante da ricercare)
                 let params = {name: store.searchInput};
 
@@ -66,13 +64,19 @@
                 .then(result => {
                      //console.log(params);
                     store.restaurants = result.data.restaurants;
-                    //console.log(store.restaurants);
+                    // console.log(store.restaurants);
+
+                    //resetto lo store per una nuova chiamata
+                    store.searchInput = '';
+                    store.searchArray = [];
                 })
             }
         },
+
         mounted(){
             //faccio partire tutte le api in App.vue
-            this.mergedApi();
+            this.getAuth();
+            this.getRestaurants();
         }
 
     }
@@ -86,7 +90,7 @@
 
         <header>
 
-            <Header/>
+            <Header @searchInput="getRestaurants"/>
 
         </header>
 
