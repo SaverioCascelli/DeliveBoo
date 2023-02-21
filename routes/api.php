@@ -26,5 +26,7 @@ Route::namespace('Api')
         Route::get('/', [RestaurantController::class, 'index']);
         Route::get('/search', [RestaurantController::class, 'searchByTypeAndName']);
         Route::get('/show', [RestaurantController::class, 'getRestaurant']);
+        Route::get('/types', [RestaurantController::class, 'getTypes']);
         //Route::get('/restaurant-type/{typeIds}',[RestaurantController::class, 'getByType']);
     });
+
