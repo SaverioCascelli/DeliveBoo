@@ -38,7 +38,7 @@
 
             textTruncate(){
 
-                return truncateText(this.food.name, 15);
+                return truncateText(this.food.name, 12);
 
             }
 
@@ -62,7 +62,12 @@
                 <img :src="food.img_url" :alt="food.name">
             </div>
 
-            <small class="food-name mb-1 text-center">{{ textTruncate }}</small>
+            <small class="food-name mb-1 text-center">
+                {{ textTruncate }}
+                <span class="text-primary"> &euro;{{ food.price }}</span>
+            </small>
+
+            <small  class="description text-capitalize">{{ food.description }}</small>
 
             <div class="buttons d-flex align-items-center justify-content-between mb-1">
 
@@ -112,6 +117,23 @@
             border-radius: 5px;
             white-space: nowrap;
             padding: 3px 6px;
+        }
+        .description {
+            position: absolute;
+            top: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            width: 90%;
+            max-height: 40%;
+            background-color: $bg-light;
+            overflow-y: scroll;
+            padding: 3px;
+            border-radius: 5px;
+            display:none;
+        }
+        &:hover .description {
+            display: block;
         }
         .buttons {
             width: 90%;

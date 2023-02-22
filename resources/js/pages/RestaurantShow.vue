@@ -11,6 +11,8 @@ permette di visualizzare il menù di un particolare ristoratore.
     import { store } from '../data/store';
 
     import FoodItem from '../components/FoodItem.vue';
+    import Cart from '../components/Cart.vue';
+    import Error404 from './Error404.vue';
 
     export default {
 
@@ -18,7 +20,9 @@ permette di visualizzare il menù di un particolare ristoratore.
 
         components:{
 
-            FoodItem
+            FoodItem,
+            Cart,
+            Error404
 
         },
 
@@ -65,24 +69,34 @@ permette di visualizzare il menù di un particolare ristoratore.
 
     <div class="container-fluid p-0">
 
-        <div class="p-2 p-lg-4">
+        <div v-if="foods.length">
 
-            <div class="d-flex align-items-center">
-                <h2 class="title display-6 mb-0 me-2">{{restaurant.name}}</h2>
-                <i v-if="restaurant.free_delivery" class="fa-solid fa-bicycle fs-1 text-primary"></i>
+            <div class="p-2 p-lg-4">
+
+                <div class="d-flex align-items-center">
+                    <h2 class="title display-6 mb-0 me-2">{{restaurant.name}}</h2>
+                    <i v-if="restaurant.free_delivery" class="fa-solid fa-bicycle fs-1 text-primary"></i>
+                </div>
+
+                <p class="mb-0">{{restaurant.address}}</p>
+
             </div>
 
-            <p class="mb-0">{{restaurant.address}}</p>
+            <div class="row px-2 px-lg-4 ">
 
-        </div>
+                <div class="col-12 col-lg-8">
 
-        <div class="row px-2 px-lg-4 ">
+                    <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4">
 
-            <div class="col-12 col-md-8">
+                        <FoodItem v-for="(food,index) in foods" :key="index" :food="food"/>
 
-                <div class="row row-cols-2 row-cols-sm-3 row-cols-xl-4">
+                    </div>
 
-                    <FoodItem v-for="(food,index) in foods" :key="index" :food="food"/>
+                </div>
+
+                <div class="col-12 col-lg-4">
+
+                    <Cart/>
 
                 </div>
 
@@ -90,13 +104,9 @@ permette di visualizzare il menù di un particolare ristoratore.
 
         </div>
 
-        <div>
+        <div v-else>
 
-            <div class="col-12 col-md-4">
-
-                Componente carrello
-
-            </div>
+            <Error404/>
 
         </div>
 
