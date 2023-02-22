@@ -65,22 +65,26 @@ permette di visualizzare il menù di un particolare ristoratore.
 
     <div class="container-fluid p-0">
 
-        <div class="p-2 pl-lg-4">
+        <div class="p-2 p-lg-4">
 
             <div class="d-flex align-items-center">
                 <h2 class="title display-6 mb-0 me-2">{{restaurant.name}}</h2>
                 <i v-if="restaurant.free_delivery" class="fa-solid fa-bicycle fs-1 text-primary"></i>
             </div>
 
-            <p class="">{{restaurant.address}}</p>
+            <p class="mb-0">{{restaurant.address}}</p>
 
         </div>
 
-        <div class="row">
+        <div class="row px-2 px-lg-4 ">
 
             <div class="col-12 col-md-8">
 
-                <FoodItem :foods=" foods "/>
+                <div class="row row-cols-2 row-cols-sm-3 row-cols-xl-4">
+
+                    <FoodItem v-for="(food,index) in foods" :key="index" :food="food"/>
+
+                </div>
 
             </div>
 

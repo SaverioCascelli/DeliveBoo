@@ -1,11 +1,6 @@
-/* funzioni globali da usare come computed */
+function truncateText(text, textMaxLength) {
+    if(text.length < textMaxLength) return text
+    return text.substring(0, textMaxLength) + '...';
+}
 
-/*
-
-function miaFunzione(){}
-
-const miaFunzione = () => {}
-
-export {miaFunzione, ...};
-
-*/
+export {truncateText}
