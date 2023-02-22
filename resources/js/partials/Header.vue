@@ -20,7 +20,15 @@
 
             cartCheck(){
 
-                return store.orderItems.length;
+                let sum = 0;
+
+                const total = store.orderItems.forEach(item => {
+
+                    sum += item.quantity
+
+                })
+
+                return sum
 
             }
 

@@ -2,9 +2,29 @@
 
 <script>
 
+    import { getQuantity, removeFood, addFood } from '../data/function';
+    import { store } from '../data/store';
+
     export default {
 
-        name:'FoodItem'
+        name:'FoodItem',
+
+        data(){
+            return{
+                store,
+                //****funzioni richiamate da function.js***
+                getQuantity,
+                removeFood,
+                addFood
+                //***fine funzioni chiamate da function.js */
+            }
+        },
+
+        props: {
+
+            foods: Object
+
+        }
 
     }
 
@@ -13,12 +33,44 @@
 
 <template>
 
-    <h1>CARD DEL FOOD</h1>
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+
+
+            <div v-for="(food,index) in foods" :key="index" class="col">
+
+                <div class="card h-100" id="{{food.id}}" name="{{food.name}}">
+
+                    <div class="image">
+                        <img :src="food.img_url" :alt="food.name">
+                    </div>
+
+
+                    <span>{{ food.name }}</span>
+                    <button @click="removeFood(food.id)">remove</button>
+                    <span>quantity : {{ getQuantity(food.id) }}</span>
+                    <button @click="addFood(food.id)">add</button>
+
+
+                </div>
+
+            </div>
+
+
+
+
+    </div>
+
+
 
 </template>
 
 
 <style lang="scss" scoped>
+
+    .image {
+        width: 100%;
+
+    }
 
 
 </style>

@@ -63,32 +63,33 @@ export default {
 
     <div class="cart">
 
-        <!-- <div v-for="(food, key) in store.orderItems">
+        <div v-for="(food, key) in store.orderItems">
             <span>{{ getFood(food.id).name }}</span>
             <button @click="removeFood(food.id)">remove</button>
             <span>quantità : {{ getQuantity(food.id) }}</span>
             <button @click="addFood(food.id)">add</button>
 
-        </div>
+
 
             <div>
                 <p>price : {{ getFood(food.id).price }} per pezzo </p>
                 <p>totale articolo: {{ foodTotalPrice(food.id) }}</p>
             </div>
 
+
+
+
+            <div>
+                <span>totale complessivo: </span>
+                <span>{{ totalCartPrice() }}</span>
+            </div>
         </div>
-
-
-        <div>
-            <span>totale complessivo: </span>
-            <span>{{ totalCartPrice() }}</span>
-        </div>-->
     </div>
 
 
 
 
-    <!-- <button @click="clearOrder()">clear localStorage</button> -->
+    <button @click="clearOrder()">clear localStorage</button>
 
 
 
