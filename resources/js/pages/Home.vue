@@ -15,6 +15,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
     import Header from '../partials/Header.vue';
     import Search from '../components/Search.vue';
     import RestaurantItem from '../components/RestaurantItem.vue';
+    import SectionTemplate from '../components/SectionTemplate.vue';
 
     export default {
 
@@ -24,7 +25,8 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
             Header,
             Search,
-            RestaurantItem
+            RestaurantItem,
+            SectionTemplate
 
         },
 
@@ -160,6 +162,8 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
         </div>
 
     </div>
+
+
 
 
 </template>

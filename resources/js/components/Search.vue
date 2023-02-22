@@ -123,7 +123,7 @@
                 display: block;
             }
             &:hover img {
-                transform: scale(1.1);
+                filter: grayscale(1);
             }
             .type-name-mobile {
                 position: absolute;
