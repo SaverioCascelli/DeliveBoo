@@ -69,30 +69,19 @@ export default {
             <span>quantità : {{ getQuantity(food.id) }}</span>
             <button @click="addFood(food.id)">add</button>
 
-
-
             <div>
                 <p>price : {{ getFood(food.id).price }} per pezzo </p>
                 <p>totale articolo: {{ foodTotalPrice(food.id) }}</p>
             </div>
 
-
-
-
-            <div>
-                <span>totale complessivo: </span>
-                <span>{{ totalCartPrice() }}</span>
-            </div>
+        </div>
+        <div>
+            <span>totale complessivo: </span>
+            <span>{{ totalCartPrice() }}</span>
         </div>
     </div>
 
-
-
-
     <button @click="clearOrder()">clear localStorage</button>
-
-
-
 </template>
 
 
