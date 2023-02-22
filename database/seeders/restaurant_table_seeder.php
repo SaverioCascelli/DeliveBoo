@@ -27,6 +27,12 @@ class restaurant_table_seeder extends Seeder
             $newRestaurant->VAT = $faker->vat();
             $newRestaurant->address = $faker->streetAddress();
             $newRestaurant->img_url = $restaurant['url'];
+            $rand = rand(1, 2);
+            if ($rand == 1) {
+                $newRestaurant->free_delivery = 1;
+            } else {
+                $newRestaurant->free_delivery = 0;
+            }
             $newRestaurant->save();
         }
     }
