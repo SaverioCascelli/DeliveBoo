@@ -13,7 +13,11 @@
 
 <template>
 
-    <h1>ERRORE 404</h1>
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+
+        <h2>Ops.. la pagina che cerchi non esiste</h2>
+
+    </div>
 
 </template>
 
