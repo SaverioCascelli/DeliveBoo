@@ -44,7 +44,7 @@ export default {
                     store.currentRestaurant = result.data.restaurant;
                     this.restaurant = store.currentRestaurant;
                     this.foods = store.currentRestaurant.foods;
-                    console.log(store.currentRestaurant.foods);
+                    //console.log(store.currentRestaurant.foods);
                 })
         }
     },

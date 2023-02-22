@@ -8,9 +8,8 @@ Tramite questo pannello è possibile pagare inserendo i dettagli della carta di 
 <script>
 
 import axios from 'axios';
-import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, apiOrderRestaurant } from '../data/function';
+import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, getFood } from '../data/function';
 import { store } from '../data/store';
-import { isProxy, toRaw } from 'vue';
 
 export default {
 
@@ -25,49 +24,23 @@ export default {
             removeFood,
             addFood,
             clearOrder,
-            apiOrderRestaurant,
+            getFood,
             //***fine funzioni chiamate da function.js */
 
             //serve per le funzioni di aggiunta in localstorage
 
-            foods: {},
         }
     },
     methods: {
-        getFood(id) {
-            if (this.foods == {}) {
-                return;
-            }
-            let raw = toRaw(this.foods);
 
-            let food = raw.find(element => element.id == id);
-            // console.log(food);
-            return food
-        },
-
-        apiCall() {
+        getRestaurant() {
             this.getLocalStorage();
-            axios.get('http://127.0.0.1:8000/api/restaurants/show', {
-                params: {
 
-                    name: this.store.orderRestaurantSlug
-                }
-            })
-                .then(result => {
-                    store.currentRestaurant = result.data.restaurant;
-                    this.foods = store.currentRestaurant.foods;
-                    // console.log(this.foods);
-                })
         },
 
-        getFirstIndex(foodId) {
-
-            var index = this.store.orderItems.findIndex(element => element == foodId);
-            return index;
-        }
     },
     mounted() {
-        this.apiCall();
+        this.getRestaurant();
     }
 
 }
@@ -81,20 +54,17 @@ export default {
     <div class="cart">
 
         <div v-for="(food, key) in store.orderItems">
-
-            <div v-if="key == getFirstIndex(food)" class="food" :id="food" :name="getFood(food).name">
-                <span>{{ getFood(food).name }}</span>
-                <button @click="removeFood(food)">remove</button>
-                <span>quantity : {{ getQuantity(food) }}</span>
-                <button @click="addFood(food)">add</button>
-            </div>
+            <span>{{ getFood(food.id).name }}</span>
+            <button @click="removeFood(food.id)">remove</button>
+            <span>quantity : {{ getQuantity(food.id) }}</span>
+            <button @click="addFood(food.id)">add</button>
         </div>
 
     </div>
 
 
 
-    <button @click="">clear localStorage</button>
+    <button @click="clearOrder()">clear localStorage</button>
 </template>
 
 
