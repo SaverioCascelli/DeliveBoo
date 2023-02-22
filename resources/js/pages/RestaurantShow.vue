@@ -50,7 +50,7 @@ export default {
     },
     mounted() {
         this.apiCall();
-        this.getLocalStorage();
+        // this.getLocalStorage();
     }
 }
 
@@ -59,7 +59,21 @@ export default {
 
 
 <template>
-    <h1>DETTAGLIO RISTORANTE</h1>
+
+    <div class="container-fluid p-0">
+
+        <h2 class="title display-6">{{restaurant.name}}</h2>
+        <p>{{restaurant.address}}</p>
+        <img :src="restaurant.img_url" :alt="restaurant.name">
+
+
+
+
+    </div>
+
+
+
+
     <div v-for="food in foods">
 
         <div class="food" id="{{food.id}}" name="{{food.name}}">
@@ -69,7 +83,18 @@ export default {
             <button @click="addFood(food.id)">add</button>
         </div>
     </div>
+
+
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+    @use '../../scss/partialsVue/vars' as *;
+
+    .title {
+        color: &black;
+    }
+
+
+</style>
