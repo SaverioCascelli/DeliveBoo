@@ -46,9 +46,9 @@ export default {
         },
 
     },
-    // mounted() {
-    //     this.getRestaurant();
-    // }
+    mounted() {
+        this.getRestaurant();
+    }
 
 }
 
@@ -69,7 +69,7 @@ export default {
             <span>quantità : {{ getQuantity(food.id) }}</span>
             <button @click="addFood(food.id)">add</button>
 
-        </div> 
+        </div>
 
             <div>
                 <p>price : {{ getFood(food.id).price }} per pezzo </p>
