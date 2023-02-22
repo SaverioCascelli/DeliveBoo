@@ -192,7 +192,7 @@ function totalCartPrice(){
         total += parseFloat(foodTotalPrice(food.id,store));
     });
 
-    return total;
+    return total.toFixed(2);
 }
 
 
