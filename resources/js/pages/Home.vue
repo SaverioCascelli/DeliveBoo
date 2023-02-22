@@ -12,7 +12,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
     import {store} from '../data/store';
     import {BASE_URL} from '../data/data';
 
-    import Header from '../partials/Header.vue';
+    import JumboSearch from '../components/JumboSearch.vue';
     import Search from '../components/Search.vue';
     import RestaurantItem from '../components/RestaurantItem.vue';
     import SectionTemplate from '../components/SectionTemplate.vue';
@@ -23,7 +23,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
         components: {
 
-            Header,
+            JumboSearch,
             Search,
             RestaurantItem,
             SectionTemplate
@@ -131,7 +131,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
 <template>
 
-    <Header @searchInput="getRestaurants(); removeClass()"/>
+    <JumboSearch @searchInput="getRestaurants(); removeClass()"/>
 
     <div class="container-fluid p-0">
 
@@ -162,6 +162,14 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
         </div>
 
     </div>
+
+	<div class="container-fluid p-0">
+
+		<SectionTemplate/>
+
+	</div>
+
+
 
 
 
