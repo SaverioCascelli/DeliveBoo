@@ -13,7 +13,7 @@
 
 <template>
 
-    <div class="container-fluid d-flex justify-content-center align-items-center">
+    <div class="error container-fluid d-flex justify-content-center align-items-center">
 
         <h2>Ops.. la pagina che cerchi non esiste</h2>
 
@@ -23,6 +23,14 @@
 
 
 <style lang="scss" scoped>
+
+    @use '../../scss/partialsVue/vars' as *;
+
+    .error {
+        min-height: 500px;
+        background-color: $bg-light;
+        color: $black;
+    }
 
 
 </style>
