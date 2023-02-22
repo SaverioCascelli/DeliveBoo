@@ -26,16 +26,8 @@ const router = createRouter({
         },
         {
             path: '/cart',
-            name: 'cart',
+            name: 'cartPayment',
             component: CartPayment
-        },
-        {
-            path: '/login',
-            name: 'login',
-        },
-        {
-            path: '/register',
-            name: 'register',
         },
         {
             path:'/:pathMatch(.*)*',

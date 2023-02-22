@@ -1,8 +1,13 @@
 <script>
 
     import axios from 'axios';
+
     import {store} from './data/store';
-    import {BASE_URL} from './data/data'
+    import {BASE_URL} from './data/data';
+
+    import {getLocalStorage} from './data/function';
+
+    import Header from './partials/Header.vue';
     import Footer from './partials/Footer.vue';
 
     export default {
@@ -11,6 +16,7 @@
 
         components: {
 
+            Header,
             Footer
 
         },
@@ -19,7 +25,8 @@
             return{
 
                 BASE_URL,
-                store
+                store,
+                getLocalStorage
 
             }
         },
@@ -38,8 +45,7 @@
                         store.isAuth = false;
                         //console.log(store.isAuth);
                     })
-            },
-
+            }
 
         },
 
@@ -47,7 +53,10 @@
 
             this.getAuth();
 
+            this.getLocalStorage();
+
         }
+
 
     }
 
@@ -57,6 +66,9 @@
 <template>
 
     <div class="container-xxl p-0">
+
+        <Header />
+
 
         <main class="container-fluid p-0">
 
