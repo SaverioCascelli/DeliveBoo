@@ -2,8 +2,7 @@
 
 <script>
 
-
-    import { getQuantity, removeFood, addFood } from '../data/function';
+    import { getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,getFood,checkRestaurant,foodTotalPrice,totalCartPrice } from '../data/function';
     import { store } from '../data/store';
     import { truncateText } from '../data/functionComputed';
 
@@ -16,8 +15,15 @@
                 store,
                 //****funzioni richiamate da function.js***
                 getQuantity,
+                clearOrder,
+                setLocalStorage,
+                getLocalStorage,
                 removeFood,
                 addFood,
+                getFood,
+                checkRestaurant,
+                foodTotalPrice,
+                totalCartPrice,
                 //***fine funzioni chiamate da function.js */
                 truncateText
             }
@@ -38,19 +44,15 @@
 
 
 
-
-        foods: Object
+        }
 
     }
-
-
 
 
 </script>
 
 
 <template>
-
 
     <div class="col p-2 h-100">
 
@@ -62,17 +64,13 @@
 
             <small class="food-name mb-1 text-center">{{ textTruncate }}</small>
 
-
             <div class="buttons d-flex align-items-center justify-content-between mb-1">
-
 
                 <button class="btn btn-outline-primary btn-sm" @click="removeFood(food.id)">
                     <i class="fa-solid fa-minus"></i>
                 </button>
 
-
                 <span> {{ getQuantity(food.id) }}</span>
-
 
                 <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id)">
                     <i class="fa-solid fa-plus"></i>
@@ -85,14 +83,10 @@
     </div>
 
 
-
 </template>
 
 
 <style lang="scss" scoped>
-.image {
-    width: 100%;
-
 
     @use '../../scss/partialsVue/vars' as *;
 
@@ -131,6 +125,5 @@
             transform: translateX(-50%);
         }
     }
-
 
 </style>
