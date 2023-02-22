@@ -60,13 +60,13 @@
 
             <ul class="d-flex justify-content-between align-items-center mb-0">
                 <li class="nav-item">
-                    <a class="nav-link link-light p-0 me-4" :class="{'d-none': store.isAuth }" href="login">Login</a>
+                    <a class="nav-link link-light p-0 me-4" :class="{'d-none': store.isAuth }" href="/login">Login</a>
                 </li>
                 <li class="nav-item d-none d-sm-block">
-                    <a class="nav-link link-light p-0" :class="{'d-none': store.isAuth }" href="register">Registrati</a>
+                    <a class="nav-link link-light p-0" :class="{'d-none': store.isAuth }" href="/register">Registrati</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link link-light mt-1 p-0" :class="{'d-none': !store.isAuth }" href="admin">Il mio ristorante</a>
+                    <a class="nav-link link-light mt-1 p-0" :class="{'d-none': !store.isAuth }" href="/admin">Il mio ristorante</a>
                 </li>
 
                 <li  class="nav-item mx-2">
