@@ -69,11 +69,32 @@ function getLocalStorage() {
         let orderString = localStorage.getItem('order');
         this.store.orderItems= JSON.parse(orderString);
         this.store.orderRestaurantSlug = localStorage.getItem('restaurantSlug')
-        // console.log('localstorage');
-        // console.log(localStorage);
-        // console.log('order');
-        // console.log(this.store.orderRestaurantSlug);
-        // console.log(this.store.orderItems);
+
+        let order = [];
+
+       this.store.orderItems.forEach(foodId => {
+        let index = order.findIndex(element => element['id']== foodId);
+        if (index == -1){
+            let obj = {id:foodId, quantity: 1};
+            //console.log(index);
+            order.push(obj);
+        }else{
+            //console.log(index);
+            order[index].quantity++;
+        }
+
+       });
+       console.log(order);
+
+       let arr = [];
+       order.forEach(food => {
+         for (let index = 0; index < food.quantity; index++) {
+            arr.push(food.id);
+         }
+       });
+       order = JSON.stringify(order);
+       console.log(JSON.parse(order));
+
     }
 }
 
@@ -116,9 +137,6 @@ function apiOrderRestaurant(){
 
 }
 
-function getFood(id){
-    let foods = this.store.currentRestaurant;
-    //console.log(foods);
-}
 
-export {getImagePath,getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,apiOrderRestaurant,getFood};
+
+export {getImagePath,getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,apiOrderRestaurant};

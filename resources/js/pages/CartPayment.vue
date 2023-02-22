@@ -35,10 +35,9 @@ export default {
     },
     methods: {
         getFood(id) {
-            if (this.foods == {}) {
-                return;
-            }
-            let raw = toRaw(this.foods);
+            let raw = [];
+
+            raw = toRaw(this.foods);
 
             let food = raw.find(element => element.id == id);
             // console.log(food);
@@ -59,6 +58,7 @@ export default {
                     // console.log(this.foods);
                 })
         },
+
 
         getFirstIndex(foodId) {
 
@@ -94,7 +94,7 @@ export default {
 
 
 
-    <button @click="">clear localStorage</button>
+    <button @click="clearOrder()">clear localStorage</button>
 </template>
 
 
