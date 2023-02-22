@@ -14,26 +14,33 @@ const getImagePath = (imageName) => {
 return new URL(`../img/${imageName}`, import.meta.url).href
 }
 
-
-//aggiunge un entità allo store.orderItems creando un array che contiene oggetti es [{id:2, quantity:3},{id:7, quantity:1}] gli id devono essere tutti dei foods dello stesso restaurant
-function addFood(foodId){
+function checkRestaurant(store){
 
     //**controllo univocità del ristorante */
     let storageRestaurant = localStorage.getItem('restaurantSlug');
     //console.log(localStorage);
     //se in localStorage esiste restaurantName && in store orderRestaurantSlug è uguale a ''
-    if (!(storageRestaurant ) && this.store.orderRestaurantSlug == '') {
-        this.store.orderRestaurantSlug= this.store.currentRestaurant.slug;
-        window.localStorage.setItem('restaurantSlug', this.store.orderRestaurantSlug);
+    if (!(storageRestaurant ) && store.orderRestaurantSlug == '') {
+        store.orderRestaurantSlug= store.currentRestaurant.slug;
+        window.localStorage.setItem('restaurantSlug', store.orderRestaurantSlug);
 
-    } else if (this.store.currentRestaurant.slug != storageRestaurant) {
+    } else if (store.currentRestaurant.slug != storageRestaurant) {
          console.log('ristorante diverso');
 
         //todo logica ristorante diverso
-        return;
+        return true;
     }
+    console.log('stesso ristorante');
+    return false;
+}
+
+//aggiunge un entità allo store.orderItems creando un array che contiene oggetti es [{id:2, quantity:3},{id:7, quantity:1}] gli id devono essere tutti dei foods dello stesso restaurant
+function addFood(foodId){
     //***fine controllo univocità del ristorante */
 
+    if(checkRestaurant(this.store)){
+        return;
+    }
     this.getLocalStorage();
 
     //crea l'oggetto es {id:2, quantity:3} e lo pusha entro orderItems se l'id è già presente aumenta la quantity
@@ -48,26 +55,16 @@ function addFood(foodId){
     }
 
     this.setLocalStorage();
-
+    return true
 }
 
 //rimuove una quantity di food da orderItems in store, se diventa 0, rimuove l'oggetto con l' id dall'array
 function removeFood(foodId) {
 
-     /** controllo univocità del ristorante */
-    let storageRestaurant = localStorage.getItem('restaurantSlug');
-    //console.log(localStorage);
-    //se in localStorage esiste restaurantName && in store orderRestaurantSlug è uguale a ''
-    if (!(storageRestaurant ) && this.store.orderRestaurantSlug == '') {
-        this.store.orderRestaurantSlug= this.store.currentRestaurant.slug;
-        window.localStorage.setItem('restaurantSlug', this.store.orderRestaurantSlug);
-
-    } else if (this.store.currentRestaurant.slug != storageRestaurant) {
-         console.log('ristorante diverso');
-
-        //todo logica ristorante diverso
+    if(checkRestaurant(this.store)){
         return;
     }
+     /** controllo univocità del ristorante */
 
      /**fine controllo univocità del ristorante */
 
@@ -147,10 +144,14 @@ function clearOrder() {
 }
 
 //prende da store l'array di id  orderItems e ritorna la quantità dell'id cercato
-function getQuantity(foodId) {
+function getQuantity(foodId,store = null) {
     //console.log('getQuantity');
+    if(store == null){
+
+        store  = this.store;
+    }
     let quantity = 0;
-    let orderItems = this.store.orderItems;
+    let orderItems = store.orderItems;
     let index = orderItems.findIndex(element => element['id'] == foodId);
     if(index != -1){
         quantity = orderItems[index].quantity;
@@ -170,6 +171,30 @@ function getFood(foodId){
     return food
 }
 
+function foodTotalPrice(foodId , store = null){
+    let stor;
+    if(store == null){
+        stor = this.store
+    }else{ stor = store}
+    let foods = stor.currentRestaurant.foods;
+    let food = foods.find(element => element.id == foodId);
+    let quantity = getQuantity(foodId,stor);
+    return (food.price * quantity).toFixed(2);
+}
+
+function totalCartPrice(){
+    let total = 0;
+    let store = this.store
+    let cart = store.orderItems;
 
 
-export {getImagePath,getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,getFood};
+    cart.forEach(food => {
+        total += parseFloat(foodTotalPrice(food.id,store));
+    });
+
+    return total;
+}
+
+
+
+export {getImagePath,getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,getFood,checkRestaurant,foodTotalPrice,totalCartPrice};

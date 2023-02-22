@@ -8,7 +8,7 @@ Tramite questo pannello è possibile pagare inserendo i dettagli della carta di 
 <script>
 
 import axios from 'axios';
-import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, getFood } from '../data/function';
+import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, getFood, foodTotalPrice, totalCartPrice } from '../data/function';
 import { store } from '../data/store';
 
 export default {
@@ -25,6 +25,8 @@ export default {
             addFood,
             clearOrder,
             getFood,
+            foodTotalPrice,
+            totalCartPrice,
             //***fine funzioni chiamate da function.js */
 
             //serve per le funzioni di aggiunta in localstorage
@@ -64,15 +66,32 @@ export default {
         <!-- <div v-for="(food, key) in store.orderItems">
             <span>{{ getFood(food.id).name }}</span>
             <button @click="removeFood(food.id)">remove</button>
-            <span>quantity : {{ getQuantity(food.id) }}</span>
+            <span>quantità : {{ getQuantity(food.id) }}</span>
             <button @click="addFood(food.id)">add</button>
-        </div> -->
 
+        </div> 
+
+            <div>
+                <p>price : {{ getFood(food.id).price }} per pezzo </p>
+                <p>totale articolo: {{ foodTotalPrice(food.id) }}</p>
+            </div>
+
+        </div>
+
+
+        <div>
+            <span>totale complessivo: </span>
+            <span>{{ totalCartPrice() }}</span>
+        </div>-->
     </div>
 
 
 
+
     <!-- <button @click="clearOrder()">clear localStorage</button> -->
+
+
+
 </template>
 
 
