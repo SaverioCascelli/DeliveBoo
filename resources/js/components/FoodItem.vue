@@ -4,6 +4,7 @@
 
     import { getQuantity, removeFood, addFood } from '../data/function';
     import { store } from '../data/store';
+    import { truncateText } from '../data/functionComputed';
 
     export default {
 
@@ -15,51 +16,64 @@
                 //****funzioni richiamate da function.js***
                 getQuantity,
                 removeFood,
-                addFood
+                addFood,
                 //***fine funzioni chiamate da function.js */
+                truncateText
             }
         },
 
         props: {
 
-            foods: Object
+            food: Object
+        },
+
+        computed: {
+
+            textTruncate(){
+
+                return truncateText(this.food.name, 15);
+
+            }
+
+
 
         }
 
     }
+
 
 </script>
 
 
 <template>
 
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+    <div class="col p-2 h-100">
 
+        <div class="card h-100 overflow-hidden position-relative" id="{{food.id}}" name="{{food.name}}">
 
-            <div v-for="(food,index) in foods" :key="index" class="col">
+            <div class="image">
+                <img :src="food.img_url" :alt="food.name">
+            </div>
 
-                <div class="card h-100" id="{{food.id}}" name="{{food.name}}">
+            <small class="food-name mb-1 text-center">{{ textTruncate }}</small>
 
-                    <div class="image">
-                        <img :src="food.img_url" :alt="food.name">
-                    </div>
+            <div class="buttons d-flex align-items-center justify-content-between mb-1">
 
+                <button class="btn btn-outline-primary btn-sm" @click="removeFood(food.id)">
+                    <i class="fa-solid fa-minus"></i>
+                </button>
 
-                    <span>{{ food.name }}</span>
-                    <button @click="removeFood(food.id)">remove</button>
-                    <span>quantity : {{ getQuantity(food.id) }}</span>
-                    <button @click="addFood(food.id)">add</button>
+                <span> {{ getQuantity(food.id) }}</span>
 
-
-                </div>
+                <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id)">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
 
             </div>
 
-
-
+        </div>
 
     </div>
-
 
 
 </template>
@@ -67,10 +81,42 @@
 
 <style lang="scss" scoped>
 
-    .image {
-        width: 100%;
+    @use '../../scss/partialsVue/vars' as *;
 
+    .card {
+        color: $black;
+        cursor: pointer;
+        .image {
+            width: 100%;
+            height: 180px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        }
+        .food-name {
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: $bg-light;
+            border-radius: 5px;
+            white-space: nowrap;
+            padding: 3px 6px;
+        }
+        .buttons {
+            width: 90%;
+            margin: 0 auto;
+            padding: 5px 10px;
+            background-color: $success;
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
-
 
 </style>
