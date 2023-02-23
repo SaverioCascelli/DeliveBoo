@@ -7,6 +7,7 @@ Tramite questo pannello è possibile pagare inserendo i dettagli della carta di 
 
 <script>
 
+import Cart from '../components/Cart.vue';
 import axios from 'axios';
 import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, getFood, foodTotalPrice, totalCartPrice } from '../data/function';
 import { store } from '../data/store';
@@ -14,6 +15,11 @@ import { store } from '../data/store';
 export default {
 
     name: 'CartPayment',
+    components: {
+
+        Cart,
+
+    },
     data() {
         return {
             store,
@@ -61,24 +67,11 @@ export default {
 
 
 
-    <div class="cart">
 
-        <div v-for="(food, key) in store.orderItems">
-            <span>{{ getFood(food.id).name }}</span>
-            <button @click="removeFood(food.id)">remove</button>
-            <span>quantità : {{ getQuantity(food.id) }}</span>
-            <button @click="addFood(food.id)">add</button>
+    <div class="col-12 col-lg-4 pt-2">
 
-            <div>
-                <p>price : {{ getFood(food.id).price }} per pezzo </p>
-                <p>totale articolo: {{ foodTotalPrice(food.id) }}</p>
-            </div>
+        <Cart />
 
-        </div>
-        <div>
-            <span>totale complessivo: </span>
-            <span>{{ totalCartPrice() }}</span>
-        </div>
     </div>
 
     <button @click="clearOrder()">clear localStorage</button>
