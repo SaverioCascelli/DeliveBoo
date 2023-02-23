@@ -22,7 +22,7 @@
 
                 let sum = 0;
 
-                const total = store.orderItems.forEach(item => {
+                store.orderItems.forEach(item => {
 
                     sum += item.quantity
 

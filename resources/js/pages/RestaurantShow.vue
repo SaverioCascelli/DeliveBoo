@@ -75,7 +75,13 @@ permette di visualizzare il menù di un particolare ristoratore.
 
                 <div class="d-flex align-items-center">
                     <h2 class="title display-6 mb-0 me-2">{{restaurant.name}}</h2>
-                    <i v-if="restaurant.free_delivery" class="fa-solid fa-bicycle fs-1 text-primary"></i>
+                    <div v-if="restaurant.free_delivery" class="position-relative">
+                        <i class="fa-solid fa-bicycle fs-1 text-primary"></i>
+                        <small class="position-absolute top-0 start-100 badge rounded-pill bg-danger text-white" >
+                            CONSEGNA GRATUITA!
+                        </small>
+                    </div>
+
                 </div>
 
                 <p class="mb-0">{{restaurant.address}}</p>
@@ -88,7 +94,7 @@ permette di visualizzare il menù di un particolare ristoratore.
 
                     <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4">
 
-                        <FoodItem v-for="(food,index) in foods" :key="index" :food="food"/>
+                        <FoodItem v-for="(food,index) in foods" :key="index" :food="food" :restaurant="restaurant"/>
 
                     </div>
 

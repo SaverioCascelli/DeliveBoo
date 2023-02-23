@@ -2,6 +2,10 @@
 
 <script>
 
+    import {checkRestaurant} from '../data/function';
+
+    import {store} from '../data/store';
+
     export default {
 
         name:'RestaurantItem',
@@ -10,6 +14,20 @@
 
             restaurant: Object
 
+        },
+
+        data(){
+            return{
+
+                checkRestaurant,
+                store
+            }
+        },
+
+        methods: {
+            check(item){
+                this.checkRestaurant(item);
+            }
         }
 
     }
@@ -21,7 +39,7 @@
 
     <div class="col mb-2 mb-md-3">
 
-        <router-link :to="{name: 'restaurant', params: {slug: restaurant.slug}}">
+        <router-link :to="{name: 'restaurant', params: {slug: restaurant.slug}}" @click="check(restaurant)">
             <div class="card restaurant overflow-hidden h-100 bg-success">
                 <div class="restaurant-image">
                     <img :src="restaurant.img_url" :alt="restaurant.name">
@@ -31,6 +49,7 @@
                 <small class="address text-center pb-1">{{ restaurant.address }}</small>
             </div>
         </router-link>
+
 
     </div>
 
@@ -68,7 +87,5 @@
             font-size: 0.7rem
         }
     }
-
-
 
 </style>

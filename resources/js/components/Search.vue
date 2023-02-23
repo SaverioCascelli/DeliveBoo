@@ -48,21 +48,19 @@
 
     <div class="search-wrapper container-fluid p-2 p-lg-4">
 
-        <h2 class="title display-6 fw-bold mb-2 mb-lg-3 mt-1 mt-lg-0">I tuoi piatti preferiti, consegnati da noi</h2>
+        <h2 class="title display-6 fw-bold mt-1 mt-lg-0 mb-0">I tuoi piatti preferiti, consegnati da noi</h2>
 
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 mb-3">
+        <small class="text-small">* Seleziona le tipologie di cucina che ti più ti piacciono</small>
+
+        <div class="mt-2 mt-lg-3 row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 mb-3">
 
             <div class="p-2" v-for="(type, index) in store.types" :key="index">
                 <div class="type-img" @click="type.isClick = !type.isClick; onClick(type.name, type.isClick)">
 
                     <img :class="{'active' : type.isClick}" :src="type.img_url" :alt="type.name">
-                    <!-- pc -->
-                    <div class="d-none d-lg-block">
-                        <h6 class="type-name" :class="{'d-block' : type.isClick}">{{ type.name.toUpperCase() }}</h6>
-                    </div>
-                    <!-- mobile -->
-                    <div class="d-lg-none">
-                        <h6 class="type-name-mobile">{{ type.name.toUpperCase() }}</h6>
+
+                    <div>
+                        <h6 class="type-name">{{ type.name.toUpperCase() }}</h6>
                     </div>
 
                 </div>
@@ -88,6 +86,9 @@
         .title {
             color: &black;
         }
+        .text-small {
+            color: $black;
+        }
         .type-img{
             flex-basis: 80%;
             aspect-ratio: 1/1;
@@ -106,26 +107,10 @@
                     filter: grayscale(1);
                 }
             }
-            .type-name {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%,-50%);
-                color: white;
-                padding:5px 10px;
-                background-color: $primary;
-                border-radius: 5px;
-                font-size: 12px;
-                white-space: nowrap;
-                display: none;
-            }
-            &:hover .type-name {
-                display: block;
-            }
             &:hover img {
                 filter: grayscale(1);
             }
-            .type-name-mobile {
+            .type-name {
                 position: absolute;
                 bottom: 10px;
                 left: 50%;
@@ -141,6 +126,7 @@
         .search {
             width: 300px;
         }
+
     }
 
 </style>

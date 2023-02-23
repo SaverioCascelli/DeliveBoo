@@ -9,7 +9,7 @@ Tramite questo pannello è possibile pagare inserendo i dettagli della carta di 
 
 import Cart from '../components/Cart.vue';
 import axios from 'axios';
-import { setLocalStorage, getLocalStorage, getQuantity, removeFood, addFood, clearOrder, getFood, foodTotalPrice, totalCartPrice } from '../data/function';
+import { setLocalStorage,   removeFood, addFood, clearOrder,  foodTotalPrice, totalCartPrice } from '../data/function';
 import { store } from '../data/store';
 
 export default {
@@ -26,11 +26,11 @@ export default {
             //****funzioni richiamate da function.js***
             setLocalStorage,
             // getLocalStorage,
-            getQuantity,
+
             removeFood,
             addFood,
             clearOrder,
-            getFood,
+
             foodTotalPrice,
             totalCartPrice,
             //***fine funzioni chiamate da function.js */

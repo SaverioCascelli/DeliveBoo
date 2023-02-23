@@ -2,7 +2,7 @@
 
 <script>
 
-    import { getQuantity,clearOrder,setLocalStorage,getLocalStorage,removeFood,addFood,getFood,checkRestaurant,foodTotalPrice,totalCartPrice } from '../data/function';
+    import {clearOrder,removeFood,addFood,setLocalStorage, getQuantity } from '../data/function';
     import { store } from '../data/store';
     import { truncateText } from '../data/functionComputed';
 
@@ -14,24 +14,32 @@
             return{
                 store,
                 //****funzioni richiamate da function.js***
-                getQuantity,
                 clearOrder,
                 setLocalStorage,
-                getLocalStorage,
+                getQuantity,
                 removeFood,
                 addFood,
-                getFood,
-                checkRestaurant,
-                foodTotalPrice,
-                totalCartPrice,
-                //***fine funzioni chiamate da function.js */
+
                 truncateText
             }
         },
 
         props: {
 
-            food: Object
+            food: Object,
+            restaurant: Object
+
+        },
+
+        methods: {
+
+            changeRestaurant() {
+
+                this.clearOrder();
+                store.openModal = false;
+
+            }
+
         },
 
         computed: {
@@ -42,7 +50,7 @@
 
             }
 
-        }
+        },
 
     }
 
@@ -75,16 +83,41 @@
 
                 <span> {{ getQuantity(food.id) }}</span>
 
-                <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id, food.name, food.price)">
+                <button v-if="!store.openModal" class="btn btn-outline-primary btn-sm" @click="addFood(food,restaurant)">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+
+                <button v-else class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-solid fa-plus"></i>
                 </button>
 
             </div>
 
+            <div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">ATTENZIONE</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Puoi ordinare da un solo ristorante alla volta. <br>
+                            Clicca prosegui per cancellare l'ordine attuale e ordinare da {{ restaurant.name }}.
+                        </div>
+                        <div class="modal-footer">
+                            <button @click="store.openModal = true" type="button" class="btn btn-danger" data-bs-dismiss="modal">ANNULLA</button>
+                            <button @click="changeRestaurant()" type="button" class="btn btn-primary text-white" data-bs-dismiss="modal">PROSEGUI</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
-
 
 </template>
 
@@ -143,6 +176,9 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
+        }
+        .modal {
+            color: $black;
         }
     }
 

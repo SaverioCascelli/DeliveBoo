@@ -3,8 +3,6 @@
 <!-- Homepage:
 offre la possibilità di cliccare sulle tipologie di ristorante e senza il refresh della pagina ottenere una lista di ristoranti con le tipologie di appartenenza sotto ogni nome. -->
 
-
-
 <script>
 
     import axios from 'axios';
@@ -15,7 +13,6 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
     import JumboSearch from '../components/JumboSearch.vue';
     import Search from '../components/Search.vue';
     import RestaurantItem from '../components/RestaurantItem.vue';
-    import SectionTemplate from '../components/SectionTemplate.vue';
 
     export default {
 
@@ -25,8 +22,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
 
             JumboSearch,
             Search,
-            RestaurantItem,
-            SectionTemplate
+            RestaurantItem
 
         },
 
@@ -162,17 +158,6 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
         </div>
 
     </div>
-
-	<div class="container-fluid p-0">
-
-		<SectionTemplate/>
-
-	</div>
-
-
-
-
-
 
 </template>
 

@@ -13,7 +13,7 @@ export const store = reactive({
     searchInput: "",
     searchArray: [],
 
-    orderRestaurantSlug: '' ,
+    orderRestaurantId: '' ,
     orderItems: [],
 
     openModal: false
