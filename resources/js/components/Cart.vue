@@ -14,7 +14,7 @@
             store,
             //****funzioni richiamate da function.js***
             setLocalStorage,
-            getLocalStorage,
+            // getLocalStorage,
             getQuantity,
             removeFood,
             addFood,
@@ -32,12 +32,12 @@
 
         methods: {
 
-            getRestaurant() {
-                this.getLocalStorage();
+            // getRestaurant() {
+            //     this.getLocalStorage();
 
-            },
+            // },
 
-            textTruncate(name, number = 20){
+            textTruncate(name, number){
 
                 return truncateText(name, number);
 
@@ -45,9 +45,9 @@
 
         },
 
-        mounted() {
-            this.getRestaurant();
-        }
+        // mounted() {
+        //     this.getRestaurant();
+        // }
 
     }
 
@@ -62,8 +62,9 @@
         <div v-for="(food, key) in store.orderItems" :key="key" class="mb-2">
 
             <div class="d-flex align-items-center justify-content-between">
-                <p>{{ textTruncate(getFood(food.id).name) }}</p>
-                <small class="text-primary">&euro;{{ getFood(food.id).price }}</small>
+                <p class="d-block d-lg-none">{{textTruncate(food.name,30)}}</p>
+                <p class="d-none d-lg-block">{{textTruncate(food.name,20)}}</p>
+                <small class="text-primary">&euro;{{ food.price }}</small>
             </div>
 
             <div class="d-flex align-items-center justify-content-between">
@@ -76,16 +77,16 @@
                             <i class="fa-solid fa-minus"></i>
                         </button>
 
-                        <span> {{ getQuantity(food.id) }}</span>
+                        <span> {{ food.quantity }}</span>
 
-                        <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id)">
+                        <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id, food.name, food.price)">
                             <i class="fa-solid fa-plus"></i>
                         </button>
 
                     </div>
 
                     <p class="mb-0">
-                        &euro;{{ foodTotalPrice(food.id) }}
+                        &euro;{{ foodTotalPrice(food.price, food.quantity) }}
                     </p>
 
                 </div>

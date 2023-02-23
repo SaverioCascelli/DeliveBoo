@@ -16,4 +16,6 @@ export const store = reactive({
     orderRestaurantSlug: '' ,
     orderItems: [],
 
+    openModal: false
+
 });

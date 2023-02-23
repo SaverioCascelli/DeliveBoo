@@ -19,7 +19,7 @@ export default {
             store,
             //****funzioni richiamate da function.js***
             setLocalStorage,
-            getLocalStorage,
+            // getLocalStorage,
             getQuantity,
             removeFood,
             addFood,
@@ -38,17 +38,17 @@ export default {
 
 
 
-    methods: {
+    // methods: {
 
-        getRestaurant() {
-            this.getLocalStorage();
+    //     getRestaurant() {
+    //         this.getLocalStorage();
 
-        },
+    //     },
 
-    },
-    mounted() {
-        this.getRestaurant();
-    }
+    // },
+    // mounted() {
+    //     this.getRestaurant();
+    // }
 
 }
 
