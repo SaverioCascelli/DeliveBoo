@@ -14,6 +14,7 @@ const getImagePath = (imageName) => {
 return new URL(`../img/${imageName}`, import.meta.url).href
 }
 
+
 function checkRestaurant(store){
 
     //**controllo univocità del ristorante */
@@ -30,24 +31,31 @@ function checkRestaurant(store){
         //todo logica ristorante diverso
         return true;
     }
+
     console.log('stesso ristorante');
     return false;
 }
 
 //aggiunge un entità allo store.orderItems creando un array che contiene oggetti es [{id:2, quantity:3},{id:7, quantity:1}] gli id devono essere tutti dei foods dello stesso restaurant
-function addFood(foodId){
+function addFood(foodId, foodName, foodPrice){
+
     //***fine controllo univocità del ristorante */
 
     if(checkRestaurant(this.store)){
         return;
     }
-    this.getLocalStorage();
+
+    // this.getLocalStorage();
 
     //crea l'oggetto es {id:2, quantity:3} e lo pusha entro orderItems se l'id è già presente aumenta la quantity
     let orderItems = this.store.orderItems;
     let index = orderItems.findIndex(element => element['id'] == foodId);
     if(index == -1){
-        let obj = {id:foodId, quantity: 1};
+        let obj = {
+            id:foodId,
+            name:foodName,
+            price: foodPrice,
+            quantity: 1};
         this.store.orderItems.push(obj);
     }else{
         orderItems[index].quantity++;
@@ -55,20 +63,20 @@ function addFood(foodId){
     }
 
     this.setLocalStorage();
-    return true
+    // return true
 }
 
 //rimuove una quantity di food da orderItems in store, se diventa 0, rimuove l'oggetto con l' id dall'array
 function removeFood(foodId) {
 
-    if(checkRestaurant(this.store)){
-        return;
-    }
+    // if(checkRestaurant(this.store)){
+    //     return;
+    // }
      /** controllo univocità del ristorante */
 
      /**fine controllo univocità del ristorante */
 
-    this.getLocalStorage();
+    //  this.getLocalStorage();
 
     //diminuisce la quantity del food di riferimento, se arriva a 0 rimuove l'id da orderItems
     let orderItems = this.store.orderItems;
@@ -171,25 +179,29 @@ function getFood(foodId){
     return food
 }
 
-function foodTotalPrice(foodId , store = null){
-    let stor;
-    if(store == null){
-        stor = this.store
-    }else{ stor = store}
-    let foods = stor.currentRestaurant.foods;
-    let food = foods.find(element => element.id == foodId);
-    let quantity = getQuantity(foodId,stor);
-    return (food.price * quantity).toFixed(2);
+function foodTotalPrice (price, quantity) {
+    const total = price * quantity
+    return total.toFixed(2);
 }
+
+// function foodTotalPrice(foodId , store = null){
+//     let stor;
+//     if(store == null){
+//         stor = this.store
+//     }else{ stor = store}
+//     let foods = stor.currentRestaurant.foods;
+//     let food = foods.find(element => element.id == foodId);
+//     let quantity = getQuantity(foodId,stor);
+//     return (food.price * quantity).toFixed(2);
+// }
 
 function totalCartPrice(){
     let total = 0;
     let store = this.store
     let cart = store.orderItems;
 
-
     cart.forEach(food => {
-        total += parseFloat(foodTotalPrice(food.id,store));
+        total += parseFloat(foodTotalPrice(food.price,food.quantity));
     });
 
     return total.toFixed(2);

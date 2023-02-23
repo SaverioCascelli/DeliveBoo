@@ -75,7 +75,7 @@
 
                 <span> {{ getQuantity(food.id) }}</span>
 
-                <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id)">
+                <button class="btn btn-outline-primary btn-sm" @click="addFood(food.id, food.name, food.price)">
                     <i class="fa-solid fa-plus"></i>
                 </button>
 
