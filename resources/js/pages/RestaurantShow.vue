@@ -67,7 +67,7 @@ permette di visualizzare il menù di un particolare ristoratore.
 
 <template>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0 mb-2 mb-lg-4">
 
         <div v-if="foods.length">
 
@@ -94,7 +94,7 @@ permette di visualizzare il menù di un particolare ristoratore.
 
                 </div>
 
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-lg-4 pt-2">
 
                     <Cart/>
 
