@@ -32,5 +32,4 @@
         color: $black;
     }
 
-
 </style>

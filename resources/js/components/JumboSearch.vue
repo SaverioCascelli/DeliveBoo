@@ -11,10 +11,24 @@
         data(){
             return{
 
-                store
+                store,
+                optionClick : ''
 
             }
         },
+
+        methods: {
+
+            typeSearch(){
+
+                if(this.optionClick != ''){
+                    store.searchArray.push(this.optionClick);
+                    this.optionClick = '';
+                }
+
+            }
+
+        }
 
     }
 
@@ -48,10 +62,19 @@
 
                 <div class="mx-3 bg-white p-4 rounded-2 mt-5 mb-4">
 
-                    <input class="form-control mb-3" v-model.trim="store.searchInput" @keyup.enter="$emit('searchInput')" type="text" placeholder="Cerca un ristorante">
+                    <input class="form-control" v-model.trim="store.searchInput" @keyup.enter="$emit('searchInput')" type="text" placeholder="Cerca un ristorante per nome">
+                    <small class="text-primary">* Inserisci entrambi o solo uno dei campi di ricerca</small>
 
-                    <div class="d-flex justify-content-end">
-                        <button class="search btn btn-primary text-white" @click="$emit('searchInput')">CERCA</button>
+                    <select v-model="optionClick" class="select form-select mt-3" aria-label="Default select example">
+                        <option value='' disabled>Cerca tipologia di cucina</option>
+
+                        <option v-for="(type, index) in store.types" :key="index" :value="type.name">{{ type.name }}</option>
+
+                    </select>
+
+                    <div class="d-flex justify-content-end mt-3">
+                        <button class="search btn btn-primary text-white" @click="typeSearch();
+                        $emit('searchInput')">CERCA</button>
                     </div>
 
                 </div>
@@ -142,6 +165,9 @@
         .rider {
             width: 320px;
             position: relative
+        }
+        .select {
+            color: $black;
         }
 
     }

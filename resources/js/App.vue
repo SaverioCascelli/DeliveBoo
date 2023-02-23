@@ -5,8 +5,6 @@
     import {store} from './data/store';
     import {BASE_URL} from './data/data';
 
-    import {getLocalStorage} from './data/function';
-
     import Header from './partials/Header.vue';
     import Footer from './partials/Footer.vue';
 
@@ -25,8 +23,7 @@
             return{
 
                 BASE_URL,
-                store,
-                getLocalStorage
+                store
 
             }
         },
@@ -45,6 +42,26 @@
                         store.isAuth = false;
                         //console.log(store.isAuth);
                     })
+            },
+
+            //prende il localStorage e lo mette in store, in localstorage troviamo il ristorante dell'ordine(completo di foods), lo slug del ristorante dell'ordine e gli item messi nel carrello
+            getLocalStorage() {
+
+                if (window.localStorage.order) {
+
+                    //prende currentRestaurant e orderItems da localstorage in formato JSON e li trasforma in array e li salva in store
+                    let orderString = localStorage.getItem('order');
+                    store.orderItems= JSON.parse(orderString);
+                    store.orderRestaurantId = localStorage.getItem('restaurantId');
+
+                    if(store.currentRestaurant.length == undefined){
+
+                        let restaurant = localStorage.getItem('currentRestaurant');
+                        store.currentRestaurant = JSON.parse(restaurant);
+
+                    }
+
+                }
             }
 
         },
