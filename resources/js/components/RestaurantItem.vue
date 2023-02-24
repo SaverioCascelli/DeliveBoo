@@ -2,7 +2,7 @@
 
 <script>
 
-    import {checkRestaurant} from '../data/function';
+    import {checkRestaurant, setLocalStorage} from '../data/function';
 
     import {store} from '../data/store';
 
@@ -20,6 +20,7 @@
             return{
 
                 checkRestaurant,
+                setLocalStorage,
                 store
             }
         },

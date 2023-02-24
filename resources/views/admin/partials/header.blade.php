@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light h-100 bg-white">
     <div class="container-fluid h-100">
 
-        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+        <a class="navbar-brand d-flex align-items-center" href="{{ route('admin.home') }}">
 
             <div class="logo">
                 <img src="https://creativereview.imgix.net/content/uploads/2016/09/Deliveroo-Logo-Crop.png" alt="Deliveboo logo">
@@ -65,6 +65,10 @@
 
                     <li class="nav-item">
                         <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Report</a>
+                    </li>
+
+                    <li class="nav-item d-lg-none">
+                        <a class="nav-link" href="/">Sito pubblico</a>
                     </li>
 
 

@@ -13,15 +13,18 @@ export {miaFunzione, ...};
 */
 
 const getImagePath = (imageName) => {
-return new URL(`../img/${imageName}`, import.meta.url).href
+    return new URL(`../img/${imageName}`, import.meta.url).href
 }
 
-function closeModal(){
-
+const getImagePathLAravel = (imageName) => {
+    return new URL(`../../../storage/app/public/${imageName}`, import.meta.url).href
 }
 
 
 function checkRestaurant(item){
+
+    this.store.openModal = false;
+
 
     if(Object.keys(this.store.currentRestaurant).length === 0) {
 
@@ -37,6 +40,7 @@ function checkRestaurant(item){
 
         this.store.openModal = true;
         console.log('caso 3')
+        this.setLocalStorage();
     }
 
 
@@ -108,29 +112,6 @@ function removeFood(foodId) {
     }
 }
 
-//prende il localStorage e lo mette in store, in localstorage troviamo il ristorante dell'ordine(completo di foods), lo slug del ristorante dell'ordine e gli item messi nel carrello
-// function getLocalStorage() {
-//     //console.log('getLocalStorage');
-//     if (window.localStorage.order) {
-//         //console.log('prendo order da localstorage');
-
-//         //prende currentRestaurant e orderItems da localstorage in formato JSON e li trasforma in array e li salva in store
-//         let orderString = localStorage.getItem('order');
-//         this.store.orderItems= JSON.parse(orderString);
-//         this.store.orderRestaurantId = localStorage.getItem('restaurantId');
-//         // console.log(this.store.currentRestaurant.length);
-//         if(this.store.currentRestaurant.length == undefined){
-//             // console.log('get currentRestaurant');
-//             // console.log(this.store.currentRestaurant);
-//             let restaurant = localStorage.getItem('currentRestaurant');
-//             this.store.currentRestaurant = JSON.parse(restaurant);
-//             // console.log(localStorage);
-//             // console.log(this.store.currentRestaurant);
-//             // console.log(this.store.orderItems);
-//         }
-
-//     }
-// }
 
 //prende i dati da store e li salva in loscalStorage convertendoli in JSON
 function setLocalStorage() {
@@ -140,6 +121,8 @@ function setLocalStorage() {
     window.localStorage.setItem('order', orderJson);
     let restaurantJson = JSON.stringify(this.store.currentRestaurant);
     window.localStorage.setItem('currentRestaurant',restaurantJson);
+    let modalJson = JSON.stringify(this.store.openModal);
+    window.localStorage.setItem('modal', modalJson);
     // console.log('set currentREstaurant');
     // console.log(localStorage);
     //console.log(localStorage.currentRestaurant);
@@ -185,8 +168,13 @@ function foodTotalPrice (price, quantity) {
 
 
 
-function totalCartPrice(){
+function totalCartPrice(boolean){
     let total = 0;
+
+    if(!boolean){
+        total = 5.9
+    }
+
     let store = this.store
     let cart = store.orderItems;
 
@@ -199,4 +187,4 @@ function totalCartPrice(){
 
 
 
-export {getImagePath,getQuantity,clearOrder,setLocalStorage,removeFood,addFood, getQuantity,checkRestaurant,foodTotalPrice,totalCartPrice};
+export {getImagePath,getQuantity,clearOrder,setLocalStorage,removeFood,addFood, getQuantity,checkRestaurant,foodTotalPrice,totalCartPrice, getImagePathLAravel};

@@ -12,34 +12,38 @@
 
     <div class="row row-cols-1 row-cols-md-2">
 
-        <div class="col mb-3">
-            <div class="card p-2 p-lg-4">
-                <h3>Ordine 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum vitae a veniam placeat cumque dignissimos illo? Suscipit quo quis fuga facilis accusamus minus error, numquam, repudiandae sunt dolor quas corrupti quam. Natus reiciendis molestias repellendus magni? Magni facere fugiat fugit ipsa praesentium odit nam, eligendi recusandae quidem, eius temporibus tenetur dolorum quod. Quisquam debitis a molestias facilis. Minus architecto dolores ipsum similique iste officia, tempore excepturi animi? Magnam obcaecati aperiam est sunt, culpa quos quas rem eligendi optio minima cumque corporis maiores quasi repellendus saepe fugiat dolore possimus voluptate animi nisi! Reiciendis repudiandae veritatis aut magnam labore. Labore, sapiente facilis.</p>
-            </div>
-        </div>
+        @foreach ($orders as $order )
 
-        <div class="col mb-3">
-            <div class="card p-2 p-lg-4">
-                <h3>Ordine 2</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum vitae a veniam placeat cumque dignissimos illo? Suscipit quo quis fuga facilis accusamus minus error, numquam, repudiandae sunt dolor quas corrupti quam. Natus reiciendis molestias repellendus magni? Magni facere fugiat fugit ipsa praesentium odit nam, eligendi recusandae quidem, eius temporibus tenetur dolorum quod. Quisquam debitis a molestias facilis. Minus architecto dolores ipsum similique iste officia, tempore excepturi animi? Magnam obcaecati aperiam est sunt, culpa quos quas rem eligendi optio minima cumque corporis maiores quasi repellendus saepe fugiat dolore possimus voluptate animi nisi! Reiciendis repudiandae veritatis aut magnam labore. Labore, sapiente facilis.</p>
-            </div>
-        </div>
+            <div class="col mb-3">
+                <div class="card p-2 p-lg-4 h-100">
+                    <div class="d-flex justify-content-between">
+                        <h4>&euro;{{$order->total_price}}</h4>
+                        <div class="d-flex flex-column align-items-end">
+                            <small>{{date_format(date_create($order->created_at),'d/m/Y')}}</small>
+                            <small>{{date_format(date_create($order->created_at),'H:m:s')}}</small>
+                        </div>
+                    </div>
+                    <h5>{{$order->customer_name}} {{$order->customer_surname}}</h5>
+                    <div>
+                        <i class="fa-solid fa-bicycle me-1"></i>
+                        <em>{{$order->customer_address}}</em>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fa-solid fa-phone me-1"></i>
+                        <small>{{$order->customer_phone_number}}</small>
+                    </div>
+                    <small>{{$order->customer_note}}</small>
+                </div>
 
-        <div class="col mb-3">
-            <div class="card p-2 p-lg-4">
-                <h3>Ordine 3</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum vitae a veniam placeat cumque dignissimos illo? Suscipit quo quis fuga facilis accusamus minus error, numquam, repudiandae sunt dolor quas corrupti quam. Natus reiciendis molestias repellendus magni? Magni facere fugiat fugit ipsa praesentium odit nam, eligendi recusandae quidem, eius temporibus tenetur dolorum quod. Quisquam debitis a molestias facilis. Minus architecto dolores ipsum similique iste officia, tempore excepturi animi? Magnam obcaecati aperiam est sunt, culpa quos quas rem eligendi optio minima cumque corporis maiores quasi repellendus saepe fugiat dolore possimus voluptate animi nisi! Reiciendis repudiandae veritatis aut magnam labore. Labore, sapiente facilis.</p>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card p-2 p-lg-4">
-                <h3>Ordine 4</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum vitae a veniam placeat cumque dignissimos illo? Suscipit quo quis fuga facilis accusamus minus error, numquam, repudiandae sunt dolor quas corrupti quam. Natus reiciendis molestias repellendus magni? Magni facere fugiat fugit ipsa praesentium odit nam, eligendi recusandae quidem, eius temporibus tenetur dolorum quod. Quisquam debitis a molestias facilis. Minus architecto dolores ipsum similique iste officia, tempore excepturi animi? Magnam obcaecati aperiam est sunt, culpa quos quas rem eligendi optio minima cumque corporis maiores quasi repellendus saepe fugiat dolore possimus voluptate animi nisi! Reiciendis repudiandae veritatis aut magnam labore. Labore, sapiente facilis.</p>
-            </div>
-        </div>
+        @endforeach
 
+    </div>
+
+    <!-- pagination -->
+    <div class="d-flex justify-content-center mt-1">
+        {{$orders->links()}}
     </div>
 
 </div>

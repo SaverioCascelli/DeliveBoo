@@ -27,7 +27,7 @@ class OrderTableSeeder extends Seeder
             // prende i piatti del ristorante (foods)
             $restaurantFoods = $restaurant->foods;
             // sceglie un numero random di ordini da associare al ristorante e li cicla
-            $randomNumersOfOrders = rand(1, 5);
+            $randomNumersOfOrders = rand(1, 15);
             for ($i = 0; $i < $randomNumersOfOrders; $i++) {
                 // crea un nuovo ordine
                 $new_order = new Order();

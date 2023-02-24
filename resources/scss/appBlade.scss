@@ -5,6 +5,7 @@
 
 body {
     overflow-x: hidden;
+    color: $black;
 
 }
 
@@ -20,6 +21,10 @@ footer {
     height: $main-height;
 }
 
+aside {
+    height: $main-height;
+}
+
 .login-main {
     min-height: calc(100vh - $header-height);
 }
@@ -28,6 +33,7 @@ footer {
     height: $main-height;
     overflow: auto;
     scroll-behavior: smooth;
+
 }
 
 .main {

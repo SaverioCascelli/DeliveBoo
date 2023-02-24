@@ -9,6 +9,7 @@ export const store = reactive({
     isAuth: false,
 
     currentRestaurant:{},
+    resturantShow: {},
 
     searchInput: "",
     searchArray: [],
@@ -16,6 +17,6 @@ export const store = reactive({
     orderRestaurantId: '' ,
     orderItems: [],
 
-    openModal: false
+    openModal: ''
 
 });

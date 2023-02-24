@@ -38,7 +38,7 @@
 
                 <!--    ASIDE MENU -->
                 @auth
-                    <aside class="d-none d-lg-block col-lg-2 h-100 p-0">
+                    <aside class="d-none d-lg-block col-lg-2 p-0">
                         @include('admin.partials.aside')
                     </aside>
                 @endauth
