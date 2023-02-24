@@ -46,10 +46,8 @@ permette di visualizzare il menù di un particolare ristoratore.
                     }
                 })
                     .then(result => {
-                        store.currentRestaurant = result.data.restaurant;
-                        this.restaurant = store.currentRestaurant;
-                        this.foods = store.currentRestaurant.foods;
-                        //console.log(store.currentRestaurant.foods);
+                        this.restaurant = result.data.restaurant;
+                        this.foods = result.data.restaurant.foods;
                     })
             }
         },
@@ -94,7 +92,7 @@ permette di visualizzare il menù di un particolare ristoratore.
 
                     <div class="row row-cols-2 row-cols-md-3 row-cols-xl-4">
 
-                        <FoodItem v-for="(food,index) in foods" :key="index" :food="food" :restaurant="restaurant"/>
+                        <FoodItem v-for="(food,index) in foods" :key="index" :food="food" :restaurant="restaurant" :id="food.id"/>
 
                     </div>
 
