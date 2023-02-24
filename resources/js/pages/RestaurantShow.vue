@@ -48,6 +48,7 @@ permette di visualizzare il menù di un particolare ristoratore.
                     .then(result => {
                         this.restaurant = result.data.restaurant;
                         this.foods = result.data.restaurant.foods;
+                        store.resturantShow = result.data.restaurant;
                     })
             }
         },
@@ -71,10 +72,10 @@ permette di visualizzare il menù di un particolare ristoratore.
 
             <div class="p-2 p-lg-4">
 
-                <div class="d-flex align-items-center">
-                    <h2 class="title display-6 mb-0 me-2">{{restaurant.name}}</h2>
-                    <div v-if="restaurant.free_delivery" class="position-relative">
-                        <i class="fa-solid fa-bicycle fs-1 text-primary"></i>
+                <div class="d-flex flex-column flex-md-row align-items-center-md flex-wrap">
+                    <h2 class="title display-6 mb-2 mb-md-0 me-2">{{restaurant.name}}</h2>
+                    <div v-if="restaurant.free_delivery" class="bike position-relative">
+                        <i class="fa-solid fa-bicycle fs-1 text-primary "></i>
                         <small class="position-absolute top-0 start-100 badge rounded-pill bg-danger text-white" >
                             CONSEGNA GRATUITA!
                         </small>
@@ -126,6 +127,11 @@ permette di visualizzare il menù di un particolare ristoratore.
     .title {
         color: &black;
     }
+    .bike{
+        display:block;
+        width: 45px;
+    }
+
 
 
 </style>

@@ -21,5 +21,9 @@
             <a class="nav-link @if(Route::currentRouteName() === 'admin.statistics') active @endif" href="{{route('admin.statistics')}}">Report</a>
         </li>
 
+        <li class="nav-item ">
+            <a class="nav-link" href="/">Sito pubblico</a>
+        </li>
+
     </ul>
 </nav>

@@ -2,7 +2,7 @@
 
 <script>
 
-    import {clearOrder,removeFood,addFood,setLocalStorage, getQuantity } from '../data/function';
+    import {clearOrder,removeFood,addFood,setLocalStorage, getQuantity, getImagePathLAravel } from '../data/function';
     import { store } from '../data/store';
     import { truncateText } from '../data/functionComputed';
 
@@ -19,6 +19,7 @@
                 getQuantity,
                 removeFood,
                 addFood,
+                getImagePathLAravel,
 
                 truncateText
             }
@@ -38,7 +39,8 @@
                 this.clearOrder();
                 store.openModal = false;
 
-            }
+            },
+
 
         },
 
@@ -65,7 +67,8 @@
         <div class="card h-100 overflow-hidden position-relative" id="{{food.id}}" name="{{food.name}}">
 
             <div class="image">
-                <img :src="food.img_url" :alt="food.name">
+                <img v-if="food.img_url.includes('http')" :src="food.img_url" :alt="food.name">
+                <img v-else :src="getImagePathLAravel(food.img_url)" :alt="food.name">
             </div>
 
             <small class="food-name mb-1 text-center">
@@ -87,7 +90,7 @@
                     <i class="fa-solid fa-plus"></i>
                 </button>
 
-                <button v-else class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button v-else @click="foodClicked()" class="btn btn-danger btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <i class="fa-solid fa-plus"></i>
                 </button>
 

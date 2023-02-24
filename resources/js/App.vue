@@ -5,6 +5,7 @@
     import {store} from './data/store';
     import {BASE_URL} from './data/data';
 
+
     import Header from './partials/Header.vue';
     import Footer from './partials/Footer.vue';
 
@@ -23,7 +24,7 @@
             return{
 
                 BASE_URL,
-                store
+                store,
 
             }
         },
@@ -53,6 +54,8 @@
                     let orderString = localStorage.getItem('order');
                     store.orderItems= JSON.parse(orderString);
                     store.orderRestaurantId = localStorage.getItem('restaurantId');
+                    let modalString = localStorage.getItem('modal');
+                    store.openModal = JSON.parse(modalString);
 
                     if(store.currentRestaurant.length == undefined){
 

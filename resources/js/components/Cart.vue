@@ -90,29 +90,27 @@
         </div>
 
         <div class="mt-2 text-end">
-            <span>TOTALE ORDINE:
+            <span>SPEDIZIONE:
                 <strong>
-                    &euro;{{ totalCartPrice() }}
+                    &euro;{{store.resturantShow.free_delivery ? '0.00' : '5.90'}}
                 </strong>
             </span>
         </div>
 
+        <div class="mt-2 text-end">
+            <strong>TOTALE ORDINE: &euro;{{ totalCartPrice(store.resturantShow.free_delivery) }}</strong>
+        </div>
 
-        <div class="d-flex justify-content-end my-2">
 
-            <div v-if="!store.openModal && totalCartPrice() != 0">
+        <div class="d-flex align-items-center justify-content-end my-2">
+
+            <div v-if="!store.openModal && store.orderItems.length > 0 ">
                 <router-link :to="{name: 'cartPayment'}">
                     <button class="btn btn-primary text-white">VEDI ORDINE</button>
                 </router-link>
             </div>
 
-            <div v-if="store.openModal">
-                <router-link :to="{name: 'restaurant', params: {slug: store.currentRestaurant.slug}}">
-                    <button class="btn btn-primary text-white">MODIFICA ORDINE</button>
-                </router-link>
-            </div>
-
-            <button class="ms-3 btn btn-danger" :disabled="totalCartPrice() == 0" @click="clearOrder()">CANCELLA E RICOMINCIA</button>
+            <button class="ms-3 btn btn-danger btn-sm" :disabled="store.orderItems.length == 0" @click="clearOrder()">CANCELLA E RICOMINCIA</button>
 
         </div>
 
