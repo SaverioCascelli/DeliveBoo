@@ -115,7 +115,7 @@ export default {
             axios.post(url, data, config)
                 .then(res => {
                     console.log(res.data);
-
+                    this.clearOrder();
 
                 })
                 .catch(err => console.log(err))
