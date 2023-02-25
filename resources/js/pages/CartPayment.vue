@@ -44,6 +44,7 @@ export default {
             address: 'via dei platani 22',
             surname: 'cascelli',
             token: '',
+            nonce: '',
 
         }
 
@@ -66,9 +67,12 @@ export default {
                         //   method nonce for the user's selected payment method, then add
                         //   it a the hidden field before submitting the complete form to
                         //   a server-side integration
+                        // form.submit();
                         document.getElementById('nonce').value = payload.nonce;
+                        this.nonce = payload.nonce;
+                        console.log('nonce');
+                        console.log(this.nonce);
                         this.sendNonce();
-                        form.submit();
                     }).catch((error) => {
                         throw error;
                     });
@@ -86,7 +90,7 @@ export default {
             const url = "http://127.0.0.1:8000/get-token";
             axios.get(url, config)
                 .then(res => {
-                    console.log(res.data);
+                    // console.log(res.data);
                     this.token = res.data.token;
                     this.startForm();
 
@@ -117,8 +121,18 @@ export default {
                     console.log(res.data);
                     this.clearOrder();
 
+                    //pagina vue di redirect dopo il pagamento
+                    this.$router.push({ name: 'home' });
+
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+
+                    console.log(err);
+                    //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
+                    this.$router.go();
+
+
+                })
         }
     },
     mounted() {
@@ -134,7 +148,7 @@ export default {
 <template>
     <h1>CARRELLO E PAGAMENTO</h1>
 
-    <form id="payment-form" action="/" method="post">
+    <form id="payment-form" method="post">
 
         <input type="hidden" name="_token" :value="csrf">
         <div id="dropin-container"></div>
@@ -180,7 +194,6 @@ export default {
             <input id="note" type="text" class="" name="note" :value="note" placeholder="Note">
         </div>
 
-        <button @click="payment()" type="submit" class="btn btn-primary">Submit</button>
     </form>
 </template>
 
