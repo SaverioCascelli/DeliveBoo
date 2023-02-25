@@ -33,6 +33,9 @@
                         <small>{{$order->customer_phone_number}}</small>
                     </div>
                     <small>{{$order->customer_note}}</small>
+                    @dd($order->foods[0]->pivot->quantity)
+
+                    <p>{{$order->foods->pivot_quantity}}</p>
                 </div>
 
             </div>
