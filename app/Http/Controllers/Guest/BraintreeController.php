@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ClientMail;
+use App\Mail\RestaurantMail;
+use App\Mail\TestMail;
 use App\Models\Food;
+use App\Models\Lead;
 use App\Models\Order;
 use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 class BraintreeController extends Controller
@@ -79,6 +85,15 @@ class BraintreeController extends Controller
                     'submitForSettlement' => True
                 ],
             ]);
+            $lead = new Lead();
+            $lead->address = $address;
+            $lead->name = $name;
+            $lead->surname = $surname;
+
+            $user = User::find($restaurantId);
+
+            Mail::to($user->email)->send(new RestaurantMail($lead));
+            Mail::to($email)->send(new ClientMail($lead));
         }
     }
 }
