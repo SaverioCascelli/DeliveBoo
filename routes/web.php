@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FoodController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Guest\BraintreeController;
 use App\Http\Controllers\Guest\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,10 @@ Route::middleware(['auth', 'verified'])
         Route::get('/statistics', [OrderController::class, 'statistics'])->name('statistics');
     });
 
+Route::any('/get-token', [BraintreeController::class, 'getToken']);
+Route::any('/nounce', [BraintreeController::class, 'nounce']);
+
+
 require __DIR__ . '/auth.php';
 
 
@@ -56,7 +61,7 @@ require __DIR__ . '/auth.php';
 /************************************************************/
 
 // questa è la rotta per la home della parte guest del sito
-Route::get('/', [PageController::class, 'index'])->name('home');
+Route::any('/', [PageController::class, 'index'])->name('home');
 
 // rotta per tutte le rotte Vue da mettere doppo tutte le altre rotte!
 Route::get('{any?}', function () {

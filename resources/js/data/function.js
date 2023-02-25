@@ -187,4 +187,4 @@ function totalCartPrice(boolean){
 
 
 
-export {getImagePath,getQuantity,clearOrder,setLocalStorage,removeFood,addFood, getQuantity,checkRestaurant,foodTotalPrice,totalCartPrice, getImagePathLAravel};
+export {getImagePath,getQuantity,clearOrder,setLocalStorage,removeFood,addFood, checkRestaurant,foodTotalPrice,totalCartPrice, getImagePathLAravel};
