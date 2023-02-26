@@ -33,9 +33,17 @@
                         <small>{{$order->customer_phone_number}}</small>
                     </div>
                     <small>{{$order->customer_note}}</small>
-                    @dd($order->foods[0]->pivot->quantity)
+                    {{-- @dd($order->foods[0]->pivot->quantity) --}}
 
-                    <p>{{$order->foods->pivot_quantity}}</p>
+                    <div>
+                        <h6>ORDINE</h6>
+                        @foreach ($order->foods as $food )
+                        <div></div>
+                        <small>{{$food->name}}</small>
+                        <smal>{{$food->pivot->quantity}}</small>
+
+                        @endforeach
+                    </div>
                 </div>
 
             </div>
