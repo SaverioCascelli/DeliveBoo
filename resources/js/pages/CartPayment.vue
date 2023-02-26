@@ -35,6 +35,17 @@ export default {
             totalCartPrice,
             //***fine funzioni chiamate da function.js */
 
+            //per aspetta la chiamata axios di braintree
+            isBraintreeLoaded: false,
+
+            //in caso di errore del pagmento (viene messo a true solo se la carta non va bene)
+            paymentError: false,
+
+            //dopo che viene fatto il pagamento, durante il tempo di verifica di braintree e mentre carica il pagamento
+            //non è indicativo del pagamento andato a buon fine ma solo dell'avvenuta chiamata axios
+            paymentDone: false,
+
+
             name: 'saverio',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             cart: JSON.stringify(store.orderItems),
@@ -51,7 +62,10 @@ export default {
 
     },
     methods: {
+        // costruzione del form di braintree, ha bisogno del container con id "payment-form" nel quale è il container id:"dropin-contaier"
         startForm() {
+            this.isBraintreeLoaded = true;
+            this.paymentError = false;
             const form = document.getElementById('payment-form');
 
             braintree.dropin.create({
@@ -70,8 +84,8 @@ export default {
                         // form.submit();
                         document.getElementById('nonce').value = payload.nonce;
                         this.nonce = payload.nonce;
-                        console.log('nonce');
-                        console.log(this.nonce);
+                        // console.log('nonce');
+                        // console.log(this.nonce);
                         this.sendNonce();
                     }).catch((error) => {
                         throw error;
@@ -81,6 +95,7 @@ export default {
                 // handle errors
             });
         },
+        // primo token di scambio con braintree,invio una chiamata al mio server e monto il form form(fornito da braintree ). Il server mi fornisce un token con il quale si builda il form
         apiToken() {
             const config = {
                 headers: {
@@ -97,6 +112,9 @@ export default {
                 })
                 .catch(err => console.log(err))
         },
+        // il form per la convalida del pagamento ha bisogno del token nonce. Token fornito da braintree dopo la validazione e successivamente inviato al server per la trandazione.Se il token non è valido la transazione non avviene.
+        //In caso positiovo pulisco il localstorage e spedisco alla pagina di ThankYou.
+        //In caso negativo ricarico la pagina di pagamento per ricreare il form.
         sendNonce() {
             const config = {
                 headers: {
@@ -116,23 +134,31 @@ export default {
                 address: this.address,
 
             }
+            this.isBraintreeLoaded = false;
+            this.paymentDone = true;
             axios.post(url, data, config)
                 .then(res => {
-                    console.log(res.data);
+                    console.log('pagamento avvenuto');
                     this.clearOrder();
 
                     //pagina vue di redirect dopo il pagamento
-                    this.$router.push({ name: 'home' });
+                    this.$router.push({ name: 'thankYou' });
 
                 })
                 .catch(err => {
-
+                    // se ci sono errori con il pagmento, faccio veder un messaggio di errore e ricarico la pagina
+                    console.log('errori pagamento');
+                    this.paymentError = true;
+                    this.isBraintreeLoaded = false;
+                    this.paymentDone = false;
                     console.log(err);
                     //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
-                    this.$router.go();
-
-
+                    setTimeout(this.pageReload, 2000);
                 })
+        },
+        //ricarica la pagina
+        pageReload() {
+            this.$router.go();
         }
     },
     mounted() {
@@ -148,13 +174,30 @@ export default {
 <template>
     <h1>CARRELLO E PAGAMENTO</h1>
 
-    <form id="payment-form" method="post">
+    <div class="col-4">
+        <div v-show="isBraintreeLoaded && !paymentDone">
 
-        <input type="hidden" name="_token" :value="csrf">
-        <div id="dropin-container"></div>
-        <input type="submit" />
-        <input type="hidden" id="nonce" name="payment_method_nonce" />
-    </form>
+            <!-- il v-if da problemi se dato al form  -->
+            <form id="payment-form" method="post">
+
+                <input type="hidden" name="_token" :value="csrf">
+                <div id="dropin-container"></div>
+                <input type="submit" />
+                <input type="hidden" id="nonce" name="payment_method_nonce" />
+            </form>
+        </div>
+        <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone">
+            loading braintree
+        </div>
+        <div v-show="paymentError" style="background-color: red;">
+            errore nel pagamento reinserisci carta
+        </div>
+        <div v-show="paymentDone" style="background-color: green;">
+            pagamento loading....
+        </div>
+
+    </div>
+
 
 
     <div class="col-12 col-lg-4 pt-2">
@@ -163,7 +206,7 @@ export default {
 
     </div>
 
-    <form action="/payment" method="post">
+    <form method="post">
         <input type="hidden" name="_token" :value="csrf">
         <input type="hidden" name="order" :value="cart">
 

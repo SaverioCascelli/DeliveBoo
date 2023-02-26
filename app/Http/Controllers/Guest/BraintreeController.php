@@ -71,6 +71,7 @@ class BraintreeController extends Controller
             $newOrder->total_price = $totalPrice;
             $newOrder->save();
 
+            $user = User::find($restaurantId);
 
             foreach ($order as $item) {
                 $food = Food::find($item->id);
@@ -84,13 +85,22 @@ class BraintreeController extends Controller
                 'options' => [
                     'submitForSettlement' => True
                 ],
+                'customer' => [
+                    'company' => $user->name,
+                    'email' => $user->email
+                ],
+                'billing' => [
+                    'firstName' => $name,
+                    'lastName' => $surname,
+                    'streetAddress' => $address,
+                ],
             ]);
+
             $lead = new Lead();
             $lead->address = $address;
             $lead->name = $name;
             $lead->surname = $surname;
 
-            $user = User::find($restaurantId);
 
             Mail::to($user->email)->send(new RestaurantMail($lead));
             Mail::to($email)->send(new ClientMail($lead));
