@@ -203,9 +203,17 @@ i {
     }
 }
 
-/* dashboard */
+/* dashboard - order */
 .order-card {
     background-color: $bg-light;
     border-radius: 10px;
     border: 1px solid $primary-light
+}
+
+.order-detail {
+    background-color: $secondary-color;
+}
+
+.order-price {
+    color: $grey;
 }
