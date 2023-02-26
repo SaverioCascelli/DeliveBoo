@@ -39,6 +39,10 @@
 
         },
 
+        // mounted(){
+        //     console.log(this.$router);
+        // }
+
     }
 
 </script>
@@ -48,16 +52,24 @@
 
     <div class="card p-2 mb-3">
 
-        <small v-if="store.openModal" class="text-danger">
+        <small v-if="store.openModal && $router.currentRoute._value.name != 'cartPayment'" class="text-danger">
             <i class="fa-solid fa-triangle-exclamation"></i>
             Attenzione! <br> Puoi ordinare da un solo ristorante alla volta
         </small>
 
         <div v-for="(food, key) in store.orderItems" :key="key" class="mb-2 mt-2">
 
-            <div class="d-flex align-items-center justify-content-between">
-                <p class="d-block d-lg-none">{{textTruncate(food.name,30)}}</p>
-                <p class="d-none d-lg-block">{{textTruncate(food.name,20)}}</p>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="d-flex align-items-center">
+
+                    <div v-if="$router.currentRoute._value.name === 'cartPayment'" class="image rounded-1 overflow-hidden me-1">
+                        <img v-if="food.img_url.includes('http')" :src="food.img_url" :alt="food.name">
+                        <img v-else :src="getImagePathLAravel(food.img_url)" :alt="food.name">
+                    </div>
+
+                    <p class="d-block d-lg-none mb-0">{{textTruncate(food.name,30)}}</p>
+                    <p class="d-none d-lg-block mb-0">{{textTruncate(food.name,20)}}</p>
+                </div>
                 <small class="text-primary">&euro;{{ food.price }}</small>
             </div>
 
@@ -107,9 +119,15 @@
 
         <div class="d-flex align-items-center justify-content-end my-2">
 
-            <div v-if="!store.openModal && store.orderItems.length > 0 ">
+            <div v-if="!store.openModal && store.orderItems.length > 0 && $router.currentRoute._value.name != 'cartPayment'">
                 <router-link :to="{name: 'cartPayment'}">
                     <button class="btn btn-primary text-white">VEDI ORDINE</button>
+                </router-link>
+            </div>
+
+            <div v-if="$router.currentRoute._value.name == 'cartPayment' && store.orderItems.length > 0 ">
+                <router-link :to="{name: 'restaurant', params: {slug: store.currentRestaurant.slug}}">
+                    <button class="btn btn-primary text-white">VEDI RISTORANTE</button>
                 </router-link>
             </div>
 
@@ -140,7 +158,15 @@
             }
 
         }
-
+        .image {
+            width: 65px;
+            height: 65px;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
     }
 
 </style>

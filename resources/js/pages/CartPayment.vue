@@ -15,13 +15,16 @@ import { store } from '../data/store';
 export default {
 
     name: 'CartPayment',
+
     components: {
 
         Cart,
 
     },
+
     data() {
         return {
+
             store,
             //****funzioni richiamate da function.js***
             setLocalStorage,
@@ -46,14 +49,14 @@ export default {
             paymentDone: false,
 
 
-            name: 'saverio',
+            name: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
             cart: JSON.stringify(store.orderItems),
-            note: 'prova nota',
-            phoneNumber: '3124569552',
-            email: 'maildiprova@test.it',
-            address: 'via dei platani 22',
-            surname: 'cascelli',
+            note: '',
+            phoneNumber: '',
+            email: '',
+            address: '',
+            surname: '',
             token: '',
             nonce: '',
 
@@ -70,7 +73,8 @@ export default {
 
             braintree.dropin.create({
                 authorization: this.token,
-                container: '#dropin-container'
+                container: '#dropin-container',
+                locale: 'it_IT'
             }).then((dropinInstance) => {
                 form.addEventListener('submit', (event) => {
                     event.preventDefault();
@@ -139,7 +143,11 @@ export default {
             axios.post(url, data, config)
                 .then(res => {
                     console.log('pagamento avvenuto');
+
+
                     this.clearOrder();
+
+
 
                     //pagina vue di redirect dopo il pagamento
                     this.$router.push({ name: 'thankYou' });
@@ -163,6 +171,9 @@ export default {
     },
     mounted() {
         this.apiToken();
+
+        store.openModal = false;
+
     }
 
 }
@@ -172,73 +183,115 @@ export default {
 
 
 <template>
-    <h1>CARRELLO E PAGAMENTO</h1>
 
-    <div class="col-4">
-        <div v-show="isBraintreeLoaded && !paymentDone">
+    <div class="container-fluid p-0 mb-2 mb-lg-4">
 
-            <!-- il v-if da problemi se dato al form  -->
-            <form id="payment-form" method="post">
+        <h2 class="p-2 p-lg-4 mb-0">CARRELLO E PAGAMENTO</h2>
 
-                <input type="hidden" name="_token" :value="csrf">
-                <div id="dropin-container"></div>
-                <input type="submit" />
-                <input type="hidden" id="nonce" name="payment_method_nonce" />
-            </form>
-        </div>
-        <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone">
-            loading braintree
-        </div>
-        <div v-show="paymentError" style="background-color: red;">
-            errore nel pagamento reinserisci carta
-        </div>
-        <div v-show="paymentDone" style="background-color: green;">
-            pagamento loading....
+        <div class="row px-2 px-lg-4 ">
+
+            <div v-if="store.orderItems.length == 0" class="empty-cart col-12 mb-3">
+                <Cart/>
+            </div>
+
+            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-7 mb-3">
+
+                <Cart/>
+
+                <div class="card p-2 ">
+
+                    <h5>INFORMAZIONI DI PAGAMENTO </h5>
+
+                    <input type="hidden" name="_token" :value="csrf">
+                    <input type="hidden" name="order" :value="cart">
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email *</label>
+                        <input id="email" type="email" class="form-control" v-model.trim="email" placeholder="Inserisci la tua email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nome *</label>
+                        <input id="name" type="text" class="form-control" v-model.trim="name" placeholder="Inserisci il tuo nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="surname" class="form-label">Cognome *</label>
+                        <input id="surname" type="text" class="form-control" v-model.trim="surname" placeholder="Inserisci il tuo cognome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Indirizzo *</label>
+                        <input id="address" type="text" class="form-control" v-model.trim="address"
+                            placeholder="Inserisci il tuo indirizzo">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phoneNumber" class="form-label">Numero di telefono *</label>
+                        <input id="phoneNumber" type="text" class="form-control" v-model.trim="phoneNumber" placeholder="Inserisci il tuo numero di telefono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="note" class="form-label">Note</label>
+                        <input id="note" type="text" class="form-control" name="note" v-model.trim="note" placeholder="Inserisci eventuali note per la consegna">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-5 mb-3">
+
+                <div class="card payment p-2 pb-0">
+                    <h5>DETTAGLI PAGAMENTO</h5>
+
+                    <div v-show="isBraintreeLoaded && !paymentDone">
+
+                        <!-- il v-if da problemi se dato al form  -->
+                        <form id="payment-form" method="post">
+
+                            <input type="hidden" name="_token" :value="csrf">
+                            <div id="dropin-container"></div>
+                            <input class="btn btn-primary text-white" type="submit"/>
+                            <input type="hidden" id="nonce" name="payment_method_nonce" />
+
+                        </form>
+
+                    </div>
+
+                    <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone">
+                        loading braintree
+                    </div>
+
+                    <div v-show="paymentError" style="background-color: red;">
+                        errore nel pagamento reinserisci carta
+                    </div>
+
+                    <div v-show="paymentDone" style="background-color: green;">
+                        pagamento loading....
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
 
-
-
-    <div class="col-12 col-lg-4 pt-2">
-
-        <Cart />
-
-    </div>
-
-    <form method="post">
-        <input type="hidden" name="_token" :value="csrf">
-        <input type="hidden" name="order" :value="cart">
-
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input id="email" type="email" class="" name="email" :value="email" placeholder="Inserisci la tua email">
-        </div>
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            <input id="nome" type="text" class="" name="name" :value="name" placeholder="Inserisci il tuo nome">
-        </div>
-        <div class="mb-3">
-            <label for="surname" class="form-label">Cognome</label>
-            <input id="surname" type="text" class="" name="surname" :value="surname" placeholder="Inserisci il tuo cognome">
-        </div>
-        <div class="mb-3">
-            <label for="address" class="form-label">Indirizzo</label>
-            <input id="address" type="text" class="" name="address" :value="address"
-                placeholder="Inserisci il tuo indirizzo">
-        </div>
-        <div class="mb-3">
-            <label for="phoneNumber" class="form-label">Nome</label>
-            <input id="phoneNumber" type="text" class="" name="phoneNumber" :value="phoneNumber"
-                placeholder="Inserisci il tuo numero di telefono">
-        </div>
-        <div class="mb-3">
-            <label for="note" class="form-label">Nome</label>
-            <input id="note" type="text" class="" name="note" :value="note" placeholder="Note">
-        </div>
-
-    </form>
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+    @use '../../scss/partialsVue/vars' as *;
+
+    .empty-cart{
+        height: $jumbo-height;
+    }
+
+    .card {
+        background-color: $bg-light;
+        #payment-form {
+            position: relative;
+            top: -20px;
+
+        }
+    }
+
+</style>

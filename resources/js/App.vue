@@ -56,6 +56,8 @@
                     store.orderRestaurantId = localStorage.getItem('restaurantId');
                     let modalString = localStorage.getItem('modal');
                     store.openModal = JSON.parse(modalString);
+                    let resturantShowString = localStorage.getItem('resturantShow');
+                    store.resturantShow = JSON.parse(resturantShowString);
 
                     if(store.currentRestaurant.length == undefined){
 
