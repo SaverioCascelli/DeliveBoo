@@ -48,7 +48,7 @@ function checkRestaurant(item){
 }
 
 //aggiunge un entità allo store.orderItems creando un array che contiene oggetti es [{id:2, quantity:3},{id:7, quantity:1}] gli id devono essere tutti dei foods dello stesso restaurant
-function addFood(food, restaurant = null){
+function addFood(food, restaurant){
 
     if(this.store.orderRestaurantId == '' || this.store.orderRestaurantId == this.store.currentRestaurant.id ){
 
@@ -69,12 +69,12 @@ function addFood(food, restaurant = null){
             this.store.orderItems = orderItems;
         }
 
-        if(restaurant != null) {
+        // if(Object.keys(this.store.currentRestaurant).length > 0) {
             this.store.orderRestaurantId = restaurant.id;
             let storageRestaurant = localStorage.getItem('restaurantId');
             window.localStorage.setItem('restaurantId', store.orderRestaurantId);
             this.store.currentRestaurant = restaurant;
-        }
+        // }
 
 
         this.store.openModal = false

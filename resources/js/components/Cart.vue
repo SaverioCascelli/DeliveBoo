@@ -73,7 +73,7 @@
 
                         <span> {{ food.quantity }}</span>
 
-                        <button class="btn  btn-sm" :class="store.openModal ? 'btn-danger' : 'btn-outline-primary'" :disabled="store.openModal"  @click="addFood(food)">
+                        <button class="btn  btn-sm" :class="store.openModal ? 'btn-danger' : 'btn-outline-primary'" :disabled="store.openModal"  @click="addFood(food, store.currentRestaurant)">
                             <i class="fa-solid fa-plus"></i>
                         </button>
 
