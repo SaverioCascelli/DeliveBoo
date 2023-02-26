@@ -62,6 +62,7 @@ function addFood(food, restaurant){
                 id: food.id,
                 name: food.name,
                 price: food.price,
+                img_url: food.img_url,
                 quantity: 1};
             this.store.orderItems.push(obj);
         }else{
@@ -123,6 +124,8 @@ function setLocalStorage() {
     window.localStorage.setItem('currentRestaurant',restaurantJson);
     let modalJson = JSON.stringify(this.store.openModal);
     window.localStorage.setItem('modal', modalJson);
+    let resturantShowJson = JSON.stringify(this.store.resturantShow);
+    window.localStorage.setItem('resturantShow', resturantShowJson );
     // console.log('set currentREstaurant');
     // console.log(localStorage);
     //console.log(localStorage.currentRestaurant);

@@ -5,6 +5,7 @@
 body {
     overflow-x: hidden;
     scroll-behavior: smooth;
+    color: $black;
 }
 
 img {
@@ -17,5 +18,72 @@ a{
 
 ul {
     list-style: none;
+}
+
+.jumbo-wrapper {
+    min-height: $jumbo-height;
+    background-color: $pink;
+    .custom-shape-divider-top-1676906121 {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+    }
+
+    .custom-shape-divider-top-1676906121 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: $shape-height-top;
+        transform: rotateY(180deg);
+    }
+
+    .custom-shape-divider-top-1676906121 .shape-fill {
+        fill: $primary-color;
+    }
+
+    .custom-shape-divider-bottom-1676906018 {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        line-height: 0;
+        transform: rotate(180deg);
+    }
+
+    .custom-shape-divider-bottom-1676906018 svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: $shape-height-bottom;
+        transform: rotateY(180deg);
+    }
+
+    .custom-shape-divider-bottom-1676906018 .shape-fill {
+        fill: $secondary-color;
+    }
+
+    .search-container {
+        position: relative;
+        h1 {
+            color: $purple;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        p {
+            color: &black
+        }
+    }
+
+    .rider {
+        width: 320px;
+        position: relative
+    }
+    .select {
+        color: $black;
+    }
 }
 
