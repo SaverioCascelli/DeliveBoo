@@ -90,15 +90,18 @@
         </div>
 
         <div class="mt-2 text-end">
-            <span>SPEDIZIONE:
-                <strong>
-                    &euro;{{store.resturantShow.free_delivery ? '0.00' : '5.90'}}
+            <span v-if="Object.keys(store.resturantShow).length > 0" >SPEDIZIONE:
+                <strong v-if="store.resturantShow.free_delivery">
+                    &euro;0.00
+                </strong>
+                <strong v-if="!store.resturantShow.free_delivery">
+                    &euro;5.90
                 </strong>
             </span>
         </div>
 
         <div class="mt-2 text-end">
-            <strong>TOTALE ORDINE: &euro;{{ totalCartPrice(store.resturantShow.free_delivery) }}</strong>
+            <strong>TOTALE ORDINE: &euro;{{ Object.keys(store.resturantShow).length > 0 ? totalCartPrice(store.resturantShow.free_delivery) : '0.00' }}</strong>
         </div>
 
 
