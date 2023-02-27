@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FoodRequest;
 use App\Mail\ClientMail;
 use App\Mail\RestaurantMail;
 use App\Mail\TestMail;
@@ -13,6 +14,7 @@ use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Requests\PaymentRequest;
 
 
 class BraintreeController extends Controller
@@ -33,7 +35,7 @@ class BraintreeController extends Controller
     }
 
 
-    public function nounce(Request $request)
+    public function nounce(PaymentRequest $request)
     {
         $data = $request->all();
         $gateway = new \Braintree\Gateway([
@@ -51,11 +53,14 @@ class BraintreeController extends Controller
             $order = json_decode($orderJson);
 
             $totalPrice = getTotalPrice($order);
-
+            if ($data['note']) {
+                $note = $data['note'];
+            } else {
+                $note = 'Nessuna nota';
+            }
             $name = $data['name'];
             $surname = $data['surname'];
             $email = $data['email'];
-            $note = $data['note'];
             $address = $data['address'];
             $phoneNumber = $data['phoneNumber'];
             $newOrder = new Order();
@@ -70,7 +75,7 @@ class BraintreeController extends Controller
             $newOrder->restaurant_id = $restaurantId;
             $newOrder->total_price = $totalPrice;
             $newOrder->save();
-
+            $restaurant = Restaurant::find($restaurantId);
             $user = User::find($restaurantId);
 
             foreach ($order as $item) {
@@ -100,7 +105,11 @@ class BraintreeController extends Controller
             $lead->address = $address;
             $lead->name = $name;
             $lead->surname = $surname;
-
+            $lead->totalPrice = $totalPrice;
+            $lead->order = $order;
+            $lead->restaurantName = $restaurant->name;
+            $lead->restaurantAddress = $restaurant->address;
+            $lead->phoneNumber = $phoneNumber;
 
             Mail::to($user->email)->send(new RestaurantMail($lead));
             Mail::to($email)->send(new ClientMail($lead));
