@@ -51,7 +51,7 @@ export default {
 
             name: '',
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            cart: JSON.stringify(store.orderItems),
+            cart: '',
             note: '',
             phoneNumber: '',
             email: '',
@@ -129,7 +129,7 @@ export default {
 
             const data = {
                 nonce: document.getElementById('nonce').value,
-                cart: this.cart,
+                cart: JSON.stringify(store.orderItems),
                 name: this.name,
                 surname: this.surname,
                 email: this.email,
@@ -183,7 +183,6 @@ export default {
 
 
 <template>
-
     <div class="container-fluid p-0 mb-2 mb-lg-4">
 
         <h2 class="p-2 p-lg-4 mb-0">CARRELLO E PAGAMENTO</h2>
@@ -191,12 +190,12 @@ export default {
         <div class="row px-2 px-lg-4 ">
 
             <div v-if="store.orderItems.length == 0" class="empty-cart col-12 mb-3">
-                <Cart/>
+                <Cart />
             </div>
 
             <div v-if="store.orderItems.length > 0" class="col-12 col-lg-7 mb-3">
 
-                <Cart/>
+                <Cart />
 
                 <div class="card p-2 ">
 
@@ -207,15 +206,18 @@ export default {
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
-                        <input id="email" type="email" class="form-control" v-model.trim="email" placeholder="Inserisci la tua email">
+                        <input id="email" type="email" class="form-control" v-model.trim="email"
+                            placeholder="Inserisci la tua email">
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome *</label>
-                        <input id="name" type="text" class="form-control" v-model.trim="name" placeholder="Inserisci il tuo nome">
+                        <input id="name" type="text" class="form-control" v-model.trim="name"
+                            placeholder="Inserisci il tuo nome">
                     </div>
                     <div class="mb-3">
                         <label for="surname" class="form-label">Cognome *</label>
-                        <input id="surname" type="text" class="form-control" v-model.trim="surname" placeholder="Inserisci il tuo cognome">
+                        <input id="surname" type="text" class="form-control" v-model.trim="surname"
+                            placeholder="Inserisci il tuo cognome">
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Indirizzo *</label>
@@ -224,11 +226,13 @@ export default {
                     </div>
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Numero di telefono *</label>
-                        <input id="phoneNumber" type="text" class="form-control" v-model.trim="phoneNumber" placeholder="Inserisci il tuo numero di telefono">
+                        <input id="phoneNumber" type="text" class="form-control" v-model.trim="phoneNumber"
+                            placeholder="Inserisci il tuo numero di telefono">
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <input id="note" type="text" class="form-control" name="note" v-model.trim="note" placeholder="Inserisci eventuali note per la consegna">
+                        <input id="note" type="text" class="form-control" name="note" v-model.trim="note"
+                            placeholder="Inserisci eventuali note per la consegna">
                     </div>
 
                 </div>
@@ -247,7 +251,7 @@ export default {
 
                             <input type="hidden" name="_token" :value="csrf">
                             <div id="dropin-container"></div>
-                            <input class="btn btn-primary text-white" type="submit"/>
+                            <input class="btn btn-primary text-white" type="submit" />
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
 
                         </form>
@@ -273,25 +277,23 @@ export default {
         </div>
 
     </div>
-
 </template>
 
 
 <style lang="scss" scoped>
+@use '../../scss/partialsVue/vars' as *;
 
-    @use '../../scss/partialsVue/vars' as *;
+.empty-cart {
+    height: $jumbo-height;
+}
 
-    .empty-cart{
-        height: $jumbo-height;
+.card {
+    background-color: $bg-light;
+
+    #payment-form {
+        position: relative;
+        top: -20px;
+
     }
-
-    .card {
-        background-color: $bg-light;
-        #payment-form {
-            position: relative;
-            top: -20px;
-
-        }
-    }
-
+}
 </style>
