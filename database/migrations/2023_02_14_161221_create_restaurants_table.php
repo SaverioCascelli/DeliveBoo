@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('VAT');
             $table->string('address', 150);
             $table->string('img_url', 250)->nullable();
-            $table->tinyInteger('free_delivery');
+            $table->tinyInteger('free_delivery')->default(1);
             $table->timestamps();
         });
     }
