@@ -42,7 +42,10 @@
             <div class="search-container">
 
                 <h1>Il tuo ordine arriverà presto.</h1>
-                <p>Controlla la tua email, ti abbiamo inviato un messaggio di conferma!</p>
+                <p class="mb-3">Controlla la tua email, ti abbiamo inviato un messaggio di conferma!</p>
+
+                <small class="d-block mb-2">Attendi qualche secondo e sarai reinderizzato alla home, altrimenti torna subito alla home.</small>
+                <button @click="timingRedirect()" class="btn btn-light">TORNA ALLA HOME</button>
 
             </div>
 

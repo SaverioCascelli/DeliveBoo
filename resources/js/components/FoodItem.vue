@@ -73,7 +73,7 @@
 
             <small class="food-name mb-1 text-center">
                 {{ textTruncate }}
-                <span class="text-primary"> &euro;{{ food.price }}</span>
+                <span class="text-primary"> &euro;{{ food.price.replace('.',',') }}</span>
             </small>
 
             <small  class="description text-capitalize">{{ food.description }}</small>

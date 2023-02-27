@@ -60,7 +60,7 @@
                     @foreach ($latestOrders as $order)
                     <div class="p-2 col mb-2 mb-md-3">
                         <div class="order-card p-2">
-                            <p class="mb-0 fw-bold">&euro;{{$order->total_price}}</p>
+                            <p class="mb-0 fw-bold">&euro;{{number_format($order->total_price, 2, ',' , '.')}}</p>
                             <p class="mb-0">{{$order->customer_name}}</p>
                             <p class="mb-0 fw-lighter">{{$order->customer_address}}</p>
                             <small class="mb-0">{{$order->customer_phone_number}}</small>

@@ -146,7 +146,7 @@ function clearOrder() {
 
     this.store.currentRestaurant = {};
 
-    this.store.resturantShow = {};
+    // this.store.resturantShow = {};
 }
 
 //prende da store l'array di id  orderItems e ritorna la quantità dell'id cercato

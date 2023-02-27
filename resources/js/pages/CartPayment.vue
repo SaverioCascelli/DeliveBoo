@@ -11,6 +11,7 @@ import Cart from '../components/Cart.vue';
 import axios from 'axios';
 import { setLocalStorage, removeFood, addFood, clearOrder, foodTotalPrice, totalCartPrice } from '../data/function';
 import { store } from '../data/store';
+import { registerRuntimeHelpers } from '@vue/compiler-core';
 
 export default {
 
@@ -59,6 +60,14 @@ export default {
             surname: '',
             token: '',
             nonce: '',
+
+            // cartError: []
+            nameError: '',
+            surnamenameError: '',
+            addressError: '',
+            phoneError: '',
+            emailError: '',
+            noteError:''
 
         }
 
@@ -140,6 +149,19 @@ export default {
             }
             this.isBraintreeLoaded = false;
             this.paymentDone = true;
+
+            const input = {
+                name: this.name,
+                surname: this.surname,
+                email : this.email,
+                address: this.address,
+                phoneNumber: this.phoneNumber,
+                note: this.note
+            };
+
+            let inputJson = JSON.stringify(input);
+            window.localStorage.setItem('input', inputJson );
+
             axios.post(url, data, config)
                 .then(res => {
                     console.log('pagamento avvenuto');
@@ -152,8 +174,12 @@ export default {
                     //pagina vue di redirect dopo il pagamento
                     this.$router.push({ name: 'thankYou' });
 
+
+
                 })
                 .catch(err => {
+                    // console.log(err.response.data.errors['name']);
+                    // this.cartError = err.response.data.errors
                     // se ci sono errori con il pagmento, faccio veder un messaggio di errore e ricarico la pagina
                     console.log('errori pagamento');
                     this.paymentError = true;
@@ -162,17 +188,45 @@ export default {
                     console.log(err);
                     //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
                     setTimeout(this.pageReload, 2000);
+
                 })
         },
         //ricarica la pagina
         pageReload() {
             this.$router.go();
+        },
+
+        inputEmailCheck(){
+            if(!this.email.length){
+                this.emailError = "L\'email è un campo obbligatorio";
+            } else if(this.email.length <=8){
+                this.emailError = "L\'email deve avere minimo 8 caratteri";
+            } else if(!this.email.includes('@') || !this.email.includes('.')){
+                this.emailError = "Il formato dell\'email non è corretto'";
+            } else {
+                this.emailError = "";
+                return true;
+            }
         }
+
     },
     mounted() {
         this.apiToken();
 
         store.openModal = false;
+        store.resturantShow = [];
+
+        let inputString = localStorage.getItem('input');
+        if(inputString){
+            let input = JSON.parse(inputString);
+            this.name = input.name;
+            this.email = input.email;
+            this.surname = input.surname;
+            this.address = input.address;
+            this.phoneNumber = input.phoneNumber;
+            this.note = input.note;
+
+        }
 
     }
 
@@ -185,29 +239,31 @@ export default {
 <template>
     <div class="container-fluid p-0 mb-2 mb-lg-4">
 
-        <h2 class="p-2 p-lg-4 mb-0">CARRELLO E PAGAMENTO</h2>
+        <h2 class="p-2 p-lg-4 mb-0 text-lg-center">CARRELLO E PAGAMENTO</h2>
 
         <div class="row px-2 px-lg-4 ">
 
-            <div v-if="store.orderItems.length == 0" class="empty-cart col-12 mb-3">
+            <div v-if="store.orderItems.length == 0" class="empty-cart col-12 col-lg-8 offset-lg-2 mb-3">
                 <Cart />
             </div>
 
-            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-7 mb-3">
+            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-8 offset-lg-2 mb-3">
 
                 <Cart />
 
                 <div class="card p-2 ">
 
-                    <h5>INFORMAZIONI DI PAGAMENTO </h5>
+                    <h5 class="mb-0">INFORMAZIONI DI PAGAMENTO </h5>
+                    <small class="mb-2">I campi contrasegnati con * sono obbligatori</small>
 
                     <input type="hidden" name="_token" :value="csrf">
                     <input type="hidden" name="order" :value="cart">
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
-                        <input id="email" type="email" class="form-control" v-model.trim="email"
-                            placeholder="Inserisci la tua email">
+                        <input @keyup="inputEmailCheck()" id="email" type="email" class="form-control" :class="inputEmailCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="email" placeholder="Inserisci la tua email">
+                        <p v-if="emailError.length" class="mb-0 invalid-feedback">{{ emailError }}</p>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome *</label>
@@ -239,7 +295,7 @@ export default {
 
             </div>
 
-            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-5 mb-3">
+            <div v-if="store.orderItems.length > 0" class="col-12 col-lg-8 offset-lg-2 mb-3">
 
                 <div class="card payment p-2 pb-0">
                     <h5>DETTAGLI PAGAMENTO</h5>
@@ -258,16 +314,17 @@ export default {
 
                     </div>
 
-                    <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone">
-                        loading braintree
+                    <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone" class="bg-primary text-white px-2 rounded-2 mb-2" >
+                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                     </div>
 
-                    <div v-show="paymentError" style="background-color: red;">
-                        errore nel pagamento reinserisci carta
+                    <div v-show="paymentError" class="bg-danger text-white px-2 py-1 rounded-2 mb-2">
+                        <p class="mb-0">Errore nell'esecuzione del pagamento</p>
                     </div>
 
-                    <div v-show="paymentDone" style="background-color: green;">
-                        pagamento loading....
+                    <div v-if="paymentDone" class="bg-primary text-white px-2 rounded-2 mb-2 d-flex align-items-center">
+                        <p class="mb-0 me-2">Pagamento in corso</p>
+                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                     </div>
 
                 </div>
@@ -283,17 +340,73 @@ export default {
 <style lang="scss" scoped>
 @use '../../scss/partialsVue/vars' as *;
 
-.empty-cart {
-    height: $jumbo-height;
-}
-
-.card {
-    background-color: $bg-light;
-
-    #payment-form {
-        position: relative;
-        top: -20px;
-
+    .empty-cart {
+        height: $jumbo-height;
     }
-}
+
+    .card {
+        background-color: $bg-light;
+
+        #payment-form {
+            position: relative;
+            top: -20px;
+
+        }
+    }
+    .lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 40px;
+    }
+    .lds-ellipsis div {
+    position: absolute;
+    top: 17px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: white;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    .lds-ellipsis div:nth-child(1) {
+    left: 8px;
+    animation: lds-ellipsis1 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(2) {
+    left: 8px;
+    animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(3) {
+    left: 32px;
+    animation: lds-ellipsis2 0.6s infinite;
+    }
+    .lds-ellipsis div:nth-child(4) {
+    left: 56px;
+    animation: lds-ellipsis3 0.6s infinite;
+    }
+    @keyframes lds-ellipsis1 {
+        0% {
+        transform: scale(0);
+        }
+        100% {
+        transform: scale(1);
+        }
+    }
+    @keyframes lds-ellipsis3 {
+        0% {
+        transform: scale(1);
+        }
+        100% {
+        transform: scale(0);
+        }
+    }
+    @keyframes lds-ellipsis2 {
+        0% {
+        transform: translate(0, 0);
+        }
+        100% {
+        transform: translate(24px, 0);
+        }
+    }
+
 </style>

@@ -57,23 +57,27 @@
             Attenzione! <br> Puoi ordinare da un solo ristorante alla volta
         </small>
 
-        <div v-for="(food, key) in store.orderItems" :key="key" class="mb-2 mt-2">
+        <div v-for="(food, key) in store.orderItems" :key="key" :class="{'mb-2 mt-2': $router.currentRoute._value.name !== 'cartPayment' }">
 
             <div class="d-flex align-items-center justify-content-between mb-2">
                 <div class="d-flex align-items-center">
 
-                    <div v-if="$router.currentRoute._value.name === 'cartPayment'" class="image rounded-1 overflow-hidden me-1">
+                    <!-- <div v-if="$router.currentRoute._value.name === 'cartPayment'" class="image rounded-1 overflow-hidden me-1">
                         <img v-if="food.img_url.includes('http')" :src="food.img_url" :alt="food.name">
                         <img v-else :src="getImagePathLAravel(food.img_url)" :alt="food.name">
-                    </div>
+                    </div> -->
 
-                    <p class="d-block d-lg-none mb-0">{{textTruncate(food.name,30)}}</p>
-                    <p class="d-none d-lg-block mb-0">{{textTruncate(food.name,20)}}</p>
+                    <p class="d-block d-md-none mb-0">{{textTruncate(food.name,30)}}</p>
+                    <p class="d-none d-md-block mb-0">{{textTruncate(food.name,50)}}</p>
                 </div>
-                <small class="text-primary">&euro;{{ food.price }}</small>
+                <small v-if="$router.currentRoute._value.name !== 'cartPayment'" class="text-primary">&euro;{{ food.price.replace('.',',') }}</small>
+                <p v-if="$router.currentRoute._value.name == 'cartPayment'" class="m-0">
+                    <span class="text-danger fw-bold">{{ food.quantity }}</span>
+                     X &euro;{{ food.price.replace('.',',') }} <span class="d-none d-sm-inline">= &euro;{{ foodTotalPrice(food.price, food.quantity).replace('.',',') }}</span>
+                </p>
             </div>
 
-            <div class="d-flex align-items-center justify-content-between">
+            <div v-if="$router.currentRoute._value.name !== 'cartPayment'" class="d-flex align-items-center justify-content-between">
 
                 <div class="buttons d-flex align-items-center justify-content-between mb-1">
 
@@ -92,7 +96,7 @@
                     </div>
 
                     <p class="mb-0">
-                        &euro;{{ foodTotalPrice(food.price, food.quantity) }}
+                        &euro;{{ foodTotalPrice(food.price, food.quantity).replace('.',',') }}
                     </p>
 
                 </div>
@@ -102,18 +106,37 @@
         </div>
 
         <div class="mt-2 text-end">
-            <span v-if="Object.keys(store.resturantShow).length > 0" >SPEDIZIONE:
-                <strong v-if="store.resturantShow.free_delivery">
-                    &euro;0.00
+
+            <span v-if="Object.keys(store.currentRestaurant).length > 0">SPEDIZIONE:
+                <strong v-if="store.currentRestaurant.free_delivery">
+                    &euro;0,00
                 </strong>
-                <strong v-if="!store.resturantShow.free_delivery">
-                    &euro;5.90
+                <strong v-if="!store.currentRestaurant.free_delivery">
+                    &euro;5,90
                 </strong>
             </span>
+
+            <span v-else-if="Object.keys(store.resturantShow).length > 0">SPEDIZIONE:
+                <strong v-if="store.resturantShow.free_delivery">
+                    &euro;0,00
+                </strong>
+                <strong v-if="!store.resturantShow.free_delivery">
+                    &euro;5,90
+                </strong>
+            </span>
+
+            <span v-else-if="$router.currentRoute._value.name !== 'cartPayment'">SPEDIZIONE:
+                <strong>
+                    &euro;0,00
+                </strong>
+            </span>
+
         </div>
 
         <div class="mt-2 text-end">
-            <strong>TOTALE ORDINE: &euro;{{ Object.keys(store.resturantShow).length > 0 ? totalCartPrice(store.resturantShow.free_delivery) : '0.00' }}</strong>
+            <strong v-if="Object.keys(store.currentRestaurant).length > 0">TOTALE ORDINE: &euro;{{totalCartPrice(store.currentRestaurant.free_delivery).replace('.',',')  }}</strong>
+            <strong v-else-if="Object.keys(store.resturantShow).length > 0">TOTALE ORDINE: &euro;{{ totalCartPrice(store.resturantShow.free_delivery).replace('.',',') }} </strong>
+            <strong v-else>TOTALE ORDINE: &euro;0,00</strong>
         </div>
 
 
