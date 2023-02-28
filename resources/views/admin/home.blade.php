@@ -154,6 +154,23 @@
             data: data,
 
         };
-        var dailyChar = new Chart(myChartDaily, config)
+
+        var dailyChar = new Chart(myChartDaily, {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value, index, ticks) {
+                                return '€' + value;
+                            }
+                        }
+                    }
+                }
+            }
+
+        })
     </script>
 @endsection
