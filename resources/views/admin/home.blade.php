@@ -42,7 +42,8 @@
                             </a>
 
                             <a class="btn btn-outline-primary btn-sm" href="{{ route('admin.foods.index') }}">MENÙ</a>
-
+                        </div>
+                    </div>
 
                 </div>
 
@@ -134,6 +135,8 @@
 
         </div>
     </div>
+
+
     <script>
         // const ctxFoods = document.getElementById('myChart');
 
