@@ -63,11 +63,11 @@ export default {
 
             // cartError: []
             nameError: '',
-            surnamenameError: '',
+            surnameError: '',
             addressError: '',
             phoneError: '',
             emailError: '',
-            noteError:''
+            noteError:'',
 
         }
 
@@ -199,17 +199,79 @@ export default {
         inputEmailCheck(){
             if(!this.email.length){
                 this.emailError = "L\'email è un campo obbligatorio";
-            } else if(this.email.length <=8){
-                this.emailError = "L\'email deve avere minimo 8 caratteri";
             } else if(!this.email.includes('@') || !this.email.includes('.')){
                 this.emailError = "Il formato dell\'email non è corretto'";
             } else {
                 this.emailError = "";
                 return true;
             }
+        },
+
+        inputNameCheck(){
+            if(!this.name.length){
+                this.nameError = "Il nome è un campo obbligatorio";
+            } else if(this.name.length > 100){
+                this.nameError = "Il nome può avere al massimo 100 caratteri'";
+            } else {
+                this.nameError = "";
+                return true;
+            }
+        },
+
+        inputSurnameCheck(){
+            if(!this.surname.length){
+                this.surnameError = "Il cognome è un campo obbligatorio";
+            } else if(this.surname.length > 100){
+                this.surnameError = "Il cognome può avere al massimo 100 caratteri'";
+            } else {
+                this.surnameError = "";
+                return true;
+            }
+        },
+
+        inputAddressCheck(){
+            if(!this.address.length){
+                this.addressError = "L\'indirizzo è un campo obbligatorio";
+            } else if(this.address.length > 255){
+                this.addressError = "L'indirizzo può avere al massimo 255 caratteri'";
+            } else {
+                this.addressError = "";
+                return true;
+            }
+        },
+
+        inputPhoneCheck(){
+            const regex = /^[0-9]+$/;
+
+            if(!this.phoneNumber.length){
+                this.phoneError = "Il numero di telefono è un campo obbligatorio";
+            } else if(!regex.test(this.phoneNumber)) {
+                this.phoneError = "Il numero di telefono può contenere solo numeri";
+            } else if(this.phoneNumber.length > 15){
+                this.phoneError = "Il numero di telefono inserito non è valido'";
+            } else {
+                this.phoneError = "";
+                return true;
+            }
+        },
+
+        inputNoteCheck(){
+            if(this.note.length > 255){
+                this.noteError = "Le note possono avere al massimo 255 caratteri";
+            } else if (this.note.length >= 0) {
+                this.noteError = "";
+                return true;
+            }
+        },
+
+        checkInput(){
+            if(this.inputEmailCheck() && this.inputNameCheck() && this.inputSurnameCheck() && this.inputAddressCheck() && this.inputPhoneCheck() && this.inputNoteCheck() ){
+                return true;
+            }
         }
 
     },
+
     mounted() {
         this.apiToken();
 
@@ -261,34 +323,44 @@ export default {
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
-                        <input @keyup="inputEmailCheck()" id="email" type="email" class="form-control" :class="inputEmailCheck() ? 'is-valid' : 'is-invalid'"
+                        <input @keyup="inputEmailCheck(), checkInput()" id="email" type="email" class="form-control" :class="inputEmailCheck() ? 'is-valid' : 'is-invalid'"
                             v-model.trim="email" placeholder="Inserisci la tua email">
                         <p v-if="emailError.length" class="mb-0 invalid-feedback">{{ emailError }}</p>
                     </div>
+
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome *</label>
-                        <input id="name" type="text" class="form-control" v-model.trim="name"
-                            placeholder="Inserisci il tuo nome">
+                        <input @keyup="inputNameCheck(), checkInput()" id="name" type="text" class="form-control" :class="inputNameCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="name" placeholder="Inserisci il tuo nome">
+                        <p v-if="nameError.length" class="mb-0 invalid-feedback">{{ nameError }}</p>
                     </div>
+
                     <div class="mb-3">
                         <label for="surname" class="form-label">Cognome *</label>
-                        <input id="surname" type="text" class="form-control" v-model.trim="surname"
-                            placeholder="Inserisci il tuo cognome">
+                        <input @keyup="inputSurnameCheck(), checkInput()" id="surname" type="text" class="form-control" :class="inputSurnameCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="surname" placeholder="Inserisci il tuo cognome">
+                        <p v-if="surnameError.length" class="mb-0 invalid-feedback">{{ surnameError }}</p>
                     </div>
+
                     <div class="mb-3">
                         <label for="address" class="form-label">Indirizzo *</label>
-                        <input id="address" type="text" class="form-control" v-model.trim="address"
-                            placeholder="Inserisci il tuo indirizzo">
+                        <input @keyup="inputAddressCheck(), checkInput()" id="address" type="text" class="form-control" :class="inputAddressCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="address" placeholder="Inserisci il tuo indirizzo">
+                        <p v-if="addressError.length" class="mb-0 invalid-feedback">{{ addressError }}</p>
                     </div>
+
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Numero di telefono *</label>
-                        <input id="phoneNumber" type="text" class="form-control" v-model.trim="phoneNumber"
-                            placeholder="Inserisci il tuo numero di telefono">
+                        <input @keyup="inputPhoneCheck(), checkInput()" id="phoneNumber" type="text" class="form-control" :class="inputPhoneCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="phoneNumber" placeholder="Inserisci il tuo numero di telefono">
+                        <p v-if="phoneError.length" class="mb-0 invalid-feedback">{{ phoneError }}</p>
                     </div>
+
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <input id="note" type="text" class="form-control" name="note" v-model.trim="note"
-                            placeholder="Inserisci eventuali note per la consegna">
+                        <input @keyup="inputNoteCheck(), checkInput()" id="note" type="text" class="form-control" name="note" :class="inputNoteCheck() ? 'is-valid' : 'is-invalid'"
+                            v-model.trim="note" placeholder="Inserisci eventuali note per la consegna">
+                        <p v-if="noteError.length" class="mb-0 invalid-feedback">{{ noteError }}</p>
                     </div>
 
                 </div>
@@ -307,7 +379,7 @@ export default {
 
                             <input type="hidden" name="_token" :value="csrf">
                             <div id="dropin-container"></div>
-                            <input class="btn btn-primary text-white" type="submit" />
+                            <input class="btn btn-primary text-white" type="submit" :disabled="!checkInput()" />
                             <input type="hidden" id="nonce" name="payment_method_nonce" />
 
                         </form>

@@ -77,23 +77,16 @@
 
                 <div class="card p-2 p-lg-4">
 
-                    <div class="row row-cols-1 row-cols-md-2">
+                    <div class="row row-cols-1">
 
                         <div class="p-2 col mb-2 mb-md-3">
                             <div class="order-card p-2">
-                                <h2>GRAFICO</h2>
+                                <h4>VENDITE GIORNALIERE</h4>
                                 <div>
                                     <canvas id="myChartDaily"></canvas>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="p-2 col mb-2 mb-md-3">
-                            <div class="order-card p-2">
-                                <h2>GRAFICO</h2>
-                            </div>
-                        </div>
-
 
                     </div>
 
@@ -140,10 +133,10 @@
         const data = {
             labels: @json($ordersHours),
             datasets: [{
-                label: 'Andamento Giornaliero',
+                label: 'Incasso',
                 data: @json($orderByHour),
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(0,204,188)',
                 tension: 0.3,
 
             }]
