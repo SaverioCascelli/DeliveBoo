@@ -8,6 +8,8 @@ use App\Models\Restaurant;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Str;
+
 class RestaurantController extends Controller
 {
     public function index()
@@ -19,7 +21,8 @@ class RestaurantController extends Controller
         return response()->json(compact('restaurants', 'types', 'foods'));
     }
 
-    public function getTypes(){
+    public function getTypes()
+    {
         $types = Type::get();
         return response()->json(compact('types'));
     }
@@ -45,6 +48,7 @@ class RestaurantController extends Controller
         }
         // stringa name che mi arriva da ricercare
         $searchInput = $_GET['name'];
+        $searchInput = Str::slug($searchInput);
         //ricerca in base al nome
         $restaurants = Restaurant::where('slug', 'like', "%$searchInput%")
             //ricerca sulla tabella ponte wherehase prender solo ristoranti con più di n relazioni con i tipi e applica una ricerca approfondit con wherein dove confronta lo slug del tipo con quello presente nell'array typeslug
