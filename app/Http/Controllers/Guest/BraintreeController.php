@@ -63,6 +63,7 @@ class BraintreeController extends Controller
             $email = $data['email'];
             $address = $data['address'];
             $phoneNumber = $data['phoneNumber'];
+
             $newOrder = new Order();
             $newOrder->customer_name = $name;
             $newOrder->customer_surname = $surname;
