@@ -109,11 +109,11 @@ permette di visualizzare il menù di un particolare ristoratore.
 
         </div>
 
-        <div v-else>
+        <!-- <div v-else>
 
             <Error404/>
 
-        </div>
+        </div> -->
 
     </div>
 
