@@ -199,8 +199,10 @@ export default {
         inputEmailCheck(){
             if(!this.email.length){
                 this.emailError = "L\'email è un campo obbligatorio";
+            } else if(this.email.length < 5){
+                this.emailError = "L\'email può avere minimo 5 caratteri";
             } else if(!this.email.includes('@') || !this.email.includes('.')){
-                this.emailError = "Il formato dell\'email non è corretto'";
+                this.emailError = "Il formato dell\'email non è corretto";
             } else {
                 this.emailError = "";
                 return true;
@@ -210,8 +212,10 @@ export default {
         inputNameCheck(){
             if(!this.name.length){
                 this.nameError = "Il nome è un campo obbligatorio";
+            } else if(this.name.length < 2){
+                this.nameError = "Il nome può avere minimo 2 caratteri";
             } else if(this.name.length > 100){
-                this.nameError = "Il nome può avere al massimo 100 caratteri'";
+                this.nameError = "Il nome può avere al massimo 100 caratteri";
             } else {
                 this.nameError = "";
                 return true;
@@ -221,6 +225,8 @@ export default {
         inputSurnameCheck(){
             if(!this.surname.length){
                 this.surnameError = "Il cognome è un campo obbligatorio";
+            } else if(this.surname.length < 2){
+                this.surnameError = "Il cognome può avere minimo 2 caratteri";
             } else if(this.surname.length > 100){
                 this.surnameError = "Il cognome può avere al massimo 100 caratteri'";
             } else {
@@ -232,6 +238,8 @@ export default {
         inputAddressCheck(){
             if(!this.address.length){
                 this.addressError = "L\'indirizzo è un campo obbligatorio";
+            } else if(this.address.length < 5){
+                this.addressError = "L\'indirizzo può avere minimo 5 caratteri";
             } else if(this.address.length > 255){
                 this.addressError = "L'indirizzo può avere al massimo 255 caratteri'";
             } else {
@@ -247,6 +255,8 @@ export default {
                 this.phoneError = "Il numero di telefono è un campo obbligatorio";
             } else if(!regex.test(this.phoneNumber)) {
                 this.phoneError = "Il numero di telefono può contenere solo numeri";
+            } else if(this.phoneNumber.length < 5){
+                this.phoneError = "Il numero di telefono può avere minimo 5 caratteri";
             } else if(this.phoneNumber.length > 15){
                 this.phoneError = "Il numero di telefono inserito non è valido'";
             } else {

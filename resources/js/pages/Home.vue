@@ -64,7 +64,7 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
             // resturant.types in store.searchArray     array con dentro lo slug della tipologia di ristorante
             getRestaurants(){
 
-                this.isShow = true;
+
 
                 //params è l'oggetto con i  parametri della chiamata axios: dentro vanno name(slug del ristorante da cercare ) e types(array dello slug dei types del ristorante da ricercare)
                 this.params = {name: store.searchInput};
@@ -93,6 +93,8 @@ offre la possibilità di cliccare sulle tipologie di ristorante e senza il refre
                     //resetto lo store per una nuova chiamata
                     store.searchInput = '';
                     store.searchArray = [];
+
+                    this.isShow = true;
                 })
             },
 
