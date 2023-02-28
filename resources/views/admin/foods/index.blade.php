@@ -109,7 +109,7 @@
                         <div class="bg-primary d-flex align-items-center justify-content-between p-2 rounded-2">
 
                             <h5 class="text-white font-bold ms-1 mb-0">
-                                <span class="text-success">&euro;</span>{{$food->price}}
+                                <span class="text-success">&euro;</span>{{number_format($food->price,2,',','.')}}
                             </h5>
 
                             <div class="py-1 px-2 bg-success rounded-2">

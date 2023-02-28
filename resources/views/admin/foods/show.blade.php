@@ -39,7 +39,7 @@
             @endif
 
             <h3>{{$food->name}}</h3>
-            <h4>&euro;{{$food->price}}</h4>
+            <h4>&euro;{{number_format($food->price,2,',','.')}}</h4>
             <p>{{$food->description}}</p>
 
             <!-- controllo immagini -->

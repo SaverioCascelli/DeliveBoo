@@ -24,7 +24,7 @@
                     <div class="p-2 col mb-2 mb-md-3">
                         <div class="order-card h-100 p-2">
                             <div class="d-flex justify-content-between">
-                                <h4 class="text-primary">&euro;{{$order->total_price}}</h4>
+                                <h4 class="text-primary">&euro;{{number_format($order->total_price, 2, ',', '.')}}</h4>
                                 <div class="d-flex flex-column align-items-end">
                                     <small>{{date_format(date_create($order->created_at),'d/m/Y')}}</small>
                                     <small>{{date_format(date_create($order->created_at),'H:m:s')}}</small>
@@ -48,7 +48,7 @@
                                             <small>{{$food->name}}</small>
                                             <smal>
                                                 <span class="text-danger fw-bold">{{$food->pivot->quantity}}</span>
-                                                <span class="order-price d-none d-sm-inline"> x &euro;{{$food->price}} = &euro;{{$food->pivot->quantity * $food->price}}</span>
+                                                <span class="order-price d-none d-sm-inline"> x &euro;{{number_format($food->price,2,',','.')}} = &euro;{{number_format($food->pivot->quantity * $food->price, 2,',','.')}}</span>
                                             </small>
                                         </li>
                                     @endforeach
