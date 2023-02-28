@@ -31,7 +31,7 @@ class ClientMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Il tuo orine è in arrivo!',
+            subject: 'Il tuo ordine è in arrivo!',
             replyTo: $this->lead->mail,
         );
     }

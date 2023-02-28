@@ -23,17 +23,18 @@ class CustomOrderSeeder extends Seeder
         $period = new DatePeriod(
             new DateTime('2023-01-01'),
             new DateInterval('P1D'),
-            new DateTime('2023-03-02'),
+            new DateTime('2023-12-31'),
         );
         $restaurant = Restaurant::find(1);
         $restaurantFoods = $restaurant->foods;
-        $hourArr = ['12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+        // $hourArr = ['12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
+        $hourArr = ['12', '13', '14', '15',  '20', '21', '22', '23'];
 
         foreach ($period as $key => $date) {
 
             // file_put_contents('dump.txt', $date->format('Y-m-d') . ' ' . $hourArr[$key] . ':01:01');
             foreach ($hourArr as $key => $hour) {
-                $randOrderPerHour = rand(1, 10);
+                $randOrderPerHour = rand(0, 5);
                 $date = date_create($date->format('Y-m-d') . ' ' . $hourArr[$key] . ':01:01');
 
                 for ($i = 0; $i < $randOrderPerHour; $i++) {
