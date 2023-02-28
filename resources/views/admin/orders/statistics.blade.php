@@ -7,36 +7,49 @@
 @section('content')
     <div class="container-fluid">
 
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="container-fluid">
 
-            <div class="col mb-3">
-                <div class="card p-2 p-lg-4">
-                    <h3>Ordini Ultimi 12 Mesi</h3>
-                    <canvas id="myChartOne"></canvas>
+            <div class="card ">
+
+                <div class="card-header px-2 px-lg-4 d-flex align-items-center justify-content-between">
+                    <h3 class="mb-0">REPORT</h3>
+                </div>
+
+                <div class="pt-2 ps-2 pe-2 pb-1 pt-lg-4 pe-lg-4 ps-lg-4">
+
+                    <div class="row row-cols-1">
+
+                        <div class="col mb-3">
+                            <div class="card p-2 p-lg-4">
+                                <h4>ORDINI 2023</h4>
+                                <canvas id="myChartOne"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="col mb-3">
+                            <div class="card p-2 p-lg-4">
+                                <h3>ORDINI ULTIMO MESE</h3>
+                                <canvas id="myChartTwo"></canvas>
+                            </div>
+                        </div>
+
+                        {{-- <div class="col mb-3">
+                            <div class="card p-2 p-lg-4">
+                                <h3>Piatto più venduto</h3>
+                                <canvas id="myChartThree"></canvas>
+                            </div>
+                        </div> --}}
+
+                        {{-- <div class="col mb-3">
+                            <div class="card p-2 p-lg-4">
+                                <h3>Grafico 4</h3>
+                                <canvas id="myChartFour"></canvas>
+                            </div>
+                        </div> --}}
+
+                    </div>
                 </div>
             </div>
-
-            <div class="col mb-3">
-                <div class="card p-2 p-lg-4">
-                    <h3>Ordini Ultimo Mese</h3>
-                    <canvas id="myChartTwo"></canvas>
-                </div>
-            </div>
-
-            {{-- <div class="col mb-3">
-                <div class="card p-2 p-lg-4">
-                    <h3>Piatto più venduto</h3>
-                    <canvas id="myChartThree"></canvas>
-                </div>
-            </div> --}}
-
-            {{-- <div class="col mb-3">
-                <div class="card p-2 p-lg-4">
-                    <h3>Grafico 4</h3>
-                    <canvas id="myChartFour"></canvas>
-                </div>
-            </div> --}}
-
         </div>
 
     </div>
@@ -54,7 +67,9 @@
                 datasets: [{
                     label: 'Fatturato in Euro',
                     data: @json($ordersInYear),
-                    borderWidth: 1
+                    borderWidth: 1,
+                    backgroundColor: '#00ccbc',
+                    borderColor: '#00ccbc',
                 }]
             },
             options: {
@@ -84,8 +99,8 @@
                     label: 'Fatturato in Euro',
                     data: @json($orderInMonth),
                     borderWidth: 1,
-                    backgroundColor: '#9BD0F5',
-                    borderColor: '#36A2EB',
+                    backgroundColor: '#D0EB99',
+                    borderColor: '#D0EB99',
                 }]
             },
             options: {

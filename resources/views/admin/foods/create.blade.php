@@ -108,9 +108,10 @@
                             <p class="invalid-feedback">{{$message}}</p>
                         @enderror
 
-                        <div class="mt-2 mb-1">
+                        <div class="mt-2 mb-1 d-none" id="wrapper-image">
                             <img id="output-image" src="" alt="">
                         </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary text-white px-4">CREA</button>

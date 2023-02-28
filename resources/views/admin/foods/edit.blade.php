@@ -126,7 +126,7 @@
                         @enderror
 
                         @if (str_contains($food->img_url, 'http'))
-                            <div class="mt-2">
+                            <div class="mt-2 mb-1">
                                 <img id="output-image" src="{{$food->img_url}}" alt="{{$food->img_url_original_name}}">
                             </div>
                         @else

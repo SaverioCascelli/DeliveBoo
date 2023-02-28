@@ -29,17 +29,17 @@ function checkRestaurant(item){
     if(Object.keys(this.store.currentRestaurant).length === 0) {
 
         this.store.openModal = false;
-        console.log('caso 1')
+        // console.log('caso 1')
 
     } else if(item.id == this.store.orderRestaurantId ) {
 
         this.store.openModal = false;
-        console.log('caso 2')
+        // console.log('caso 2')
 
     }  else {
 
         this.store.openModal = true;
-        console.log('caso 3')
+        // console.log('caso 3')
         this.setLocalStorage();
     }
 
