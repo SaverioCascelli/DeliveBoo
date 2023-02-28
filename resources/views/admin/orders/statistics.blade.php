@@ -64,7 +64,12 @@ let myChartOne = new Chart(chartOne, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, ticks) {
+                        return '€' + value;
+                    }
+                }
             }
         }
     }
@@ -90,7 +95,12 @@ let myChartTwo = new Chart(chartTwo, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, ticks) {
+                        return '€' + value;
+                    }
+                }
             }
         }
     }
