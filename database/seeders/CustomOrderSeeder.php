@@ -21,11 +21,11 @@ class CustomOrderSeeder extends Seeder
     public function run(Faker $faker)
     {
         $period = new DatePeriod(
-            new DateTime('2022-01-01'),
+            new DateTime('2023-01-01'),
             new DateInterval('P1D'),
             new DateTime('2023-03-02'),
         );
-        $restaurant = Restaurant::find(101);
+        $restaurant = Restaurant::find(1);
         $restaurantFoods = $restaurant->foods;
         $hourArr = ['12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
 
@@ -57,9 +57,10 @@ class CustomOrderSeeder extends Seeder
                         //prende il il food con incice random
                         $food = $restaurantFoods[$key];
                         //calcola il totale dell'ordine
-                        $totalPrice += $food->price;
+                        $quantity = rand(1, 3);
+                        $totalPrice += $food->price * $quantity;
                         //crea il collegamento tra food e order settando un quantità casuale
-                        $food->orders()->attach($new_order->id, ['quantity' => rand(1, 3)]);
+                        $food->orders()->attach($new_order->id, ['quantity' => $quantity]);
                     }
                     //fa l'update di total price nella tabella order
                     $new_order->total_price = $totalPrice;

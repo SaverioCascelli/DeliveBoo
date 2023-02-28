@@ -16,7 +16,7 @@ class typeImgSeeder extends Seeder
     public function run()
     {
         $foods = Type::all();
-        file_put_contents('dump.json', $foods);
+        // file_put_contents('dump.json', $foods);
 
         $americana = Type::where('name', 'americana')->first();
         $americana->img_url = 'https://www.gardengourmet.it/sites/default/files/recipes/aeead5804e79ff6fb98b2039619c5230_200828_MEDIAMONKS_GG_Spicytarian.jpg';

@@ -19,5 +19,12 @@ class TestQuery extends Seeder
      */
     public function run()
     {
+        $months = [1, 2, 3];
+
+        $monthNames = array_map(function ($month) {
+            return Carbon::create(null, $month, null)->monthName;
+        }, $months);
+
+        // file_put_contents('dump.json', json_encode($monthNames));
     }
 }

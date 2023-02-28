@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal('total_price', 5, 2)->nullable();
+            $table->decimal('total_price', 10, 2)->nullable();
             $table->string('customer_name', 75);
             $table->string('customer_surname', 75);
             $table->string('customer_address');

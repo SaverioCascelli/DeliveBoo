@@ -40,17 +40,23 @@ class OrderTableSeeder extends Seeder
                 $new_order->restaurant_id = $restaurant->id;
                 $new_order->save();
 
+                $maxItemsInOrder = 5;
+                $countFoods = count($restaurantFoods->toArray());
+                if ($countFoods > $maxItemsInOrder) {
+                    $countFoods = $maxItemsInOrder;
+                }
                 // sceglie un numero n di indici casuali dall'array dei food e li cicla
-                $randomKeysOfFood = array_rand($restaurantFoods->toArray(), rand(2, count($restaurantFoods->toArray())));
+                $randomKeysOfFood = array_rand($restaurantFoods->toArray(), rand(2, $countFoods));
                 //setta il prezzo totale a 0 per sommarlo man mano
                 $totalPrice = 0;
                 foreach ($randomKeysOfFood as $key) {
                     //prende il il food con incice random
                     $food = $restaurantFoods[$key];
                     //calcola il totale dell'ordine
-                    $totalPrice += $food->price;
+                    $quantity = rand(1, 3);
+                    $totalPrice += $food->price * $quantity;
                     //crea il collegamento tra food e order settando un quantità casuale
-                    $food->orders()->attach($new_order->id, ['quantity' => rand(1, 5)]);
+                    $food->orders()->attach($new_order->id, ['quantity' => $quantity]);
                 }
                 //fa l'update di total price nella tabella order
                 $new_order->total_price = $totalPrice;
