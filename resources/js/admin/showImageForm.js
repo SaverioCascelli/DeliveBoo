@@ -12,6 +12,7 @@ if(imageForm) {
 
 function showImage(event){
     const tagImage = document.getElementById('output-image');
+    tagImage.classList.add('image-create');
     tagImage.src = URL.createObjectURL(event.target.files[0]);
 }
 

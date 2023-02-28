@@ -12,7 +12,6 @@ permette di visualizzare il menù di un particolare ristoratore.
 
     import FoodItem from '../components/FoodItem.vue';
     import Cart from '../components/Cart.vue';
-    import Error404 from './Error404.vue';
 
     export default {
 
@@ -21,8 +20,7 @@ permette di visualizzare il menù di un particolare ristoratore.
         components:{
 
             FoodItem,
-            Cart,
-            Error404
+            Cart
 
         },
 
@@ -108,12 +106,6 @@ permette di visualizzare il menù di un particolare ristoratore.
             </div>
 
         </div>
-
-        <!-- <div v-else>
-
-            <Error404/>
-
-        </div> -->
 
     </div>
 
