@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
 use App\Models\Order;
 use App\Models\Restaurant;
 use DateInterval;
@@ -25,7 +26,7 @@ class CustomOrderSeeder extends Seeder
             new DateInterval('P1D'),
             new DateTime('2023-12-31'),
         );
-        $restaurant = Restaurant::find(1);
+        $restaurant = Restaurant::find(3);
         $restaurantFoods = $restaurant->foods;
         // $hourArr = ['12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'];
         $hourArr = ['12', '13', '14', '15',  '20', '21', '22', '23'];
@@ -64,6 +65,16 @@ class CustomOrderSeeder extends Seeder
                         $food->orders()->attach($new_order->id, ['quantity' => $quantity]);
                     }
                     //fa l'update di total price nella tabella order
+                    if (!($restaurant->free_delivery)) {
+
+                        $food = Food::find(1);
+                        $food->orders()->attach($new_order->id);
+                        $totalPrice += 5.90;
+                    } else {
+
+                        $food = Food::find(2);
+                        $food->orders()->attach($new_order->id);
+                    }
                     $new_order->total_price = $totalPrice;
                     $new_order->update();
                 }

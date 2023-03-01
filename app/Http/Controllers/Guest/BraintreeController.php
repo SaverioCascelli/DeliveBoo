@@ -74,14 +74,31 @@ class BraintreeController extends Controller
             $foods =  foodsFromFoodId($order[0]->id);
             $restaurantId = $foods[0]->restaurant_id;
             $newOrder->restaurant_id = $restaurantId;
+
+            $restaurant = Restaurant::find($restaurantId);
+            if (!($restaurant->free_delivery)) {
+                $totalPrice += 5.90;
+            }
+
+
+
+
             $newOrder->total_price = $totalPrice;
             $newOrder->save();
-            $restaurant = Restaurant::find($restaurantId);
             $user = User::find($restaurantId);
 
             foreach ($order as $item) {
                 $food = Food::find($item->id);
                 $food->orders()->attach($newOrder->id, ['quantity' => $item->quantity]);
+            }
+            if (!($restaurant->free_delivery)) {
+
+                $food = Food::find(1);
+                $food->orders()->attach($newOrder->id);
+            } else {
+
+                $food = Food::find(2);
+                $food->orders()->attach($newOrder->id);
             }
 
             $nonceFromTheClient = $request['nonce'];
@@ -112,8 +129,8 @@ class BraintreeController extends Controller
             $lead->restaurantAddress = $restaurant->address;
             $lead->phoneNumber = $phoneNumber;
 
-            Mail::to($user->email)->send(new RestaurantMail($lead));
-            Mail::to($email)->send(new ClientMail($lead));
+            // Mail::to($user->email)->send(new RestaurantMail($lead));
+            // Mail::to($email)->send(new ClientMail($lead));
         }
     }
 }

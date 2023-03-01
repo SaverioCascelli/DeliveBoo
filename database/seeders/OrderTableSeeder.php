@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Food;
 use App\Models\Order;
 use App\Models\Restaurant;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -59,6 +60,16 @@ class OrderTableSeeder extends Seeder
                     $food->orders()->attach($new_order->id, ['quantity' => $quantity]);
                 }
                 //fa l'update di total price nella tabella order
+
+                if (!($restaurant->free_delivery)) {
+                    $food = Food::find(1);
+                    $food->orders()->attach($new_order->id);
+                    $totalPrice += 5.90;
+                } else {
+
+                    $food = Food::find(2);
+                    $food->orders()->attach($new_order->id);
+                }
                 $new_order->total_price = $totalPrice;
                 $new_order->update();
             }
