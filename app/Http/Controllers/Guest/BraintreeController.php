@@ -129,8 +129,8 @@ class BraintreeController extends Controller
             $lead->restaurantAddress = $restaurant->address;
             $lead->phoneNumber = $phoneNumber;
 
-            // Mail::to($user->email)->send(new RestaurantMail($lead));
-            // Mail::to($email)->send(new ClientMail($lead));
+            Mail::to($user->email)->send(new RestaurantMail($lead));
+            Mail::to($email)->send(new ClientMail($lead));
         }
     }
 }
