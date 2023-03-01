@@ -30,9 +30,9 @@ class OrderController extends Controller
 
         $monthsInYear = getMonths();
         $ordersInYear = getOrderPerMonth($monthsInYear);
-
+        setlocale(LC_TIME, 'it_IT'); // Set the locale to Italian
         $monthNames = array_map(function ($month) {
-            return Carbon::create(null, $month, null)->monthName;
+            return ucfirst(Carbon::create(null, $month, null)->locale('it_IT')->monthName);
         }, $monthsInYear);
 
         return view('admin.orders.statistics', compact('daysInMonth', 'orderInMonth', 'monthNames', 'ordersInYear'));

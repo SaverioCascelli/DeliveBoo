@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
 
             user_table_seeder::class,
+            DeliverySeeder::class,
             restaurant_table_seeder::class,
             Typeseeder::class,
             restaurant_type_seeder::class,
