@@ -32,7 +32,16 @@ class RestaurantController extends Controller
     {
         if (isset($_GET['name'])) {
             $searchItem = $_GET['name'];
-            $restaurant = Restaurant::with(['foods'])->where('slug', $searchItem)->first();
+
+
+            // $restaurant = Restaurant::where('slug', $searchItem
+            //     ->with(['foods' => function ($query) {
+            //         $query->where('is_available', 1);
+            //     }]))->first();
+            $restaurant = Restaurant::where('slug', $searchItem)
+                ->with(['foods' => function ($query) {
+                    $query->where('is_available', 1);
+                }])->first();
         }
         return response()->json(compact('restaurant'));
     }

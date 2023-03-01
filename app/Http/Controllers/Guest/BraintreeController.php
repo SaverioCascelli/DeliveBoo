@@ -118,6 +118,8 @@ class BraintreeController extends Controller
                     'streetAddress' => $address,
                 ],
             ]);
+            return;
+            $newOrder->save();
 
             $order = Order::with('foods')->find($newOrder->id);
             $lead = new Lead();
