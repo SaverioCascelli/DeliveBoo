@@ -119,6 +119,7 @@ class BraintreeController extends Controller
                 ],
             ]);
 
+            $order = Order::with('foods')->find($newOrder->id);
             $lead = new Lead();
             $lead->address = $address;
             $lead->name = $name;
@@ -128,6 +129,7 @@ class BraintreeController extends Controller
             $lead->restaurantName = $restaurant->name;
             $lead->restaurantAddress = $restaurant->address;
             $lead->phoneNumber = $phoneNumber;
+            // file_put_contents('dump.json', $order);
 
             Mail::to($user->email)->send(new RestaurantMail($lead));
             Mail::to($email)->send(new ClientMail($lead));
