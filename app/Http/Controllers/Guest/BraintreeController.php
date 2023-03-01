@@ -35,7 +35,7 @@ class BraintreeController extends Controller
     }
 
 
-    public function nounce(PaymentRequest $request)
+    public function nounce(Request $request)
     {
         $data = $request->all();
         $gateway = new \Braintree\Gateway([
@@ -45,6 +45,8 @@ class BraintreeController extends Controller
             'privateKey' => '641f6b41bbf02806747ef4e9cca79b7d'
         ]);
         if ($data['nonce'] != null) {
+
+            // $res = $request->transaction->status;
 
             $orderJson = $data['cart'];
             // $order = $orderJson->json();
@@ -76,33 +78,14 @@ class BraintreeController extends Controller
             $newOrder->restaurant_id = $restaurantId;
 
             $restaurant = Restaurant::find($restaurantId);
+
+            $user = User::find($restaurantId);
             if (!($restaurant->free_delivery)) {
                 $totalPrice += 5.90;
             }
 
-
-
-
-            $newOrder->total_price = $totalPrice;
-            $newOrder->save();
-            $user = User::find($restaurantId);
-
-            foreach ($order as $item) {
-                $food = Food::find($item->id);
-                $food->orders()->attach($newOrder->id, ['quantity' => $item->quantity]);
-            }
-            if (!($restaurant->free_delivery)) {
-
-                $food = Food::find(1);
-                $food->orders()->attach($newOrder->id);
-            } else {
-
-                $food = Food::find(2);
-                $food->orders()->attach($newOrder->id);
-            }
-
             $nonceFromTheClient = $request['nonce'];
-            $gateway->transaction()->sale([
+            $braintreeResult = $gateway->transaction()->sale([
                 'amount' => $totalPrice,
                 'paymentMethodNonce' => $nonceFromTheClient,
                 'options' => [
@@ -118,8 +101,28 @@ class BraintreeController extends Controller
                     'streetAddress' => $address,
                 ],
             ]);
-            return;
-            $newOrder->save();
+            $status = $braintreeResult->transaction->status;
+
+
+            $newOrder->total_price = $totalPrice;
+            // $newOrder->save();
+
+            if ($status == 'submitted_for_settlement') {
+                $newOrder->save();
+            }
+            foreach ($order as $item) {
+                $food = Food::find($item->id);
+                $food->orders()->attach($newOrder->id, ['quantity' => $item->quantity]);
+            }
+            if (!($restaurant->free_delivery)) {
+
+                $food = Food::find(1);
+                $food->orders()->attach($newOrder->id);
+            } else {
+
+                $food = Food::find(2);
+                $food->orders()->attach($newOrder->id);
+            }
 
             $order = Order::with('foods')->find($newOrder->id);
             $lead = new Lead();
@@ -131,10 +134,14 @@ class BraintreeController extends Controller
             $lead->restaurantName = $restaurant->name;
             $lead->restaurantAddress = $restaurant->address;
             $lead->phoneNumber = $phoneNumber;
-            // file_put_contents('dump.json', $order);
+            // file_put_contents('dimp.txt', $lead);
 
-            Mail::to($user->email)->send(new RestaurantMail($lead));
-            Mail::to($email)->send(new ClientMail($lead));
+            $status = $braintreeResult->transaction->status;
+            if ($status == 'submitted_for_settlement') {
+                Mail::to($user->email)->send(new RestaurantMail($lead));
+                Mail::to($email)->send(new ClientMail($lead));
+            }
+            return response()->json(compact('status'));
         }
     }
 }

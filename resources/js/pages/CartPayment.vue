@@ -67,7 +67,7 @@ export default {
             addressError: '',
             phoneError: '',
             emailError: '',
-            noteError:'',
+            noteError: '',
 
         }
 
@@ -137,7 +137,7 @@ export default {
             const url = "http://127.0.0.1:8000/nounce";
 
             const data = {
-                nonce: document.getElementById('nonce').value,
+                nonce: this.nonce,
                 cart: JSON.stringify(store.orderItems),
                 name: this.name,
                 surname: this.surname,
@@ -153,34 +153,46 @@ export default {
             const input = {
                 name: this.name,
                 surname: this.surname,
-                email : this.email,
+                email: this.email,
                 address: this.address,
                 phoneNumber: this.phoneNumber,
                 note: this.note
             };
 
             let inputJson = JSON.stringify(input);
-            window.localStorage.setItem('input', inputJson );
+            window.localStorage.setItem('input', inputJson);
 
             axios.post(url, data, config)
                 .then(res => {
-                    console.log('pagamento avvenuto');
+                    console.log(res.data);
+                    if (res.data.status == 'submitted_for_settlement') {
+                        console.log('pagamento avvenuto');
+                        this.$router.push({ name: 'thankYou' });
+                        this.clearOrder();
+                    } else {
 
-
-                    this.clearOrder();
-
-
-
+                        this.paymentError = true;
+                        this.isBraintreeLoaded = false;
+                        this.paymentDone = false;
+                        console.log(err);
+                        //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
+                        setTimeout(this.pageReload, 2000);
+                    }
+                    // this.clearOrder();
                     //pagina vue di redirect dopo il pagamento
-                    this.$router.push({ name: 'thankYou' });
 
-
-
+                    // console.log(res);
+                    // console.log('errori pagamento');
+                    // this.paymentError = true;
+                    // this.isBraintreeLoaded = false;
+                    // this.paymentDone = false;
+                    // console.log(err);
+                    // //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
+                    // setTimeout(this.pageReload, 2000);
                 })
                 .catch(err => {
-                    // console.log(err.response.data.errors['name']);
-                    // this.cartError = err.response.data.errors
                     // se ci sono errori con il pagmento, faccio veder un messaggio di errore e ricarico la pagina
+                    console.log(err);
                     console.log('errori pagamento');
                     this.paymentError = true;
                     this.isBraintreeLoaded = false;
@@ -189,6 +201,11 @@ export default {
                     //faccio ricaricare la pagina in caso di errore sulla carta così da ricaricare il form di pagamento
                     setTimeout(this.pageReload, 2000);
 
+                    // console.log(err);
+                    // console.log('pagamento avvenuto');
+                    // this.clearOrder();
+                    // //pagina vue di redirect dopo il pagamento
+                    // this.$router.push({ name: 'thankYou' });
                 })
         },
         //ricarica la pagina
@@ -196,12 +213,12 @@ export default {
             this.$router.go();
         },
 
-        inputEmailCheck(){
-            if(!this.email.length){
+        inputEmailCheck() {
+            if (!this.email.length) {
                 this.emailError = "L\'email è un campo obbligatorio";
-            } else if(this.email.length < 5){
+            } else if (this.email.length < 5) {
                 this.emailError = "L\'email può avere minimo 5 caratteri";
-            } else if(!this.email.includes('@') || !this.email.includes('.')){
+            } else if (!this.email.includes('@') || !this.email.includes('.')) {
                 this.emailError = "Il formato dell\'email non è corretto";
             } else {
                 this.emailError = "";
@@ -209,12 +226,12 @@ export default {
             }
         },
 
-        inputNameCheck(){
-            if(!this.name.length){
+        inputNameCheck() {
+            if (!this.name.length) {
                 this.nameError = "Il nome è un campo obbligatorio";
-            } else if(this.name.length < 2){
+            } else if (this.name.length < 2) {
                 this.nameError = "Il nome può avere minimo 2 caratteri";
-            } else if(this.name.length > 100){
+            } else if (this.name.length > 100) {
                 this.nameError = "Il nome può avere al massimo 100 caratteri";
             } else {
                 this.nameError = "";
@@ -222,12 +239,12 @@ export default {
             }
         },
 
-        inputSurnameCheck(){
-            if(!this.surname.length){
+        inputSurnameCheck() {
+            if (!this.surname.length) {
                 this.surnameError = "Il cognome è un campo obbligatorio";
-            } else if(this.surname.length < 2){
+            } else if (this.surname.length < 2) {
                 this.surnameError = "Il cognome può avere minimo 2 caratteri";
-            } else if(this.surname.length > 100){
+            } else if (this.surname.length > 100) {
                 this.surnameError = "Il cognome può avere al massimo 100 caratteri'";
             } else {
                 this.surnameError = "";
@@ -235,12 +252,12 @@ export default {
             }
         },
 
-        inputAddressCheck(){
-            if(!this.address.length){
+        inputAddressCheck() {
+            if (!this.address.length) {
                 this.addressError = "L\'indirizzo è un campo obbligatorio";
-            } else if(this.address.length < 5){
+            } else if (this.address.length < 5) {
                 this.addressError = "L\'indirizzo può avere minimo 5 caratteri";
-            } else if(this.address.length > 255){
+            } else if (this.address.length > 255) {
                 this.addressError = "L'indirizzo può avere al massimo 255 caratteri'";
             } else {
                 this.addressError = "";
@@ -248,16 +265,16 @@ export default {
             }
         },
 
-        inputPhoneCheck(){
+        inputPhoneCheck() {
             const regex = /^[0-9]+$/;
 
-            if(!this.phoneNumber.length){
+            if (!this.phoneNumber.length) {
                 this.phoneError = "Il numero di telefono è un campo obbligatorio";
-            } else if(!regex.test(this.phoneNumber)) {
+            } else if (!regex.test(this.phoneNumber)) {
                 this.phoneError = "Il numero di telefono può contenere solo numeri";
-            } else if(this.phoneNumber.length < 5){
+            } else if (this.phoneNumber.length < 5) {
                 this.phoneError = "Il numero di telefono può avere minimo 5 caratteri";
-            } else if(this.phoneNumber.length > 15){
+            } else if (this.phoneNumber.length > 15) {
                 this.phoneError = "Il numero di telefono inserito non è valido'";
             } else {
                 this.phoneError = "";
@@ -265,8 +282,8 @@ export default {
             }
         },
 
-        inputNoteCheck(){
-            if(this.note.length > 255){
+        inputNoteCheck() {
+            if (this.note.length > 255) {
                 this.noteError = "Le note possono avere al massimo 255 caratteri";
             } else if (this.note.length >= 0) {
                 this.noteError = "";
@@ -274,8 +291,8 @@ export default {
             }
         },
 
-        checkInput(){
-            if(this.inputEmailCheck() && this.inputNameCheck() && this.inputSurnameCheck() && this.inputAddressCheck() && this.inputPhoneCheck() && this.inputNoteCheck() ){
+        checkInput() {
+            if (this.inputEmailCheck() && this.inputNameCheck() && this.inputSurnameCheck() && this.inputAddressCheck() && this.inputPhoneCheck() && this.inputNoteCheck()) {
                 return true;
             }
         }
@@ -289,7 +306,7 @@ export default {
         store.resturantShow = [];
 
         let inputString = localStorage.getItem('input');
-        if(inputString){
+        if (inputString) {
             let input = JSON.parse(inputString);
             this.name = input.name;
             this.email = input.email;
@@ -333,43 +350,49 @@ export default {
 
                     <div class="mb-3">
                         <label for="email" class="form-label">Email *</label>
-                        <input @keyup="inputEmailCheck(), checkInput()" id="email" type="email" class="form-control" :class="inputEmailCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="email" placeholder="Inserisci la tua email">
+                        <input @keyup="inputEmailCheck(), checkInput()" id="email" type="email" class="form-control"
+                            :class="inputEmailCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="email"
+                            placeholder="Inserisci la tua email">
                         <p v-if="emailError.length" class="mb-0 invalid-feedback">{{ emailError }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome *</label>
-                        <input @keyup="inputNameCheck(), checkInput()" id="name" type="text" class="form-control" :class="inputNameCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="name" placeholder="Inserisci il tuo nome">
+                        <input @keyup="inputNameCheck(), checkInput()" id="name" type="text" class="form-control"
+                            :class="inputNameCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="name"
+                            placeholder="Inserisci il tuo nome">
                         <p v-if="nameError.length" class="mb-0 invalid-feedback">{{ nameError }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label for="surname" class="form-label">Cognome *</label>
-                        <input @keyup="inputSurnameCheck(), checkInput()" id="surname" type="text" class="form-control" :class="inputSurnameCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="surname" placeholder="Inserisci il tuo cognome">
+                        <input @keyup="inputSurnameCheck(), checkInput()" id="surname" type="text" class="form-control"
+                            :class="inputSurnameCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="surname"
+                            placeholder="Inserisci il tuo cognome">
                         <p v-if="surnameError.length" class="mb-0 invalid-feedback">{{ surnameError }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label for="address" class="form-label">Indirizzo *</label>
-                        <input @keyup="inputAddressCheck(), checkInput()" id="address" type="text" class="form-control" :class="inputAddressCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="address" placeholder="Inserisci il tuo indirizzo">
+                        <input @keyup="inputAddressCheck(), checkInput()" id="address" type="text" class="form-control"
+                            :class="inputAddressCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="address"
+                            placeholder="Inserisci il tuo indirizzo">
                         <p v-if="addressError.length" class="mb-0 invalid-feedback">{{ addressError }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label for="phoneNumber" class="form-label">Numero di telefono *</label>
-                        <input @keyup="inputPhoneCheck(), checkInput()" id="phoneNumber" type="text" class="form-control" :class="inputPhoneCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="phoneNumber" placeholder="Inserisci il tuo numero di telefono">
+                        <input @keyup="inputPhoneCheck(), checkInput()" id="phoneNumber" type="text" class="form-control"
+                            :class="inputPhoneCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="phoneNumber"
+                            placeholder="Inserisci il tuo numero di telefono">
                         <p v-if="phoneError.length" class="mb-0 invalid-feedback">{{ phoneError }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <input @keyup="inputNoteCheck(), checkInput()" id="note" type="text" class="form-control" name="note" :class="inputNoteCheck() ? 'is-valid' : 'is-invalid'"
-                            v-model.trim="note" placeholder="Inserisci eventuali note per la consegna">
+                        <input @keyup="inputNoteCheck(), checkInput()" id="note" type="text" class="form-control"
+                            name="note" :class="inputNoteCheck() ? 'is-valid' : 'is-invalid'" v-model.trim="note"
+                            placeholder="Inserisci eventuali note per la consegna">
                         <p v-if="noteError.length" class="mb-0 invalid-feedback">{{ noteError }}</p>
                     </div>
 
@@ -396,8 +419,14 @@ export default {
 
                     </div>
 
-                    <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone" class="bg-primary text-white px-2 rounded-2 mb-2" >
-                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                    <div v-show="!isBraintreeLoaded && !paymentError && !paymentDone"
+                        class="bg-primary text-white px-2 rounded-2 mb-2">
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
 
                     <div v-show="paymentError" class="bg-danger text-white px-2 py-1 rounded-2 mb-2">
@@ -406,7 +435,12 @@ export default {
 
                     <div v-if="paymentDone" class="bg-primary text-white px-2 rounded-2 mb-2 d-flex align-items-center">
                         <p class="mb-0 me-2">Pagamento in corso</p>
-                        <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        <div class="lds-ellipsis">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div>
 
                 </div>
@@ -422,26 +456,28 @@ export default {
 <style lang="scss" scoped>
 @use '../../scss/partialsVue/vars' as *;
 
-    .empty-cart {
-        height: $jumbo-height;
+.empty-cart {
+    height: $jumbo-height;
+}
+
+.card {
+    background-color: $bg-light;
+
+    #payment-form {
+        position: relative;
+        top: -20px;
+
     }
+}
 
-    .card {
-        background-color: $bg-light;
-
-        #payment-form {
-            position: relative;
-            top: -20px;
-
-        }
-    }
-    .lds-ellipsis {
+.lds-ellipsis {
     display: inline-block;
     position: relative;
     width: 80px;
     height: 40px;
-    }
-    .lds-ellipsis div {
+}
+
+.lds-ellipsis div {
     position: absolute;
     top: 17px;
     width: 13px;
@@ -449,46 +485,55 @@ export default {
     border-radius: 50%;
     background: white;
     animation-timing-function: cubic-bezier(0, 1, 1, 0);
-    }
-    .lds-ellipsis div:nth-child(1) {
+}
+
+.lds-ellipsis div:nth-child(1) {
     left: 8px;
     animation: lds-ellipsis1 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(2) {
+}
+
+.lds-ellipsis div:nth-child(2) {
     left: 8px;
     animation: lds-ellipsis2 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(3) {
+}
+
+.lds-ellipsis div:nth-child(3) {
     left: 32px;
     animation: lds-ellipsis2 0.6s infinite;
-    }
-    .lds-ellipsis div:nth-child(4) {
+}
+
+.lds-ellipsis div:nth-child(4) {
     left: 56px;
     animation: lds-ellipsis3 0.6s infinite;
-    }
-    @keyframes lds-ellipsis1 {
-        0% {
+}
+
+@keyframes lds-ellipsis1 {
+    0% {
         transform: scale(0);
-        }
-        100% {
-        transform: scale(1);
-        }
-    }
-    @keyframes lds-ellipsis3 {
-        0% {
-        transform: scale(1);
-        }
-        100% {
-        transform: scale(0);
-        }
-    }
-    @keyframes lds-ellipsis2 {
-        0% {
-        transform: translate(0, 0);
-        }
-        100% {
-        transform: translate(24px, 0);
-        }
     }
 
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
+
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(24px, 0);
+    }
+}
 </style>
