@@ -16,12 +16,12 @@
         <th>Costo unitario</th>
         <th>Totale Piatti</th>
     </tr>
-    @foreach ($lead->order as $item)
+    @foreach ($lead->order->foods as $item)
         <tr>
             <td>{{ $item->name }}</td>
-            <td>{{ $item->quantity }}</td>
+            <td>{{ $item->pivot->quantity }}</td>
             <td>{{ $item->price }}</td>
-            <td>{{ $item->price * $item->quantity }}</td>
+            <td>{{ number_format($item->price * $item->pivot->quantity, 2, ',', '.') }}</td>
         </tr>
     @endforeach
 </table>
